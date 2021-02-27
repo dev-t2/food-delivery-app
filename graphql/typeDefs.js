@@ -15,8 +15,13 @@ module.exports = `
     category: PhotoCategory = PORTRAIT
   }
 
+  type AuthPayload {
+    token: String!
+    user: User!
+  }
+
   type User {
-    id: ID!
+    githubLogin: ID!
     name: String
     avatar: String
     postedPhotos: [Photo!]!
@@ -42,6 +47,7 @@ module.exports = `
   }
 
   type Mutation {
+    githubAuth(code: String!): AuthPayload!
     postPhoto(input: PostPhotoInput!): Photo!
   }
 `;
