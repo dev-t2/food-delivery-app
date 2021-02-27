@@ -1,51 +1,4 @@
 const { GraphQLScalarType } = require('graphql');
-const { ApolloServer } = require('apollo-server');
-
-const typeDefs = `
-  scalar DateTime
-
-  enum PhotoCategory {
-    SELFIE
-    PORTRAIT
-    ACTION
-    LANDSCAPE
-    GRAPHIC
-  }
-
-  input PostPhotoInput {
-    name: String!
-    description: String
-    category: PhotoCategory = PORTRAIT
-  }
-
-  type User {
-    id: ID!
-    name: String
-    avatar: String
-    postedPhotos: [Photo!]!
-    inPhotos: [Photo!]!
-  }
-
-  type Photo {
-    id: ID!
-    name: String!
-    url: String!
-    description: String
-    category: PhotoCategory!
-    postedBy: User!
-    taggedUsers: [User!]!
-    created: DateTime!
-  }
-
-  type Query {
-    totalPhotos: Int!
-    allPhotos: [Photo!]!
-  }
-
-  type Mutation {
-    postPhoto(input: PostPhotoInput!): Photo!
-  }
-`;
 
 let _id = 0;
 
@@ -88,7 +41,7 @@ let tags = [
   { photoId: '2', userId: '68bc16dd-8b91-48f6-b757-795023c8a28f' },
 ];
 
-const resolvers = {
+module.exports = {
   DateTime: new GraphQLScalarType({
     name: 'DateTime',
     description: 'A valid date time value',
@@ -131,7 +84,3 @@ const resolvers = {
     },
   },
 };
-
-const server = new ApolloServer({ typeDefs, resolvers });
-
-server.listen().then(({ url }) => console.log(`GraphQL Service running on ${url}`));
