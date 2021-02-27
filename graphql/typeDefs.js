@@ -35,6 +35,8 @@ module.exports = `
   }
 
   type Query {
+    totalUsers: Int!
+    allUsers: [User!]!
     totalPhotos: Int!
     allPhotos: [Photo!]!
   }
