@@ -30,10 +30,14 @@ const githubAuth = async (parent, { code }, { db }) => {
   return { user, token: access_token };
 };
 
-const postPhoto = (parent, args) => {
-  const createPhoto = { id: _id++, ...args.input, created: new Date() };
+const postPhoto = async (parent, args, { db, currentUser }) => {
+  if (!currentUser) throw new Error('Only an authorized user can post a photo');
 
-  photos.push(createPhoto);
+  const createPhoto = { ...args.input, userId: currentUser.githubLogin, created: new Date() };
+
+  const { insertedIds } = await db.collection('photos').insert(createPhoto);
+
+  createPhoto.id = insertedIds[0];
 
   return createPhoto;
 };

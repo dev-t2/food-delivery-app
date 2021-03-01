@@ -18,8 +18,10 @@ const User = {
 };
 
 const Photo = {
-  url: (parent) => `http://yoursite.com/img/${parent.id}`,
-  postedBy: (parent) => users.find((user) => user.id === parent.userId),
+  id: (parent) => parent.id || parent._id,
+  url: (parent) => `/img/photos/${parent._id}.jpg`,
+  postedBy: (parent, agrs, { db }) =>
+    db.collection('users').findOne({ githubLogin: parent.userId }),
   taggedUsers: (parent) =>
     tags
       .filter((tag) => tag.photoId === parent.id)

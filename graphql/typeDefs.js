@@ -40,6 +40,7 @@ module.exports = `
   }
 
   type Query {
+    me: User
     totalUsers: Int!
     allUsers: [User!]!
     totalPhotos: Int!
