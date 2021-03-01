@@ -48,6 +48,8 @@ module.exports = `
   }
 
   type Mutation {
+    addFakerUsers(count: Int = 1): [User!]!
+    fakeUserAuth(githubLogin: ID!): AuthPayload!
     githubAuth(code: String!): AuthPayload!
     postPhoto(input: PostPhotoInput!): Photo!
   }
