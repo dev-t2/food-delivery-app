@@ -5,7 +5,7 @@
   "main": "app.js",
   "scripts": {
     "dev": "nodemon",
-    "start": "node app"
+    "start": "pm2 start app.js"
   },
   "repository": {
     "type": "git",
@@ -30,7 +30,8 @@
     "helmet-csp": "^3.3.1",
     "hpp": "^0.2.3",
     "mongodb": "^3.6.4",
-    "morgan": "^1.10.0"
+    "morgan": "^1.10.0",
+    "pm2": "^4.5.5"
   },
   "devDependencies": {
     "nodemon": "^2.0.7"

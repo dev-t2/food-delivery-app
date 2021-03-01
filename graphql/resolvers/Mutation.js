@@ -8,8 +8,8 @@ dotenv.config();
 const CLIENT_ID = process.env.CLIENT_ID;
 const CLIENT_SECRET = process.env.CLIENT_SECRET;
 
-const addFakerUsers = async (parent, { count }, { db }) => {
-  const randomUserApi = `https://randomuser.me/api/?results=${count}`;
+const addFakerUsers = async (parent, args, { db }) => {
+  const randomUserApi = `https://randomuser.me/api/?results=1`;
   const { data } = await axios.get(randomUserApi);
 
   const users = data.results.map((result) => ({
