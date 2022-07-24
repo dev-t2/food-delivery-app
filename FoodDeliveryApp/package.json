@@ -11,7 +11,10 @@
   },
   "dependencies": {
     "react": "18.0.0",
-    "react-native": "0.69.2"
+    "react-native": "0.69.2",
+    "react-native-flipper": "^0.155.0",
+    "redux-flipper": "^2.0.2",
+    "rn-async-storage-flipper": "^0.0.10"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",
