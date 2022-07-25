@@ -9,8 +9,29 @@
  */
 
 import React, { memo } from 'react';
+import { Text, TouchableHighlight, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+
+function HomeScreen() {
+  return (
+    <View>
+      <TouchableHighlight>
+        <Text>Home Screen</Text>
+      </TouchableHighlight>
+    </View>
+  );
+}
+
+function DetailsScreen() {
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <TouchableHighlight>
+        <Text>Details Screen</Text>
+      </TouchableHighlight>
+    </View>
+  );
+}
 
 const { Navigator, Screen } = createNativeStackNavigator();
 
@@ -18,8 +39,8 @@ function App() {
   return (
     <NavigationContainer>
       <Navigator initialRouteName="Home">
-        <Screen name="Home" />
-        <Screen name="Details" />
+        <Screen name="Home" component={HomeScreen} options={{ title: 'Overview' }} />
+        <Screen name="Details" component={DetailsScreen} />
       </Navigator>
     </NavigationContainer>
   );
