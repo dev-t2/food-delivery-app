@@ -8,45 +8,49 @@
  * @format
  */
 
-import React, { memo } from 'react';
-import { Text, TouchableHighlight, View } from 'react-native';
+import React, { memo, useMemo } from 'react';
+import { Pressable, Text } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import styled from '@emotion/native';
 
-function HomeScreen() {
-  return (
-    <View>
-      <TouchableHighlight>
-        <Text>Home Screen</Text>
-      </TouchableHighlight>
-    </View>
-  );
-}
-
-const DetailsScreenContainer = styled.View({
+const Container = styled.View({
   flex: 1,
   alignItems: 'center',
   justifyContent: 'center',
 });
 
+function HomeScreen() {
+  return (
+    <Container>
+      <Pressable>
+        <Text>Home Screen</Text>
+      </Pressable>
+    </Container>
+  );
+}
+
 function DetailsScreen() {
   return (
-    <DetailsScreenContainer>
-      <TouchableHighlight>
+    <Container>
+      <Pressable>
         <Text>Details Screen</Text>
-      </TouchableHighlight>
-    </DetailsScreenContainer>
+      </Pressable>
+    </Container>
   );
 }
 
 const { Navigator, Screen } = createNativeStackNavigator();
 
 function App() {
+  const HomeScreenOptions = useMemo(() => {
+    return { title: 'Overview' };
+  }, []);
+
   return (
     <NavigationContainer>
       <Navigator initialRouteName="Home">
-        <Screen name="Home" component={HomeScreen} options={{ title: 'Overview' }} />
+        <Screen name="Home" component={HomeScreen} options={HomeScreenOptions} />
         <Screen name="Details" component={DetailsScreen} />
       </Navigator>
     </NavigationContainer>
