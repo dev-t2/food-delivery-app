@@ -12,6 +12,7 @@ import React, { memo } from 'react';
 import { Text, TouchableHighlight, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import styled from '@emotion/native';
 
 function HomeScreen() {
   return (
@@ -23,13 +24,19 @@ function HomeScreen() {
   );
 }
 
+const DetailsScreenContainer = styled.View({
+  flex: 1,
+  alignItems: 'center',
+  justifyContent: 'center',
+});
+
 function DetailsScreen() {
   return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+    <DetailsScreenContainer>
       <TouchableHighlight>
         <Text>Details Screen</Text>
       </TouchableHighlight>
-    </View>
+    </DetailsScreenContainer>
   );
 }
 
