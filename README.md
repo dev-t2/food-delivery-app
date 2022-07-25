@@ -9,3 +9,5 @@
 - [React Navigation](https://reactnavigation.org): Routing and navigation for Expo and React Native apps.
   - [Getting started](https://reactnavigation.org/docs/getting-started)
   - [Native Stack Navigator](https://reactnavigation.org/docs/native-stack-navigator)
+- [Emotion](https://emotion.sh/docs/introduction): Emotion is a library designed for writing css styles with JavaScript.
+  - [@emotion/native](https://emotion.sh/docs/@emotion/native)
