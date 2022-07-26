@@ -28,7 +28,7 @@ type RootStackParamList = {
 type HomeScreenProps = NativeStackScreenProps<RootStackParamList, 'Home'>;
 type DetailsScreenProps = NativeStackScreenProps<ParamListBase, 'Details'>;
 
-const HomeScreen = ({ navigation }: HomeScreenProps) => {
+function HomeScreen({ navigation }: HomeScreenProps) {
   const onPress = useCallback(() => {
     navigation.navigate('Details');
   }, [navigation]);
@@ -40,9 +40,9 @@ const HomeScreen = ({ navigation }: HomeScreenProps) => {
       </Pressable>
     </Container>
   );
-};
+}
 
-const DetailsScreen = ({ navigation }: DetailsScreenProps) => {
+function DetailsScreen({ navigation }: DetailsScreenProps) {
   const onPress = useCallback(() => {
     navigation.navigate('Home');
   }, [navigation]);
@@ -54,11 +54,11 @@ const DetailsScreen = ({ navigation }: DetailsScreenProps) => {
       </Pressable>
     </Container>
   );
-};
+}
 
 const { Navigator, Screen } = createNativeStackNavigator();
 
-const App = () => {
+function App() {
   const HomeScreenOptions = useMemo(() => {
     return { title: 'Overview' };
   }, []);
@@ -71,6 +71,6 @@ const App = () => {
       </Navigator>
     </NavigationContainer>
   );
-};
+}
 
 export default memo(App);
