@@ -8,10 +8,10 @@
  * @format
  */
 
-import React, { memo, useMemo } from 'react';
+import React, { memo, useCallback, useMemo } from 'react';
 import { Pressable, Text } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { NavigationContainer, ParamListBase, useNavigation } from '@react-navigation/native';
+import { createNativeStackNavigator, NativeStackScreenProps } from '@react-navigation/native-stack';
 import styled from '@emotion/native';
 
 const Container = styled.View({
@@ -20,29 +20,49 @@ const Container = styled.View({
   justifyContent: 'center',
 });
 
-function HomeScreen() {
+type RootStackParamList = {
+  Home: undefined;
+  Details: undefined;
+};
+
+type HomeScreenProps = NativeStackScreenProps<RootStackParamList, 'Home'>;
+type DetailsScreenProps = NativeStackScreenProps<ParamListBase, 'Details'>;
+
+const HomeScreen = () => {
+  const { navigation } = useNavigation<HomeScreenProps>();
+
+  const onPress = useCallback(() => {
+    navigation.navigate('Details');
+  }, [navigation]);
+
   return (
     <Container>
-      <Pressable>
+      <Pressable onPress={onPress}>
         <Text>Home Screen</Text>
       </Pressable>
     </Container>
   );
-}
+};
 
-function DetailsScreen() {
+const DetailsScreen = () => {
+  const { navigation } = useNavigation<DetailsScreenProps>();
+
+  const onPress = useCallback(() => {
+    navigation.navigate('Details');
+  }, [navigation]);
+
   return (
     <Container>
-      <Pressable>
+      <Pressable onPress={onPress}>
         <Text>Details Screen</Text>
       </Pressable>
     </Container>
   );
-}
+};
 
 const { Navigator, Screen } = createNativeStackNavigator();
 
-function App() {
+const App = () => {
   const HomeScreenOptions = useMemo(() => {
     return { title: 'Overview' };
   }, []);
@@ -55,6 +75,6 @@ function App() {
       </Navigator>
     </NavigationContainer>
   );
-}
+};
 
 export default memo(App);
