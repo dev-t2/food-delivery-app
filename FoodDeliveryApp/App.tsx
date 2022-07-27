@@ -8,69 +8,23 @@
  * @format
  */
 
-import React, { memo, useCallback, useMemo } from 'react';
-import { Pressable, Text } from 'react-native';
-import { NavigationContainer, ParamListBase } from '@react-navigation/native';
-import { createNativeStackNavigator, NativeStackScreenProps } from '@react-navigation/native-stack';
-import styled from '@emotion/native';
+import React, { memo } from 'react';
+import { NavigationContainer } from '@react-navigation/native';
 
-const Container = styled.View({
-  flex: 1,
-  alignItems: 'center',
-  justifyContent: 'center',
-});
-
-type RootStackParamList = {
-  Home: undefined;
-  Details: undefined;
+export type LoggedInParamList = {
+  Orders: undefined;
+  Settings: undefined;
+  Delivery: undefined;
+  Complete: { orderId: string };
 };
 
-type HomeScreenProps = NativeStackScreenProps<RootStackParamList, 'Home'>;
-type DetailsScreenProps = NativeStackScreenProps<ParamListBase, 'Details'>;
-
-function HomeScreen({ navigation }: HomeScreenProps) {
-  const onPress = useCallback(() => {
-    navigation.navigate('Details');
-  }, [navigation]);
-
-  return (
-    <Container>
-      <Pressable onPress={onPress}>
-        <Text>Home Screen</Text>
-      </Pressable>
-    </Container>
-  );
-}
-
-function DetailsScreen({ navigation }: DetailsScreenProps) {
-  const onPress = useCallback(() => {
-    navigation.navigate('Home');
-  }, [navigation]);
-
-  return (
-    <Container>
-      <Pressable onPress={onPress}>
-        <Text>Details Screen</Text>
-      </Pressable>
-    </Container>
-  );
-}
-
-const { Navigator, Screen } = createNativeStackNavigator();
+export type RootStackParamList = {
+  SignIn: undefined;
+  SignUp: undefined;
+};
 
 function App() {
-  const HomeScreenOptions = useMemo(() => {
-    return { title: 'Overview' };
-  }, []);
-
-  return (
-    <NavigationContainer>
-      <Navigator initialRouteName="Home">
-        <Screen name="Home" component={HomeScreen} options={HomeScreenOptions} />
-        <Screen name="Details" component={DetailsScreen} />
-      </Navigator>
-    </NavigationContainer>
-  );
+  return <NavigationContainer />;
 }
 
 export default memo(App);
