@@ -13,3 +13,4 @@
   - [Native Stack Navigator](https://reactnavigation.org/docs/native-stack-navigator)
   - [Type checking with TypeScript](https://reactnavigation.org/docs/typescript)
   - [Options for screens](https://reactnavigation.org/docs/screen-options)
+  - [Bottom Tabs Navigator](https://reactnavigation.org/docs/bottom-tab-navigator)
