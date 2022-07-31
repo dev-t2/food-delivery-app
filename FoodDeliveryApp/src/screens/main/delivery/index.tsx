@@ -4,7 +4,8 @@ import {
   NativeStackNavigationOptions,
 } from '@react-navigation/native-stack';
 
-import { Complete, Proceed } from '../screens/main/delivery';
+import Proceed from './Proceed';
+import Complete from './Complete';
 
 export type DeliveryParamList = {
   Proceed: undefined;

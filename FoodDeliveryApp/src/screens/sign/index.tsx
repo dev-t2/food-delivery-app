@@ -4,7 +4,8 @@ import {
   NativeStackNavigationOptions,
 } from '@react-navigation/native-stack';
 
-import { SignIn, SignUp } from '../screens/sign';
+import SignIn from './SignIn';
+import SignUp from './SignUp';
 
 export type SignParamList = {
   SignIn: undefined;

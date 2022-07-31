@@ -1,7 +1,7 @@
 import React, { memo, useState } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 
-import { Main, Sign } from './src/navigators';
+import { Main, Sign } from './src/screens';
 
 function App() {
   const [isLoggedIn] = useState(false);
