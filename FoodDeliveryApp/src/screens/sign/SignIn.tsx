@@ -1,5 +1,9 @@
-import React, { memo, useCallback, useMemo, useState } from 'react';
+import React, { memo, useCallback, useMemo, useRef, useState } from 'react';
+import { Alert, TextInput } from 'react-native';
 import styled from '@emotion/native';
+import { useNavigation } from '@react-navigation/native';
+
+import { SignInScreenProps } from './types';
 
 const Container = styled.View({
   padding: 20,
@@ -19,10 +23,6 @@ const StyledTextInput = styled.TextInput(({ theme }) => ({
   borderBottomColor: theme.colors.gray,
 }));
 
-const ButtonContainer = styled.View({
-  alignItems: 'center',
-});
-
 const SignInButton = styled.Pressable(({ theme, disabled }) => ({
   backgroundColor: disabled ? theme.colors.gray : theme.colors.blue,
   paddingVertical: 10,
@@ -32,18 +32,26 @@ const SignInButton = styled.Pressable(({ theme, disabled }) => ({
 }));
 
 const SignInText = styled.Text(({ theme }) => ({
+  textAlign: 'center',
   fontSize: 16,
   fontWeight: 'bold',
   color: theme.colors.white,
 }));
 
-const StyledPressable = styled.Pressable({});
+const SignUpButton = styled.Pressable({});
 
-const SignUpText = styled.Text({});
+const SignUpText = styled.Text({
+  textAlign: 'center',
+});
 
 function SignIn() {
+  const { navigation } = useNavigation<SignInScreenProps>();
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+
+  const emailRef = useRef<TextInput>(null);
+  const passwordRef = useRef<TextInput>(null);
 
   const isDisabled = useMemo(() => {
     return !email.trim() || !password.trim();
@@ -53,37 +61,78 @@ function SignIn() {
     setEmail(text);
   }, []);
 
+  const onSubmitEmail = useCallback(() => {
+    setEmail(prev => prev.trim());
+
+    passwordRef.current?.focus();
+  }, []);
+
   const onChangePassword = useCallback((text: string) => {
     setPassword(text);
   }, []);
 
-  const onSignIn = useCallback(() => {}, []);
+  const onSignIn = useCallback(() => {
+    if (!email.trim()) {
+      return Alert.alert('알림', '이메일을 입력해주세요.');
+    }
 
-  const onSignUp = useCallback(() => {}, []);
+    if (!password.trim()) {
+      return Alert.alert('알림', '비밀번호를 입력해주세요.');
+    }
+
+    Alert.alert('알림', '로그인 되었습니다.');
+  }, [email, password]);
+
+  const onSignUp = useCallback(() => {
+    navigation.navigate('SignUp');
+  }, [navigation]);
 
   return (
     <Container>
       <InputContainer>
         <StyledText>이메일</StyledText>
-        <StyledTextInput placeholder="이메일을 입력해주세요." onChangeText={onChangeEmail} />
+
+        <StyledTextInput
+          ref={emailRef}
+          importantForAutofill="yes"
+          clearButtonMode="while-editing"
+          autoComplete="email"
+          textContentType="emailAddress"
+          keyboardType="email-address"
+          returnKeyType="next"
+          placeholder="이메일을 입력해주세요."
+          blurOnSubmit={false}
+          value={email}
+          onChangeText={onChangeEmail}
+          onSubmitEditing={onSubmitEmail}
+        />
       </InputContainer>
 
       <InputContainer>
         <StyledText>비밀번호</StyledText>
-        <StyledTextInput placeholder="비밀번호를 입력해주세요." onChangeText={onChangePassword} />
+
+        <StyledTextInput
+          ref={passwordRef}
+          importantForAutofill="yes"
+          clearButtonMode="while-editing"
+          autoComplete="password"
+          textContentType="password"
+          secureTextEntry
+          returnKeyType="done"
+          placeholder="비밀번호를 입력해주세요."
+          value={password}
+          onChangeText={onChangePassword}
+          onSubmitEditing={onSignIn}
+        />
       </InputContainer>
 
-      <ButtonContainer>
-        <SignInButton onPress={onSignIn} disabled={isDisabled}>
-          <SignInText>로그인</SignInText>
-        </SignInButton>
-      </ButtonContainer>
+      <SignInButton onPress={onSignIn} disabled={isDisabled}>
+        <SignInText>로그인</SignInText>
+      </SignInButton>
 
-      <ButtonContainer>
-        <StyledPressable onPress={onSignUp}>
-          <SignUpText>회원가입</SignUpText>
-        </StyledPressable>
-      </ButtonContainer>
+      <SignUpButton onPress={onSignUp}>
+        <SignUpText>회원가입</SignUpText>
+      </SignUpButton>
     </Container>
   );
 }

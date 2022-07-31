@@ -4,15 +4,11 @@ import {
   NativeStackNavigationOptions,
 } from '@react-navigation/native-stack';
 
+import { DeliveryParamList } from './types';
 import Proceed from './Proceed';
 import Complete from './Complete';
 
-export type DeliveryParamList = {
-  Proceed: undefined;
-  Complete: { orderId: string };
-};
-
-const { Navigator, Screen } = createNativeStackNavigator();
+const { Navigator, Screen } = createNativeStackNavigator<DeliveryParamList>();
 
 function Delivery() {
   const screenOptions = useMemo<NativeStackNavigationOptions>(() => {
@@ -28,7 +24,7 @@ function Delivery() {
   }, []);
 
   return (
-    <Navigator initialRouteName="Ing" screenOptions={screenOptions}>
+    <Navigator initialRouteName="Proceed" screenOptions={screenOptions}>
       <Screen name="Proceed" component={Proceed} options={proceedOptions} />
       <Screen name="Complete" component={Complete} options={completeOptions} />
     </Navigator>

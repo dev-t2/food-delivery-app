@@ -4,17 +4,12 @@ import {
   createBottomTabNavigator,
 } from '@react-navigation/bottom-tabs';
 
+import { MainParamList } from './types';
 import Orders from './Orders';
 import Delivery from './delivery';
 import Settings from './Settings';
 
-export type MainParamList = {
-  Orders: undefined;
-  Settings: undefined;
-  DeliveryNavigator: undefined;
-};
-
-const { Navigator, Screen } = createBottomTabNavigator();
+const { Navigator, Screen } = createBottomTabNavigator<MainParamList>();
 
 function Main() {
   const ordersOptions = useMemo<BottomTabNavigationOptions>(() => {
