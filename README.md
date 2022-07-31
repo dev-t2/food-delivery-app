@@ -16,4 +16,3 @@
   - [Options for screens](https://reactnavigation.org/docs/screen-options)
   - [Bottom Tabs Navigator](https://reactnavigation.org/docs/bottom-tab-navigator)
 - [Material Design](https://material.io)
-  - [Color Tool](https://material.io/resources/color)
