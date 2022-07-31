@@ -3,6 +3,7 @@ import { Alert, TextInput } from 'react-native';
 import styled from '@emotion/native';
 
 import { SignInScreenProps } from './types';
+import { EmailInput, PasswordInput } from '../../components';
 
 const Container = styled.View({
   padding: 20,
@@ -16,11 +17,6 @@ const StyledText = styled.Text({
   fontSize: 16,
   fontWeight: 'bold',
 });
-
-const StyledTextInput = styled.TextInput(({ theme }) => ({
-  borderBottomWidth: 0.2,
-  borderBottomColor: theme.colors.gray,
-}));
 
 const SignInButton = styled.Pressable(({ theme, disabled }) => ({
   backgroundColor: disabled ? theme.colors.gray : theme.colors.blue,
@@ -89,37 +85,22 @@ function SignIn({ navigation }: SignInScreenProps) {
       <InputContainer>
         <StyledText>이메일</StyledText>
 
-        <StyledTextInput
-          ref={emailRef}
-          importantForAutofill="yes"
-          clearButtonMode="while-editing"
-          autoComplete="email"
-          textContentType="emailAddress"
-          keyboardType="email-address"
-          returnKeyType="next"
-          placeholder="이메일을 입력해주세요."
-          blurOnSubmit={false}
-          value={email}
-          onChangeText={onChangeEmail}
-          onSubmitEditing={onSubmitEmail}
+        <EmailInput
+          emailRef={emailRef}
+          email={email}
+          onChangeEmail={onChangeEmail}
+          onSubmitEmail={onSubmitEmail}
         />
       </InputContainer>
 
       <InputContainer>
         <StyledText>비밀번호</StyledText>
 
-        <StyledTextInput
-          ref={passwordRef}
-          importantForAutofill="yes"
-          clearButtonMode="while-editing"
-          autoComplete="password"
-          textContentType="password"
-          secureTextEntry
-          returnKeyType="done"
-          placeholder="비밀번호를 입력해주세요."
-          value={password}
-          onChangeText={onChangePassword}
-          onSubmitEditing={onSignIn}
+        <PasswordInput
+          passwordRef={passwordRef}
+          password={password}
+          onChangePassword={onChangePassword}
+          onSubmitPassword={onSignIn}
         />
       </InputContainer>
 
