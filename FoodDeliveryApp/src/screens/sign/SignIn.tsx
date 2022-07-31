@@ -9,15 +9,6 @@ const Container = styled.View({
   padding: 20,
 });
 
-const InputContainer = styled.View({
-  marginBottom: 20,
-});
-
-const StyledText = styled.Text({
-  fontSize: 16,
-  fontWeight: 'bold',
-});
-
 const SignInButton = styled.Pressable(({ theme, disabled }) => ({
   backgroundColor: disabled ? theme.colors.gray : theme.colors.blue,
   paddingVertical: 10,
@@ -82,27 +73,19 @@ function SignIn({ navigation }: SignInScreenProps) {
 
   return (
     <Container>
-      <InputContainer>
-        <StyledText>이메일</StyledText>
+      <EmailInput
+        emailRef={emailRef}
+        email={email}
+        onChangeEmail={onChangeEmail}
+        onSubmitEmail={onSubmitEmail}
+      />
 
-        <EmailInput
-          emailRef={emailRef}
-          email={email}
-          onChangeEmail={onChangeEmail}
-          onSubmitEmail={onSubmitEmail}
-        />
-      </InputContainer>
-
-      <InputContainer>
-        <StyledText>비밀번호</StyledText>
-
-        <PasswordInput
-          passwordRef={passwordRef}
-          password={password}
-          onChangePassword={onChangePassword}
-          onSubmitPassword={onSignIn}
-        />
-      </InputContainer>
+      <PasswordInput
+        passwordRef={passwordRef}
+        password={password}
+        onChangePassword={onChangePassword}
+        onSubmitPassword={onSignIn}
+      />
 
       <SignInButton onPress={onSignIn} disabled={isDisabled}>
         <SignInText>로그인</SignInText>
