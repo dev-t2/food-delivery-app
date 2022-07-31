@@ -4,12 +4,12 @@ import {
   createBottomTabNavigator,
 } from '@react-navigation/bottom-tabs';
 
-import { MainParamList } from './types';
+import { RootTabsParamList } from './types';
 import Orders from './Orders';
 import Delivery from './delivery';
 import Settings from './Settings';
 
-const { Navigator, Screen } = createBottomTabNavigator<MainParamList>();
+const { Navigator, Screen } = createBottomTabNavigator<RootTabsParamList>();
 
 function Main() {
   const ordersOptions = useMemo<BottomTabNavigationOptions>(() => {

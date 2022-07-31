@@ -1,4 +1,4 @@
-export type DeliveryParamList = {
+export type RootStackParamList = {
   Proceed: undefined;
   Complete: { orderId: string };
 };

@@ -1,7 +1,6 @@
 import React, { memo, useCallback, useMemo, useRef, useState } from 'react';
 import { Alert, TextInput } from 'react-native';
 import styled from '@emotion/native';
-import { useNavigation } from '@react-navigation/native';
 
 import { SignInScreenProps } from './types';
 
@@ -44,9 +43,7 @@ const SignUpText = styled.Text({
   textAlign: 'center',
 });
 
-function SignIn() {
-  const { navigation } = useNavigation<SignInScreenProps>();
-
+function SignIn({ navigation }: SignInScreenProps) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 

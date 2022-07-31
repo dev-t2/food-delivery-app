@@ -4,11 +4,11 @@ import {
   NativeStackNavigationOptions,
 } from '@react-navigation/native-stack';
 
-import { SignParamList } from './types';
+import { RootStackParamList } from './types';
 import SignIn from './SignIn';
 import SignUp from './SignUp';
 
-const { Navigator, Screen } = createNativeStackNavigator<SignParamList>();
+const { Navigator, Screen } = createNativeStackNavigator<RootStackParamList>();
 
 function Sign() {
   const signInOptions = useMemo<NativeStackNavigationOptions>(() => {

@@ -4,11 +4,11 @@ import {
   NativeStackNavigationOptions,
 } from '@react-navigation/native-stack';
 
-import { DeliveryParamList } from './types';
+import { RootStackParamList } from './types';
 import Proceed from './Proceed';
 import Complete from './Complete';
 
-const { Navigator, Screen } = createNativeStackNavigator<DeliveryParamList>();
+const { Navigator, Screen } = createNativeStackNavigator<RootStackParamList>();
 
 function Delivery() {
   const screenOptions = useMemo<NativeStackNavigationOptions>(() => {
