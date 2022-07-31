@@ -1,5 +1,5 @@
 import React, { memo, useCallback, useMemo, useRef, useState } from 'react';
-import { Alert, TextInput } from 'react-native';
+import { TextInput } from 'react-native';
 import styled from '@emotion/native';
 
 import { SignInScreenProps } from './types';
@@ -55,17 +55,7 @@ function SignIn({ navigation }: SignInScreenProps) {
     setPassword(text);
   }, []);
 
-  const onSignIn = useCallback(() => {
-    if (!email.trim()) {
-      return Alert.alert('알림', '이메일을 입력해주세요.');
-    }
-
-    if (!password.trim()) {
-      return Alert.alert('알림', '비밀번호를 입력해주세요.');
-    }
-
-    Alert.alert('알림', '로그인 되었습니다.');
-  }, [email, password]);
+  const onSignIn = useCallback(() => {}, []);
 
   const onSignUp = useCallback(() => {
     navigation.navigate('SignUp');
@@ -88,11 +78,11 @@ function SignIn({ navigation }: SignInScreenProps) {
       />
 
       <SignInButton onPress={onSignIn} disabled={isDisabled}>
-        <SignInText>로그인</SignInText>
+        <SignInText>Sign In</SignInText>
       </SignInButton>
 
       <SignUpButton onPress={onSignUp}>
-        <SignUpText>회원가입</SignUpText>
+        <SignUpText>Sign Up</SignUpText>
       </SignUpButton>
     </Container>
   );
