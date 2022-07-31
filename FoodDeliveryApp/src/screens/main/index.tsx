@@ -5,7 +5,7 @@ import {
 } from '@react-navigation/bottom-tabs';
 
 import Orders from './Orders';
-import delivery from './delivery';
+import Delivery from './delivery';
 import Settings from './Settings';
 
 export type MainParamList = {
@@ -28,7 +28,7 @@ function Main() {
   return (
     <Navigator initialRouteName="Orders">
       <Screen name="Orders" component={Orders} options={ordersOptions} />
-      <Screen name="Delivery" component={delivery} />
+      <Screen name="Delivery" component={Delivery} />
       <Screen name="Settings" component={Settings} options={settingsOptions} />
     </Navigator>
   );
