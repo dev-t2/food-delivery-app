@@ -12,11 +12,11 @@ const { Navigator, Screen } = createNativeStackNavigator<RootStackParamList>();
 
 function Sign() {
   const signInOptions = useMemo<NativeStackNavigationOptions>(() => {
-    return { title: '로그인' };
+    return { title: 'Sign In' };
   }, []);
 
   const signUpOptions = useMemo<NativeStackNavigationOptions>(() => {
-    return { title: '회원가입' };
+    return { title: 'Sign Up' };
   }, []);
 
   return (
