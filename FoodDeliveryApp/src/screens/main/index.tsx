@@ -4,10 +4,15 @@ import {
   createBottomTabNavigator,
 } from '@react-navigation/bottom-tabs';
 
-import { RootTabsParamList } from './types';
 import Orders from './Orders';
 import Delivery from './delivery';
 import Settings from './Settings';
+
+export type RootTabsParamList = {
+  Orders: undefined;
+  Delivery: undefined;
+  Settings: undefined;
+};
 
 const { Navigator, Screen } = createBottomTabNavigator<RootTabsParamList>();
 

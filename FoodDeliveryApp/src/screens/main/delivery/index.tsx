@@ -4,9 +4,13 @@ import {
   NativeStackNavigationOptions,
 } from '@react-navigation/native-stack';
 
-import { RootStackParamList } from './types';
 import Proceed from './Proceed';
 import Complete from './Complete';
+
+export type RootStackParamList = {
+  Proceed: undefined;
+  Complete: { orderId: string };
+};
 
 const { Navigator, Screen } = createNativeStackNavigator<RootStackParamList>();
 

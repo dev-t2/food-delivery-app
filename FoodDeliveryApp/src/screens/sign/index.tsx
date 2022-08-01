@@ -2,11 +2,18 @@ import React, { memo, useMemo } from 'react';
 import {
   createNativeStackNavigator,
   NativeStackNavigationOptions,
+  NativeStackScreenProps,
 } from '@react-navigation/native-stack';
 
-import { RootStackParamList } from './types';
 import SignIn from './SignIn';
 import SignUp from './SignUp';
+
+export type RootStackParamList = {
+  SignIn: undefined;
+  SignUp: undefined;
+};
+
+export type SignInScreenProps = NativeStackScreenProps<RootStackParamList, 'SignIn'>;
 
 const { Navigator, Screen } = createNativeStackNavigator<RootStackParamList>();
 

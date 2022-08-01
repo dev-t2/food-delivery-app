@@ -1,34 +1,10 @@
 import React, { memo, useCallback, useMemo, useRef, useState } from 'react';
 import { TextInput } from 'react-native';
-import styled from '@emotion/native';
 
-import { SignInScreenProps } from './types';
-import { EmailInput, PasswordInput } from '../../components';
-
-const Container = styled.View({
-  padding: 20,
-});
-
-const SignInButton = styled.Pressable(({ theme, disabled }) => ({
-  backgroundColor: disabled ? theme.colors.gray : theme.colors.blue,
-  paddingVertical: 10,
-  paddingHorizontal: 20,
-  borderRadius: 4,
-  marginBottom: 10,
-}));
-
-const SignInText = styled.Text(({ theme }) => ({
-  textAlign: 'center',
-  fontSize: 16,
-  fontWeight: 'bold',
-  color: theme.colors.white,
-}));
-
-const SignUpButton = styled.Pressable({});
-
-const SignUpText = styled.Text({
-  textAlign: 'center',
-});
+import { SignInScreenProps } from './index';
+import { Container } from '../../components/layouts';
+import { EmailInput, PasswordInput } from '../../components/inputs';
+import { ContainedButton, TextButton } from '../../components/buttons';
 
 function SignIn({ navigation }: SignInScreenProps) {
   const [email, setEmail] = useState('');
@@ -37,9 +13,7 @@ function SignIn({ navigation }: SignInScreenProps) {
   const emailRef = useRef<TextInput>(null);
   const passwordRef = useRef<TextInput>(null);
 
-  const isDisabled = useMemo(() => {
-    return !email.trim() || !password.trim();
-  }, [email, password]);
+  const isDisabled = useMemo(() => !email.trim() || !password.trim(), [email, password]);
 
   const onChangeEmail = useCallback((text: string) => {
     setEmail(text);
@@ -53,6 +27,10 @@ function SignIn({ navigation }: SignInScreenProps) {
 
   const onChangePassword = useCallback((text: string) => {
     setPassword(text);
+  }, []);
+
+  const onSubmitPassword = useCallback(() => {
+    setPassword(prev => prev.trim());
   }, []);
 
   const onSignIn = useCallback(() => {}, []);
@@ -74,16 +52,12 @@ function SignIn({ navigation }: SignInScreenProps) {
         passwordRef={passwordRef}
         password={password}
         onChangePassword={onChangePassword}
-        onSubmitPassword={onSignIn}
+        onSubmitPassword={onSubmitPassword}
       />
 
-      <SignInButton onPress={onSignIn} disabled={isDisabled}>
-        <SignInText>Sign In</SignInText>
-      </SignInButton>
+      <ContainedButton isDisabled={isDisabled} text="Sign In" onPress={onSignIn} />
 
-      <SignUpButton onPress={onSignUp}>
-        <SignUpText>Sign Up</SignUpText>
-      </SignUpButton>
+      <TextButton text="Sign Up" onPress={onSignUp} />
     </Container>
   );
 }
