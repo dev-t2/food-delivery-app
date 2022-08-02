@@ -1,5 +1,6 @@
 import React, { memo, Ref } from 'react';
 import { TextInput } from 'react-native';
+import { useTheme } from '@emotion/react';
 import styled from '@emotion/native';
 
 const Container = styled.View({
@@ -29,19 +30,21 @@ function PasswordInput({
   onChangePassword,
   onSubmitPassword,
 }: IPasswordInput) {
+  const theme = useTheme();
+
   return (
     <Container>
       <StyledText>Password</StyledText>
 
       <StyledTextInput
         ref={passwordRef}
-        importantForAutofill="yes"
         clearButtonMode="while-editing"
         autoComplete="password"
         textContentType="password"
         secureTextEntry
         returnKeyType="done"
         placeholder="Please enter your password."
+        placeholderTextColor={theme.colors.gray}
         value={password}
         onChangeText={onChangePassword}
         onSubmitEditing={onSubmitPassword}

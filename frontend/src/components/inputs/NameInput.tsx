@@ -1,4 +1,5 @@
-import React, { memo } from 'react';
+import React, { memo, Ref } from 'react';
+import { TextInput } from 'react-native';
 import { useTheme } from '@emotion/react';
 import styled from '@emotion/native';
 
@@ -16,34 +17,35 @@ const StyledTextInput = styled.TextInput(({ theme }) => ({
   borderBottomColor: theme.colors.gray,
 }));
 
-interface IEmailInput {
-  email: string;
-  onChangeEmail: (text: string) => void;
-  onSubmitEmail: () => void;
+interface INameInput {
+  nameRef: Ref<TextInput>;
+  name: string;
+  onChangeName: (text: string) => void;
+  onSubmitName: () => void;
 }
 
-function EmailInput({ email, onChangeEmail, onSubmitEmail }: IEmailInput) {
+function NameInput({ nameRef, name, onChangeName, onSubmitName }: INameInput) {
   const theme = useTheme();
 
   return (
     <Container>
-      <StyledText>Email</StyledText>
+      <StyledText>Name</StyledText>
 
       <StyledTextInput
+        ref={nameRef}
         clearButtonMode="while-editing"
-        autoComplete="email"
-        textContentType="emailAddress"
-        keyboardType="email-address"
+        autoComplete="name"
+        textContentType="name"
         returnKeyType="next"
         blurOnSubmit={false}
-        placeholder="Please enter your email."
+        placeholder="Please enter your name."
         placeholderTextColor={theme.colors.gray}
-        value={email}
-        onChangeText={onChangeEmail}
-        onSubmitEditing={onSubmitEmail}
+        value={name}
+        onChangeText={onChangeName}
+        onSubmitEditing={onSubmitName}
       />
     </Container>
   );
 }
 
-export default memo(EmailInput);
+export default memo(NameInput);

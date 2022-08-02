@@ -10,7 +10,6 @@ function SignIn({ navigation }: SignInScreenProps) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const emailRef = useRef<TextInput>(null);
   const passwordRef = useRef<TextInput>(null);
 
   const isDisabled = useMemo(() => !email || !password, [email, password]);
@@ -37,12 +36,7 @@ function SignIn({ navigation }: SignInScreenProps) {
 
   return (
     <Container>
-      <EmailInput
-        emailRef={emailRef}
-        email={email}
-        onChangeEmail={onChangeEmail}
-        onSubmitEmail={onSubmitEmail}
-      />
+      <EmailInput email={email} onChangeEmail={onChangeEmail} onSubmitEmail={onSubmitEmail} />
 
       <PasswordInput
         passwordRef={passwordRef}
