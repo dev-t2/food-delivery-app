@@ -16,21 +16,15 @@ function SignIn({ navigation }: SignInScreenProps) {
   const isDisabled = useMemo(() => !email.trim() || !password.trim(), [email, password]);
 
   const onChangeEmail = useCallback((text: string) => {
-    setEmail(text);
+    setEmail(text.trim());
   }, []);
 
   const onSubmitEmail = useCallback(() => {
-    setEmail(prev => prev.trim());
-
     passwordRef.current?.focus();
   }, []);
 
   const onChangePassword = useCallback((text: string) => {
-    setPassword(text);
-  }, []);
-
-  const onSubmitPassword = useCallback(() => {
-    setPassword(prev => prev.trim());
+    setPassword(text.trim());
   }, []);
 
   const onSignIn = useCallback(() => {}, []);
@@ -52,7 +46,7 @@ function SignIn({ navigation }: SignInScreenProps) {
         passwordRef={passwordRef}
         password={password}
         onChangePassword={onChangePassword}
-        onSubmitPassword={onSubmitPassword}
+        onSubmitPassword={onSignIn}
       />
 
       <ContainedButton isDisabled={isDisabled} text="Sign In" onPress={onSignIn} />
