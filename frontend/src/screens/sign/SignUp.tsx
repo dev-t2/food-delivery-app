@@ -13,7 +13,21 @@ function SignUp() {
   const nameRef = useRef<TextInput>(null);
   const passwordRef = useRef<TextInput>(null);
 
-  const isDisabled = useMemo(() => !email || !password, [email, password]);
+  const isDisabled = useMemo(() => {
+    if (
+      !/^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/.test(
+        email,
+      )
+    ) {
+      return true;
+    }
+
+    if (!/^(?=.*[A-Za-z])(?=.*[0-9])(?=.*[$@^!%*#?&]).{8,16}$/.test(password)) {
+      return true;
+    }
+
+    return false;
+  }, [email, password]);
 
   const onChangeEmail = useCallback((text: string) => {
     setEmail(text.trim());
@@ -35,6 +49,12 @@ function SignUp() {
     setPassword(text.trim());
   }, []);
 
+  const onSubmitPassword = useCallback(() => {
+    if (!isDisabled) {
+      console.log('onSignUp');
+    }
+  }, [isDisabled]);
+
   const onSignUp = useCallback(() => {
     console.log('onSignUp');
   }, []);
@@ -54,7 +74,7 @@ function SignUp() {
         passwordRef={passwordRef}
         password={password}
         onChangePassword={onChangePassword}
-        onSubmitPassword={onSignUp}
+        onSubmitPassword={onSubmitPassword}
       />
 
       <ContainedButton isDisabled={isDisabled} text="Sign Up" onPress={onSignUp} />

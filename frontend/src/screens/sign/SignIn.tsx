@@ -26,6 +26,12 @@ function SignIn({ navigation }: SignInScreenProps) {
     setPassword(text.trim());
   }, []);
 
+  const onSubmitPassword = useCallback(() => {
+    if (!isDisabled) {
+      console.log('onSignIn');
+    }
+  }, [isDisabled]);
+
   const onSignIn = useCallback(() => {
     console.log('onSignIn');
   }, []);
@@ -42,7 +48,7 @@ function SignIn({ navigation }: SignInScreenProps) {
         passwordRef={passwordRef}
         password={password}
         onChangePassword={onChangePassword}
-        onSubmitPassword={onSignIn}
+        onSubmitPassword={onSubmitPassword}
       />
 
       <ContainedButton isDisabled={isDisabled} text="Sign In" onPress={onSignIn} />
