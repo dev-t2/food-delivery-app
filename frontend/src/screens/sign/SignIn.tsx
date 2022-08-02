@@ -13,7 +13,7 @@ function SignIn({ navigation }: SignInScreenProps) {
   const emailRef = useRef<TextInput>(null);
   const passwordRef = useRef<TextInput>(null);
 
-  const isDisabled = useMemo(() => !email.trim() || !password.trim(), [email, password]);
+  const isDisabled = useMemo(() => !email || !password, [email, password]);
 
   const onChangeEmail = useCallback((text: string) => {
     setEmail(text.trim());
@@ -27,7 +27,9 @@ function SignIn({ navigation }: SignInScreenProps) {
     setPassword(text.trim());
   }, []);
 
-  const onSignIn = useCallback(() => {}, []);
+  const onSignIn = useCallback(() => {
+    console.log('onSignIn');
+  }, []);
 
   const onSignUp = useCallback(() => {
     navigation.navigate('SignUp');
