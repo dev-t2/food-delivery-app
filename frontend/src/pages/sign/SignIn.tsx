@@ -52,6 +52,7 @@ function SignIn({ navigation }: SignInScreenProps) {
         autoComplete="email"
         textContentType="emailAddress"
         value={email}
+        maxLength={26}
         returnKeyType="next"
         isBlurOnSubmit={false}
         onChangeText={onChangeEmail}
@@ -66,6 +67,7 @@ function SignIn({ navigation }: SignInScreenProps) {
         textContentType="password"
         isSecureTextEntry
         value={password}
+        maxLength={16}
         returnKeyType="done"
         onChangeText={onChangePassword}
         onSubmit={onSubmitPassword}
