@@ -25,7 +25,7 @@ interface IUnderlinedInput {
   textContentType: 'emailAddress' | 'password' | 'nickname';
   isSecureTextEntry?: boolean;
   value: string;
-  maxLength?: number;
+  maxLength: number;
   returnKeyType: 'next' | 'done';
   isBlurOnSubmit?: boolean;
   onChangeText: (text: string) => void;
@@ -50,7 +50,7 @@ function UnderlinedInput({
 
   return (
     <Container>
-      {label && <Label>{label}</Label>}
+      <Label>{label}</Label>
 
       <StyledTextInput
         ref={underlinedInputRef}
