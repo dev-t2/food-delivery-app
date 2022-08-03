@@ -23,6 +23,7 @@ interface IUnderlinedInput {
   placeholder: string;
   autoComplete: 'email' | 'password' | 'name';
   textContentType: 'emailAddress' | 'password' | 'nickname';
+  isSecureTextEntry?: boolean;
   value: string;
   returnKeyType: 'next' | 'done';
   isBlurOnSubmit?: boolean;
@@ -36,6 +37,7 @@ function UnderlinedInput({
   placeholder,
   autoComplete,
   textContentType,
+  isSecureTextEntry = false,
   value,
   returnKeyType,
   isBlurOnSubmit = true,
@@ -54,8 +56,9 @@ function UnderlinedInput({
         placeholderTextColor={theme.colors.gray}
         autoComplete={autoComplete}
         textContentType={textContentType}
-        clearButtonMode="while-editing"
+        secureTextEntry={isSecureTextEntry}
         value={value}
+        clearButtonMode="while-editing"
         returnKeyType={returnKeyType}
         blurOnSubmit={isBlurOnSubmit}
         onChangeText={onChangeText}

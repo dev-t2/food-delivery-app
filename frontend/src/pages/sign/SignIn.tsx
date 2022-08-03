@@ -2,6 +2,7 @@ import React, { memo, useCallback, useMemo, useRef, useState } from 'react';
 import { TextInput } from 'react-native';
 
 import { SignInScreenProps } from './index';
+import { validateEmail, validatePassword } from '../../utilities/validate';
 import { Container } from '../../components/layouts';
 import { ContainedButton, TextButton, UnderlinedInput } from '../../components/inputs';
 
@@ -11,7 +12,11 @@ function SignIn({ navigation }: SignInScreenProps) {
 
   const passwordRef = useRef<TextInput>(null);
 
-  const isDisabled = useMemo(() => !email || !password, [email, password]);
+  const isDisabled = useMemo(() => {
+    const isValidate = validateEmail(email) && validatePassword(password);
+
+    return !isValidate;
+  }, [email, password]);
 
   const onChangeEmail = useCallback((text: string) => {
     setEmail(text.trim());
@@ -59,6 +64,7 @@ function SignIn({ navigation }: SignInScreenProps) {
         placeholder="Please enter your password."
         autoComplete="password"
         textContentType="password"
+        isSecureTextEntry
         value={password}
         returnKeyType="done"
         onChangeText={onChangePassword}
