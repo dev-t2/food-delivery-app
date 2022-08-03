@@ -73,7 +73,7 @@ function SignUp() {
       />
 
       <UnderlinedInput
-        ref={nicknameRef}
+        underlinedInputRef={nicknameRef}
         label="Nickname"
         placeholder="Please enter your nickname."
         autoComplete="name"
@@ -86,7 +86,7 @@ function SignUp() {
       />
 
       <UnderlinedInput
-        ref={passwordRef}
+        underlinedInputRef={passwordRef}
         label="Password"
         placeholder="Please enter your password."
         autoComplete="password"

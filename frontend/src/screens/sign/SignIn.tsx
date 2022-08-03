@@ -54,7 +54,7 @@ function SignIn({ navigation }: SignInScreenProps) {
       />
 
       <UnderlinedInput
-        ref={passwordRef}
+        underlinedInputRef={passwordRef}
         label="Password"
         placeholder="Please enter your password."
         autoComplete="password"

@@ -18,7 +18,7 @@ const StyledTextInput = styled.TextInput(({ theme }) => ({
 }));
 
 interface IUnderlinedInput {
-  ref?: Ref<TextInput>;
+  underlinedInputRef?: Ref<TextInput>;
   label: string;
   placeholder: string;
   autoComplete: 'email' | 'password' | 'name';
@@ -31,7 +31,7 @@ interface IUnderlinedInput {
 }
 
 function UnderlinedInput({
-  ref,
+  underlinedInputRef,
   label,
   placeholder,
   autoComplete,
@@ -49,7 +49,7 @@ function UnderlinedInput({
       {label && <Label>{label}</Label>}
 
       <StyledTextInput
-        ref={ref}
+        ref={underlinedInputRef}
         placeholder={placeholder}
         placeholderTextColor={theme.colors.gray}
         autoComplete={autoComplete}
