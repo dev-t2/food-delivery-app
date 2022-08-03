@@ -3,7 +3,7 @@ import { ThemeProvider } from '@emotion/react';
 import { NavigationContainer } from '@react-navigation/native';
 
 import { theme } from './src/theme';
-import { Main, Sign } from './src/screens';
+import { Main, Sign } from './src/pages';
 
 function App() {
   const [isLoggedIn] = useState(false);
