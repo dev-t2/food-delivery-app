@@ -3,8 +3,7 @@ import { TextInput } from 'react-native';
 
 import { SignInScreenProps } from './index';
 import { Container } from '../../components/layouts';
-import { EmailInput, PasswordInput } from '../../components/inputs';
-import { ContainedButton, TextButton } from '../../components/buttons';
+import { ContainedButton, TextButton, UnderlinedInput } from '../../components/inputs';
 
 function SignIn({ navigation }: SignInScreenProps) {
   const [email, setEmail] = useState('');
@@ -42,18 +41,33 @@ function SignIn({ navigation }: SignInScreenProps) {
 
   return (
     <Container>
-      <EmailInput email={email} onChangeEmail={onChangeEmail} onSubmitEmail={onSubmitEmail} />
-
-      <PasswordInput
-        passwordRef={passwordRef}
-        password={password}
-        onChangePassword={onChangePassword}
-        onSubmitPassword={onSubmitPassword}
+      <UnderlinedInput
+        label="Email"
+        placeholder="Please enter your email."
+        autoComplete="email"
+        textContentType="emailAddress"
+        value={email}
+        returnKeyType="next"
+        isBlurOnSubmit={false}
+        onChangeText={onChangeEmail}
+        onSubmit={onSubmitEmail}
       />
 
-      <ContainedButton isDisabled={isDisabled} text="Sign In" onPress={onSignIn} />
+      <UnderlinedInput
+        ref={passwordRef}
+        label="Password"
+        placeholder="Please enter your password."
+        autoComplete="password"
+        textContentType="password"
+        value={password}
+        returnKeyType="done"
+        onChangeText={onChangePassword}
+        onSubmit={onSubmitPassword}
+      />
 
-      <TextButton text="Sign Up" onPress={onSignUp} />
+      <ContainedButton isDisabled={isDisabled} text="SignIn" onPress={onSignIn} />
+
+      <TextButton text="SignUp" onPress={onSignUp} />
     </Container>
   );
 }

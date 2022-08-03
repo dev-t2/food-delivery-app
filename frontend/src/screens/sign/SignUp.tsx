@@ -2,15 +2,14 @@ import React, { memo, useCallback, useMemo, useRef, useState } from 'react';
 import { TextInput } from 'react-native';
 
 import { Container } from '../../components/layouts';
-import { EmailInput, NameInput, PasswordInput } from '../../components/inputs';
-import { ContainedButton } from '../../components/buttons';
+import { ContainedButton, UnderlinedInput } from '../../components/inputs';
 
 function SignUp() {
   const [email, setEmail] = useState('');
-  const [name, setName] = useState('');
+  const [nickname, setNickname] = useState('');
   const [password, setPassword] = useState('');
 
-  const nameRef = useRef<TextInput>(null);
+  const nicknameRef = useRef<TextInput>(null);
   const passwordRef = useRef<TextInput>(null);
 
   const isDisabled = useMemo(() => {
@@ -34,14 +33,14 @@ function SignUp() {
   }, []);
 
   const onSubmitEmail = useCallback(() => {
-    nameRef.current?.focus();
+    nicknameRef.current?.focus();
   }, []);
 
-  const onChangeName = useCallback((text: string) => {
-    setName(text.trim());
+  const onChangeNickname = useCallback((text: string) => {
+    setNickname(text.trim());
   }, []);
 
-  const onSubmitName = useCallback(() => {
+  const onSubmitNickname = useCallback(() => {
     passwordRef.current?.focus();
   }, []);
 
@@ -61,23 +60,44 @@ function SignUp() {
 
   return (
     <Container>
-      <EmailInput email={email} onChangeEmail={onChangeEmail} onSubmitEmail={onSubmitEmail} />
-
-      <NameInput
-        nameRef={nameRef}
-        name={name}
-        onChangeName={onChangeName}
-        onSubmitName={onSubmitName}
+      <UnderlinedInput
+        label="Email"
+        placeholder="Please enter your email."
+        autoComplete="email"
+        textContentType="emailAddress"
+        value={email}
+        returnKeyType="next"
+        isBlurOnSubmit={false}
+        onChangeText={onChangeEmail}
+        onSubmit={onSubmitEmail}
       />
 
-      <PasswordInput
-        passwordRef={passwordRef}
-        password={password}
-        onChangePassword={onChangePassword}
-        onSubmitPassword={onSubmitPassword}
+      <UnderlinedInput
+        ref={nicknameRef}
+        label="Nickname"
+        placeholder="Please enter your nickname."
+        autoComplete="name"
+        textContentType="nickname"
+        value={nickname}
+        returnKeyType="next"
+        isBlurOnSubmit={false}
+        onChangeText={onChangeNickname}
+        onSubmit={onSubmitNickname}
       />
 
-      <ContainedButton isDisabled={isDisabled} text="Sign Up" onPress={onSignUp} />
+      <UnderlinedInput
+        ref={passwordRef}
+        label="Password"
+        placeholder="Please enter your password."
+        autoComplete="password"
+        textContentType="password"
+        value={password}
+        returnKeyType="done"
+        onChangeText={onChangePassword}
+        onSubmit={onSubmitPassword}
+      />
+
+      <ContainedButton isDisabled={isDisabled} text="SignUp" onPress={onSignUp} />
     </Container>
   );
 }

@@ -1,3 +1,3 @@
-export { default as EmailInput } from './EmailInput';
-export { default as NameInput } from './NameInput';
-export { default as PasswordInput } from './PasswordInput';
+export { default as ContainedButton } from './ContainedButton';
+export { default as TextButton } from './TextButton';
+export { default as UnderlinedInput } from './UnderlinedInput';

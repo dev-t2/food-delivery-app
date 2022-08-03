@@ -19,11 +19,11 @@ const { Navigator, Screen } = createNativeStackNavigator<RootStackParamList>();
 
 function Sign() {
   const signInOptions = useMemo<NativeStackNavigationOptions>(() => {
-    return { title: 'Sign In' };
+    return { title: 'SignIn' };
   }, []);
 
   const signUpOptions = useMemo<NativeStackNavigationOptions>(() => {
-    return { title: 'Sign Up' };
+    return { title: 'SignUp' };
   }, []);
 
   return (
