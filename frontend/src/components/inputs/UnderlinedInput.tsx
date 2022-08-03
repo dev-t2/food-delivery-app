@@ -25,6 +25,7 @@ interface IUnderlinedInput {
   textContentType: 'emailAddress' | 'password' | 'nickname';
   isSecureTextEntry?: boolean;
   value: string;
+  maxLength?: number;
   returnKeyType: 'next' | 'done';
   isBlurOnSubmit?: boolean;
   onChangeText: (text: string) => void;
@@ -39,6 +40,7 @@ function UnderlinedInput({
   textContentType,
   isSecureTextEntry = false,
   value,
+  maxLength,
   returnKeyType,
   isBlurOnSubmit = true,
   onChangeText,
@@ -58,6 +60,7 @@ function UnderlinedInput({
         textContentType={textContentType}
         secureTextEntry={isSecureTextEntry}
         value={value}
+        maxLength={maxLength}
         clearButtonMode="while-editing"
         returnKeyType={returnKeyType}
         blurOnSubmit={isBlurOnSubmit}

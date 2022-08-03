@@ -14,10 +14,10 @@ function SignUp() {
   const passwordRef = useRef<TextInput>(null);
 
   const isDisabled = useMemo(() => {
-    const isValidate = validateEmail(email) && validatePassword(password);
+    const isValidate = validateEmail(email) && nickname.trim() && validatePassword(password);
 
     return !isValidate;
-  }, [email, password]);
+  }, [email, nickname, password]);
 
   const onChangeEmail = useCallback((text: string) => {
     setEmail(text.trim());
@@ -70,6 +70,7 @@ function SignUp() {
         autoComplete="name"
         textContentType="nickname"
         value={nickname}
+        maxLength={10}
         returnKeyType="next"
         isBlurOnSubmit={false}
         onChangeText={onChangeNickname}
