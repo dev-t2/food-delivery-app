@@ -22,5 +22,6 @@
   - [Middleware Setup](https://redux-toolkit.js.org/api/getDefaultMiddleware)
   - [Redux Flipper](https://github.com/jk-gan/redux-flipper)
   - [Combine Reducers](https://redux.js.org/api/combinereducers)
+  - [TypeScript Setup](https://redux-toolkit.js.org/tutorials/typescript)
 
 # Backend References
