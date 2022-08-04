@@ -19,6 +19,7 @@
 - [Keyboard Aware Scroll View](https://github.com/APSL/react-native-keyboard-aware-scroll-view)
 - [Redux Toolkit](https://redux-toolkit.js.org)
   - [Redux Toolkit Quick Start](https://redux-toolkit.js.org/tutorials/quick-start)
+  - [Get Default Middleware](https://redux-toolkit.js.org/api/getDefaultMiddleware)
   - [Redux Flipper](https://github.com/jk-gan/redux-flipper)
 
 # Backend References
