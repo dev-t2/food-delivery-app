@@ -3,7 +3,7 @@ import { TextInput } from 'react-native';
 
 import { SignInScreenProps } from './index';
 import { validateEmail, validatePassword } from '../../utilities/validate';
-import { Container } from '../../components/layouts';
+import { DismissKeyboardContainer } from '../../components/layouts';
 import { ContainedButton, TextButton, UnderlinedInput } from '../../components/inputs';
 
 function SignIn({ navigation }: SignInScreenProps) {
@@ -47,7 +47,7 @@ function SignIn({ navigation }: SignInScreenProps) {
   }, [navigation]);
 
   return (
-    <Container>
+    <DismissKeyboardContainer>
       <UnderlinedInput
         label="Email"
         placeholder="Please enter your email."
@@ -78,7 +78,7 @@ function SignIn({ navigation }: SignInScreenProps) {
       <ContainedButton isDisabled={isDisabled} text="SignIn" onPress={onSignIn} />
 
       <TextButton text="SignUp" onPress={onSignUp} />
-    </Container>
+    </DismissKeyboardContainer>
   );
 }
 

@@ -2,7 +2,7 @@ import React, { memo, useCallback, useMemo, useRef, useState } from 'react';
 import { TextInput } from 'react-native';
 
 import { validateEmail, validatePassword } from '../../utilities/validate';
-import { Container } from '../../components/layouts';
+import { DismissKeyboardContainer } from '../../components/layouts';
 import { ContainedButton, UnderlinedInput } from '../../components/inputs';
 
 function SignUp() {
@@ -52,7 +52,7 @@ function SignUp() {
   }, [isDisabled]);
 
   return (
-    <Container>
+    <DismissKeyboardContainer>
       <UnderlinedInput
         label="Email"
         placeholder="Please enter your email."
@@ -95,7 +95,7 @@ function SignUp() {
       />
 
       <ContainedButton isDisabled={isDisabled} text="SignUp" onPress={onSignUp} />
-    </Container>
+    </DismissKeyboardContainer>
   );
 }
 
