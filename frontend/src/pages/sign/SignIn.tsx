@@ -37,8 +37,10 @@ function SignIn({ navigation }: SignInScreenProps) {
   }, [isDisabled]);
 
   const onSignIn = useCallback(() => {
-    console.log('onSignIn');
-  }, []);
+    if (!isDisabled) {
+      console.log('onSignIn');
+    }
+  }, [isDisabled]);
 
   const onSignUp = useCallback(() => {
     navigation.navigate('SignUp');

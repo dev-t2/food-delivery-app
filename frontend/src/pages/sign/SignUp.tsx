@@ -46,8 +46,10 @@ function SignUp() {
   }, [isDisabled]);
 
   const onSignUp = useCallback(() => {
-    console.log('onSignUp');
-  }, []);
+    if (!isDisabled) {
+      console.log('onSignUp');
+    }
+  }, [isDisabled]);
 
   return (
     <Container>
