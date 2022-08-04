@@ -19,6 +19,6 @@
   - [The color system](https://material.io/design/color/the-color-system.html)
 - [Keyboard Aware Scroll View](https://github.com/APSL/react-native-keyboard-aware-scroll-view)
 - [Redux Toolkit](https://redux-toolkit.js.org)
-  - [Getting Started with Redux Toolkit](https://redux-toolkit.js.org/introduction/getting-started)
+  - [Redux Toolkit Quick Start](https://redux-toolkit.js.org/tutorials/quick-start)
 
 # Backend References
