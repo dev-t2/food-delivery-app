@@ -1,7 +1,7 @@
 import React, { memo, useCallback, useMemo, useRef, useState } from 'react';
 import { TextInput } from 'react-native';
 
-import { validateEmail, validatePassword } from '../../utilities/validate';
+import { validateEmail, validatePassword } from '../../utilities/validation';
 import { DismissKeyboardContainer } from '../../components/layouts';
 import { ContainedButton, UnderlinedInput } from '../../components/inputs';
 
