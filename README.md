@@ -4,7 +4,6 @@
   - [Setting up the development environment](https://reactnative.dev/docs/environment-setup)
 - [Flipper](https://fbflipper.com)
   - [Installation](https://fbflipper.com/docs/getting-started/#installation)
-  - [Redux Flipper](https://github.com/jk-gan/redux-flipper)
   - [Async Storage Flipper](https://github.com/Fausto95/rn-async-storage-flipper)
 - [Emotion](https://emotion.sh/docs/introduction)
   - [@emotion/native](https://emotion.sh/docs/@emotion/native)
@@ -20,5 +19,6 @@
 - [Keyboard Aware Scroll View](https://github.com/APSL/react-native-keyboard-aware-scroll-view)
 - [Redux Toolkit](https://redux-toolkit.js.org)
   - [Redux Toolkit Quick Start](https://redux-toolkit.js.org/tutorials/quick-start)
+  - [Redux Flipper](https://github.com/jk-gan/redux-flipper)
 
 # Backend References
