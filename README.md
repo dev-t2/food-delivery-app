@@ -17,5 +17,6 @@
   - [Bottom Tabs Navigator](https://reactnavigation.org/docs/bottom-tab-navigator)
 - [Material Design](https://material.io)
   - [The color system](https://material.io/design/color/the-color-system.html)
+- [react-native-keyboard-aware-scroll-view](https://github.com/APSL/react-native-keyboard-aware-scroll-view)
 
 # Backend References
