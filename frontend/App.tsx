@@ -2,7 +2,7 @@ import React, { memo } from 'react';
 import { Provider } from 'react-redux';
 import { ThemeProvider } from '@emotion/react';
 
-import { store } from './src/store';
+import store from './src/store';
 import { theme } from './src/utilities/theme';
 import RootPage from './src/pages';
 

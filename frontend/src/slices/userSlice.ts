@@ -14,8 +14,10 @@ const initialState: InitialState = {
   refreshToken: '',
 };
 
-export const userSlice = createSlice({
+const userSlice = createSlice({
   name: 'user',
   initialState,
   reducers: {},
 });
+
+export default userSlice;
