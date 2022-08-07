@@ -22,7 +22,6 @@
   - [Redux Flipper](https://github.com/jk-gan/redux-flipper)
   - [Combine Reducers](https://redux.js.org/api/combinereducers)
   - [TypeScript Setup](https://redux-toolkit.js.org/tutorials/typescript)
-- [Axios](https://axios-http.com/kr)
 - [React Native Config](https://github.com/luggit/react-native-config)
 
 # Backend References
