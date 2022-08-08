@@ -1,11 +1,16 @@
 import React, { memo, useCallback, useMemo, useRef, useState } from 'react';
 import { TextInput } from 'react-native';
 
+import { useCreateUserMutation } from '../../apis/userApi';
 import { validateEmail, validatePassword } from '../../utils/validation';
 import { DismissKeyboardContainer } from '../../components/layouts';
 import { ContainedButton, UnderlinedInput } from '../../components/inputs';
 
 function SignUp() {
+  const [createUser, { isLoading }] = useCreateUserMutation();
+
+  console.log(isLoading);
+
   const [email, setEmail] = useState('');
   const [nickname, setNickname] = useState('');
   const [password, setPassword] = useState('');
@@ -39,11 +44,17 @@ function SignUp() {
     setPassword(text.trim());
   }, []);
 
-  const onSubmitPassword = useCallback(() => {
+  const onSubmitPassword = useCallback(async () => {
     if (!isDisabled) {
       console.log('onSignUp');
+
+      try {
+        await createUser().unwrap();
+      } catch (err) {
+        console.error(err);
+      }
     }
-  }, [isDisabled]);
+  }, [isDisabled, createUser]);
 
   const onSignUp = useCallback(() => {
     if (!isDisabled) {
