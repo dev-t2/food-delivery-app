@@ -22,6 +22,7 @@
   - [Redux Flipper](https://github.com/jk-gan/redux-flipper)
   - [Combine Reducers](https://redux.js.org/api/combinereducers)
   - [TypeScript Setup](https://redux-toolkit.js.org/tutorials/typescript)
+  - [RTK Query](https://redux-toolkit.js.org/tutorials/rtk-query)
 - [React Native Config](https://github.com/luggit/react-native-config)
 
 # Backend References
