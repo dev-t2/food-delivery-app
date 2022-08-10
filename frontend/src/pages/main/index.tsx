@@ -5,7 +5,7 @@ import {
 } from '@react-navigation/bottom-tabs';
 
 import Orders from './Orders';
-import Delivery from './delivery';
+import Delivery from '../delivery';
 import Settings from './Settings';
 
 export type RootTabsParamList = {
