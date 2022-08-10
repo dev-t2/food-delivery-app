@@ -1,30 +1,25 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { setupListeners } from '@reduxjs/toolkit/query';
 
-import { rootSliceReducer } from '../slices';
-import { apiMiddlewares, rootApiReducer } from '../apis';
+import { rootMiddlewares, rootReducer } from '../slices';
 
 const store = configureStore({
-  reducer: { rootSliceReducer, rootApiReducer },
+  reducer: rootReducer,
   middleware: getDefaultMiddleware => {
     if (__DEV__) {
       const createDebugger = require('redux-flipper').default;
 
-      return getDefaultMiddleware()
-        .concat(...apiMiddlewares)
-        .concat(createDebugger());
+      return getDefaultMiddleware().concat(...rootMiddlewares, createDebugger());
     }
 
-    return getDefaultMiddleware().concat(...apiMiddlewares);
+    return getDefaultMiddleware().concat(...rootMiddlewares);
   },
 });
 
 setupListeners(store.dispatch);
 
-// Infer the `RootState` and `AppDispatch` types from the store itself
 export type RootState = ReturnType<typeof store.getState>;
 
-// Inferred type: {posts: PostsState, comments: CommentsState, users: UsersState}
 export type AppDispatch = typeof store.dispatch;
 
 export default store;
