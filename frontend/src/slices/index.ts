@@ -1,11 +1,11 @@
 import { combineReducers } from '@reduxjs/toolkit';
 
+import foodDeliveryApi from './foodDeliveryApi';
 import userSlice from './userSlice';
-import userApi from './userApi';
 
 export const rootReducer = combineReducers({
+  [foodDeliveryApi.reducerPath]: foodDeliveryApi.reducer,
   user: userSlice.reducer,
-  userApi: userApi.reducer,
 });
 
-export const rootMiddlewares = [userApi.middleware];
+export const rootMiddleware = [foodDeliveryApi.middleware];

@@ -6,8 +6,8 @@ interface ICreateUser {
   password: string;
 }
 
-const userApi = createApi({
-  reducerPath: 'userApi',
+const foodDeliveryApi = createApi({
+  reducerPath: 'foodDeliveryApi',
   baseQuery: fetchBaseQuery({ baseUrl: 'http://localhost:8080/' }),
   endpoints: builder => ({
     createUser: builder.mutation<void, ICreateUser>({
@@ -16,6 +16,6 @@ const userApi = createApi({
   }),
 });
 
-export const { useCreateUserMutation } = userApi;
+export const { useCreateUserMutation } = foodDeliveryApi;
 
-export default userApi;
+export default foodDeliveryApi;
