@@ -22,6 +22,7 @@
   - [Redux Flipper](https://github.com/jk-gan/redux-flipper)
   - [TypeScript Setup](https://redux-toolkit.js.org/tutorials/typescript)
   - [RTK Query](https://redux-toolkit.js.org/tutorials/rtk-query)
+  - [Code Splitting](https://redux-toolkit.js.org/rtk-query/usage/code-splitting)
 - [React Native Config](https://github.com/luggit/react-native-config)
 
 # Backend References
