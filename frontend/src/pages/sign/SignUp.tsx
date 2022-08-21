@@ -1,11 +1,14 @@
 import React, { memo, useCallback, useMemo, useRef, useState } from 'react';
 import { TextInput } from 'react-native';
 
+import { useCreateUserMutation } from '../../slices/userApi';
 import { validateEmail, validatePassword } from '../../utils/validation';
 import { DismissKeyboardContainer } from '../../components/layouts';
 import { ContainedButton, UnderlinedInput } from '../../components/inputs';
 
 function SignUp() {
+  const [createUser] = useCreateUserMutation();
+
   const [email, setEmail] = useState('');
   const [nickname, setNickname] = useState('');
   const [password, setPassword] = useState('');
@@ -39,17 +42,11 @@ function SignUp() {
     setPassword(text.trim());
   }, []);
 
-  const onSubmitPassword = useCallback(async () => {
-    if (!isDisabled) {
-      console.log('onSignUp');
-    }
-  }, [isDisabled]);
-
   const onSignUp = useCallback(() => {
     if (!isDisabled) {
-      console.log('onSignUp');
+      createUser({ email, nickname, password });
     }
-  }, [isDisabled]);
+  }, [isDisabled, createUser, email, nickname, password]);
 
   return (
     <DismissKeyboardContainer>
@@ -91,7 +88,7 @@ function SignUp() {
         maxLength={16}
         returnKeyType="done"
         onChangeText={onChangePassword}
-        onSubmit={onSubmitPassword}
+        onSubmit={onSignUp}
       />
 
       <ContainedButton isDisabled={isDisabled} text="SignUp" onPress={onSignUp} />

@@ -1,14 +1,12 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import { rootApi } from './index';
 
 interface ICreateUser {
   email: string;
-  name: string;
+  nickname: string;
   password: string;
 }
 
-const foodDeliveryApi = createApi({
-  reducerPath: 'foodDeliveryApi',
-  baseQuery: fetchBaseQuery({ baseUrl: 'http://localhost:8080/' }),
+const foodDeliveryApi = rootApi.injectEndpoints({
   endpoints: builder => ({
     createUser: builder.mutation<void, ICreateUser>({
       query: body => ({ url: 'user', method: 'POST', body }),

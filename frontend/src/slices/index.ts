@@ -1,11 +1,15 @@
 import { combineReducers } from '@reduxjs/toolkit';
+import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
-import foodDeliveryApi from './foodDeliveryApi';
 import userSlice from './userSlice';
 
-export const rootReducer = combineReducers({
-  [foodDeliveryApi.reducerPath]: foodDeliveryApi.reducer,
-  user: userSlice.reducer,
+export const rootApi = createApi({
+  reducerPath: 'rootApi',
+  baseQuery: fetchBaseQuery({ baseUrl: 'http://localhost:8080/' }),
+  endpoints: () => ({}),
 });
 
-export const rootMiddleware = [foodDeliveryApi.middleware];
+export const rootReducer = combineReducers({
+  [rootApi.reducerPath]: rootApi.reducer,
+  user: userSlice.reducer,
+});
