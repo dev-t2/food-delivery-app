@@ -1,13 +1,13 @@
 import React, { memo, useCallback, useMemo, useRef, useState } from 'react';
 import { TextInput } from 'react-native';
 
-import { useCreateUserMutation } from '../../slices/userApi';
+import { useSignUpMutation } from '../../slices/userApi';
 import { validateEmail, validatePassword } from '../../utils/validation';
 import { DismissKeyboardContainer } from '../../components/layouts';
 import { ContainedButton, UnderlinedInput } from '../../components/inputs';
 
 function SignUp() {
-  const [createUser] = useCreateUserMutation();
+  const [signUp, { isLoading }] = useSignUpMutation();
 
   const [email, setEmail] = useState('');
   const [nickname, setNickname] = useState('');
@@ -19,8 +19,8 @@ function SignUp() {
   const isDisabled = useMemo(() => {
     const isValidate = validateEmail(email) && nickname.trim() && validatePassword(password);
 
-    return !isValidate;
-  }, [email, nickname, password]);
+    return !isValidate || isLoading;
+  }, [email, nickname, password, isLoading]);
 
   const onChangeEmail = useCallback((text: string) => {
     setEmail(text.trim());
@@ -44,9 +44,9 @@ function SignUp() {
 
   const onSignUp = useCallback(() => {
     if (!isDisabled) {
-      createUser({ email, nickname, password });
+      signUp({ email, nickname, password });
     }
-  }, [isDisabled, createUser, email, nickname, password]);
+  }, [isDisabled, signUp, email, nickname, password]);
 
   return (
     <DismissKeyboardContainer>
@@ -91,7 +91,12 @@ function SignUp() {
         onSubmit={onSignUp}
       />
 
-      <ContainedButton isDisabled={isDisabled} text="SignUp" onPress={onSignUp} />
+      <ContainedButton
+        isDisabled={isDisabled}
+        isLoading={isLoading}
+        text="SignUp"
+        onPress={onSignUp}
+      />
     </DismissKeyboardContainer>
   );
 }

@@ -1,4 +1,6 @@
 import React, { memo } from 'react';
+import { ActivityIndicator } from 'react-native';
+import { useTheme } from '@emotion/react';
 import styled from '@emotion/native';
 
 const StyledPressable = styled.Pressable(({ theme, disabled }) => ({
@@ -18,14 +20,21 @@ const StyledText = styled.Text(({ theme }) => ({
 
 interface IContainedButton {
   isDisabled: boolean;
+  isLoading?: boolean;
   text: string;
   onPress: () => void;
 }
 
-function ContainedButton({ isDisabled, text, onPress }: IContainedButton) {
+function ContainedButton({ isDisabled, isLoading, text, onPress }: IContainedButton) {
+  const theme = useTheme();
+
   return (
     <StyledPressable disabled={isDisabled} onPress={onPress}>
-      <StyledText>{text}</StyledText>
+      {isLoading ? (
+        <ActivityIndicator color={theme.colors.white} />
+      ) : (
+        <StyledText>{text}</StyledText>
+      )}
     </StyledPressable>
   );
 }

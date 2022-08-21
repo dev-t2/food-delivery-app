@@ -8,12 +8,12 @@ interface ICreateUser {
 
 const foodDeliveryApi = rootApi.injectEndpoints({
   endpoints: builder => ({
-    createUser: builder.mutation<void, ICreateUser>({
+    signUp: builder.mutation<void, ICreateUser>({
       query: body => ({ url: 'user', method: 'POST', body }),
     }),
   }),
 });
 
-export const { useCreateUserMutation } = foodDeliveryApi;
+export const { useSignUpMutation } = foodDeliveryApi;
 
 export default foodDeliveryApi;
