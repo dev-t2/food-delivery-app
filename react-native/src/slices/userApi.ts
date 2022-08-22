@@ -1,6 +1,6 @@
 import { rootApi } from './index';
 
-interface ICreateUser {
+interface ISignUpRequest {
   email: string;
   nickname: string;
   password: string;
@@ -8,7 +8,7 @@ interface ICreateUser {
 
 const foodDeliveryApi = rootApi.injectEndpoints({
   endpoints: builder => ({
-    signUp: builder.mutation<void, ICreateUser>({
+    signUp: builder.mutation<void, ISignUpRequest>({
       query: body => ({ url: 'user', method: 'POST', body }),
     }),
   }),
