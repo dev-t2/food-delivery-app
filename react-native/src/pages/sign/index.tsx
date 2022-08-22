@@ -14,6 +14,7 @@ export type RootStackParamList = {
 };
 
 export type SignInScreenProps = NativeStackScreenProps<RootStackParamList, 'SignIn'>;
+export type SignUpScreenProps = NativeStackScreenProps<RootStackParamList, 'SignUp'>;
 
 const { Navigator, Screen } = createNativeStackNavigator<RootStackParamList>();
 
