@@ -4,7 +4,7 @@ import { Provider } from 'react-redux';
 
 import theme from './src/utils/theme';
 import store from './src/store';
-import RootPage from './src/pages/RootPage';
+import RootPage from './src/pages';
 
 function App() {
   return (

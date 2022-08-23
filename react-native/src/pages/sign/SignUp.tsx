@@ -8,7 +8,7 @@ import { DismissKeyboardContainer } from '../../components/layouts';
 import { ContainedButton, UnderlinedInput } from '../../components/inputs';
 
 function SignUp({ navigation }: SignUpScreenProps) {
-  const [signUp, { isLoading, isSuccess }] = useSignUpMutation();
+  const [signUp, { isLoading, isSuccess, isError, error }] = useSignUpMutation();
 
   const [email, setEmail] = useState('');
   const [nickname, setNickname] = useState('');
@@ -27,7 +27,11 @@ function SignUp({ navigation }: SignUpScreenProps) {
     if (isSuccess) {
       navigation.navigate('SignIn');
     }
-  }, [isSuccess, navigation]);
+
+    if (isError) {
+      console.log(error);
+    }
+  }, [isSuccess, navigation, isError, error]);
 
   const onChangeEmail = useCallback((text: string) => {
     setEmail(text.trim());

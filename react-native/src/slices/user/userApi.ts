@@ -12,6 +12,7 @@ const userApi = api.injectEndpoints({
       query: body => ({ url: 'user', method: 'POST', body }),
     }),
   }),
+  overrideExisting: __DEV__,
 });
 
 export const { useSignUpMutation } = userApi;
