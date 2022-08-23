@@ -2,9 +2,9 @@ import React, { memo } from 'react';
 import { ThemeProvider } from '@emotion/react';
 import { Provider } from 'react-redux';
 
-import { theme } from './src/utils/theme';
+import theme from './src/utils/theme';
 import store from './src/store';
-import RootPage from './src/pages';
+import RootPage from './src/pages/RootPage';
 
 function App() {
   return (

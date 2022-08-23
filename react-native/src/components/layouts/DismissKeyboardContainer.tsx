@@ -1,7 +1,7 @@
 import React, { memo, ReactNode, useCallback } from 'react';
 import { Keyboard, TouchableWithoutFeedback } from 'react-native';
-import styled from '@emotion/native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import styled from '@emotion/native';
 
 const StyledKeyboardAwareScrollView = styled(KeyboardAwareScrollView)({
   padding: 20,
