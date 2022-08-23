@@ -1,7 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { setupListeners } from '@reduxjs/toolkit/query/react';
 
-import { rootApi, rootReducer } from '../slices';
+import { api, rootReducer } from '../slices';
 
 const store = configureStore({
   reducer: rootReducer,
@@ -9,10 +9,10 @@ const store = configureStore({
     if (__DEV__) {
       const createDebugger = require('redux-flipper').default;
 
-      return getDefaultMiddleware().concat(rootApi.middleware, createDebugger());
+      return getDefaultMiddleware().concat(api.middleware, createDebugger());
     }
 
-    return getDefaultMiddleware().concat(rootApi.middleware);
+    return getDefaultMiddleware().concat(api.middleware);
   },
 });
 

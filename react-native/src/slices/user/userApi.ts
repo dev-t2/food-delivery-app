@@ -1,4 +1,4 @@
-import { rootApi } from './index';
+import { api } from '../index';
 
 interface ISignUpRequest {
   email: string;
@@ -6,7 +6,7 @@ interface ISignUpRequest {
   password: string;
 }
 
-const foodDeliveryApi = rootApi.injectEndpoints({
+const userApi = api.injectEndpoints({
   endpoints: builder => ({
     signUp: builder.mutation<void, ISignUpRequest>({
       query: body => ({ url: 'user', method: 'POST', body }),
@@ -14,6 +14,4 @@ const foodDeliveryApi = rootApi.injectEndpoints({
   }),
 });
 
-export const { useSignUpMutation } = foodDeliveryApi;
-
-export default foodDeliveryApi;
+export const { useSignUpMutation } = userApi;
