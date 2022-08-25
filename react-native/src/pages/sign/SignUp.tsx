@@ -20,8 +20,8 @@ function SignUp({ navigation }: SignUpScreenProps) {
   const isDisabled = useMemo(() => {
     const isValidate = validateEmail(email) && nickname.trim() && validatePassword(password);
 
-    return !isValidate || isLoading;
-  }, [email, nickname, password, isLoading]);
+    return isLoading || !isValidate;
+  }, [isLoading, email, nickname, password]);
 
   useEffect(() => {
     if (isSuccess) {
