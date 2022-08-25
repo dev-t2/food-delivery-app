@@ -2,17 +2,17 @@ import React, { memo } from 'react';
 import { ThemeProvider } from '@emotion/react';
 import { Provider } from 'react-redux';
 
-import theme from './src/utils/theme';
 import store from './src/store';
+import theme from './src/theme';
 import RootPage from './src/pages';
 
 function App() {
   return (
-    <ThemeProvider theme={theme}>
-      <Provider store={store}>
+    <Provider store={store}>
+      <ThemeProvider theme={theme}>
         <RootPage />
-      </Provider>
-    </ThemeProvider>
+      </ThemeProvider>
+    </Provider>
   );
 }
 
