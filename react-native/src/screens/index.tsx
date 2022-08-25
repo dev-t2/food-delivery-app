@@ -5,10 +5,10 @@ import { useAppSelector } from '../store';
 import Main from './main';
 import Sign from './sign';
 
-function RootPage() {
+function RootScreen() {
   const { email } = useAppSelector(state => state.user);
 
   return <NavigationContainer>{email ? <Main /> : <Sign />}</NavigationContainer>;
 }
 
-export default memo(RootPage);
+export default memo(RootScreen);

@@ -4,13 +4,13 @@ import { Provider } from 'react-redux';
 
 import store from './src/store';
 import theme from './src/theme';
-import RootPage from './src/pages';
+import RootScreen from './src/screens';
 
 function App() {
   return (
     <Provider store={store}>
       <ThemeProvider theme={theme}>
-        <RootPage />
+        <RootScreen />
       </ThemeProvider>
     </Provider>
   );
