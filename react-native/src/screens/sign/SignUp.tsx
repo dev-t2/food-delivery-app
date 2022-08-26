@@ -2,6 +2,7 @@ import React, { memo, useCallback, useEffect, useMemo, useRef, useState } from '
 import { TextInput } from 'react-native';
 
 import { SignUpScreenProps } from './index';
+import { isErrorWithMessage } from '../../slices';
 import { useSignUpMutation } from '../../slices/user/userApi';
 import { validateEmail, validatePassword } from '../../utils/validation';
 import { DismissKeyboardContainer } from '../../components/layouts';
@@ -29,7 +30,11 @@ function SignUp({ navigation }: SignUpScreenProps) {
     }
 
     if (isError) {
-      console.log(error);
+      if (isErrorWithMessage(error)) {
+        console.log(error.data.message);
+      } else {
+        console.error(error);
+      }
     }
   }, [isSuccess, navigation, isError, error]);
 
