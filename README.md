@@ -1,10 +1,9 @@
 # React Native References
 
-- [React Native](https://reactnative.dev)
-  - [Development Environment Setup](https://reactnative.dev/docs/environment-setup)
+- [React Native](https://reactnative.dev/docs/environment-setup)
   - [Keyboard Aware Scroll View](https://github.com/APSL/react-native-keyboard-aware-scroll-view)
   - [Config Variables](https://github.com/luggit/react-native-config)
-- [Flipper](https://fbflipper.com/docs/getting-started/#installation)
+- [Flipper](https://fbflipper.com/docs/getting-started)
 - [Emotion](https://emotion.sh/docs/@emotion/native)
   - [Theme Setup](https://emotion.sh/docs/typescript#define-a-theme)
 - [React Navigation](https://reactnavigation.org/docs/getting-started)
