@@ -3,8 +3,8 @@ import { ThemeProvider } from '@emotion/react';
 import { Provider } from 'react-redux';
 
 import store from './src/store';
-import theme from './src/theme';
-import RootScreen from './src/screens';
+import theme from './src/utils/theme';
+import RootScreen from './src/screens/RootScreen';
 
 function App() {
   return (
