@@ -24,5 +24,6 @@
   - [TypeScript Setup](https://redux-toolkit.js.org/tutorials/typescript)
   - [RTK Query](https://redux-toolkit.js.org/tutorials/rtk-query)
     - [Code Splitting](https://redux-toolkit.js.org/rtk-query/usage/code-splitting)
+    - [TypeScript Setup](https://redux-toolkit.js.org/rtk-query/usage-with-typescript)
 - [Android Manifest](https://developer.android.com/guide/topics/manifest/manifest-intro)
   - [Application](https://developer.android.com/guide/topics/manifest/application-element)
