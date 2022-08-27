@@ -3,7 +3,7 @@ import { TextInput } from 'react-native';
 
 import { SignInScreenProps } from './index';
 import { useSignInMutation } from '../../slices/user/userApi';
-import { validateEmail, validatePassword } from '../../utils/validation';
+import { isValidateEmail, isValidatePassword } from '../../utils/validation';
 import { DismissKeyboardContainer } from '../../components/layouts';
 import { ContainedButton, TextButton, UnderlinedInput } from '../../components/inputs';
 import { isErrorWithMessage } from '../../slices';
@@ -17,7 +17,7 @@ function SignIn({ navigation }: SignInScreenProps) {
   const passwordRef = useRef<TextInput>(null);
 
   const isDisabled = useMemo(() => {
-    const isValidate = validateEmail(email) && validatePassword(password);
+    const isValidate = isValidateEmail(email) && isValidatePassword(password);
 
     return isLoading || !isValidate;
   }, [isLoading, email, password]);
