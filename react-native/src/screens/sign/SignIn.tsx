@@ -6,10 +6,9 @@ import { useSignInMutation } from '../../slices/user/userApi';
 import { isValidateEmail, isValidatePassword } from '../../utils/validation';
 import { DismissKeyboardContainer } from '../../components/layouts';
 import { ContainedButton, TextButton, UnderlinedInput } from '../../components/inputs';
-import { isErrorWithMessage } from '../../slices';
 
 function SignIn({ navigation }: SignInScreenProps) {
-  const [signIn, { isLoading, isSuccess, isError, error }] = useSignInMutation();
+  const [signIn, { isLoading, isSuccess, error }] = useSignInMutation();
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -25,14 +24,14 @@ function SignIn({ navigation }: SignInScreenProps) {
       //
     }
 
-    if (isError) {
-      if (isErrorWithMessage(error)) {
-        console.log(error.data.message);
+    if (error) {
+      if ('status' in error) {
+        console.log(error.data);
       } else {
         console.error(error);
       }
     }
-  }, [isSuccess, navigation, isError, error]);
+  }, [isSuccess, navigation, error]);
 
   const onChangeEmail = useCallback((text: string) => {
     setEmail(text.trim());

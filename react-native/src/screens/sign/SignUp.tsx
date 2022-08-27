@@ -2,14 +2,13 @@ import React, { memo, useCallback, useEffect, useMemo, useRef, useState } from '
 import { TextInput } from 'react-native';
 
 import { SignUpScreenProps } from './index';
-import { isErrorWithMessage } from '../../slices';
 import { useSignUpMutation } from '../../slices/user/userApi';
 import { isValidateEmail, isValidatePassword } from '../../utils/validation';
 import { DismissKeyboardContainer } from '../../components/layouts';
 import { ContainedButton, UnderlinedInput } from '../../components/inputs';
 
 function SignUp({ navigation }: SignUpScreenProps) {
-  const [signUp, { isLoading, isSuccess, isError, error }] = useSignUpMutation();
+  const [signUp, { isLoading, isSuccess, error }] = useSignUpMutation();
 
   const [email, setEmail] = useState('');
   const [nickname, setNickname] = useState('');
@@ -27,14 +26,14 @@ function SignUp({ navigation }: SignUpScreenProps) {
       navigation.navigate('SignIn');
     }
 
-    if (isError) {
-      if (isErrorWithMessage(error)) {
-        console.log(error.data.message);
+    if (error) {
+      if ('status' in error) {
+        console.log(error.data);
       } else {
         console.error(error);
       }
     }
-  }, [isSuccess, navigation, isError, error]);
+  }, [isSuccess, navigation, error]);
 
   const onChangeEmail = useCallback((text: string) => {
     setEmail(text.trim());
