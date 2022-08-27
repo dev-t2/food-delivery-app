@@ -6,13 +6,21 @@ interface ISignUpRequest {
   password: string;
 }
 
+interface ISignInRequest {
+  email: string;
+  password: string;
+}
+
 const userApi = api.injectEndpoints({
   endpoints: builder => ({
     signUp: builder.mutation<void, ISignUpRequest>({
-      query: body => ({ url: 'user', method: 'POST', body }),
+      query: body => ({ url: 'signup', method: 'POST', body }),
+    }),
+    signIn: builder.mutation<void, ISignInRequest>({
+      query: body => ({ url: 'signin', method: 'POST', body }),
     }),
   }),
   overrideExisting: __DEV__,
 });
 
-export const { useSignUpMutation } = userApi;
+export const { useSignUpMutation, useSignInMutation } = userApi;

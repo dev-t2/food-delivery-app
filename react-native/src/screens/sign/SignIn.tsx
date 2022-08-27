@@ -1,12 +1,16 @@
-import React, { memo, useCallback, useMemo, useRef, useState } from 'react';
+import React, { memo, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { TextInput } from 'react-native';
 
 import { SignInScreenProps } from './index';
+import { useSignInMutation } from '../../slices/user/userApi';
 import { validateEmail, validatePassword } from '../../utils/validation';
 import { DismissKeyboardContainer } from '../../components/layouts';
 import { ContainedButton, TextButton, UnderlinedInput } from '../../components/inputs';
+import { isErrorWithMessage } from '../../slices';
 
 function SignIn({ navigation }: SignInScreenProps) {
+  const [signIn, { isLoading, isSuccess, isError, error }] = useSignInMutation();
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -15,8 +19,22 @@ function SignIn({ navigation }: SignInScreenProps) {
   const isDisabled = useMemo(() => {
     const isValidate = validateEmail(email) && validatePassword(password);
 
-    return !isValidate;
-  }, [email, password]);
+    return isLoading || !isValidate;
+  }, [isLoading, email, password]);
+
+  useEffect(() => {
+    if (isSuccess) {
+      //
+    }
+
+    if (isError) {
+      if (isErrorWithMessage(error)) {
+        console.log(error.data.message);
+      } else {
+        console.error(error);
+      }
+    }
+  }, [isSuccess, navigation, isError, error]);
 
   const onChangeEmail = useCallback((text: string) => {
     setEmail(text.trim());
@@ -30,17 +48,11 @@ function SignIn({ navigation }: SignInScreenProps) {
     setPassword(text.trim());
   }, []);
 
-  const onSubmitPassword = useCallback(() => {
-    if (!isDisabled) {
-      console.log('onSignIn');
-    }
-  }, [isDisabled]);
-
   const onSignIn = useCallback(() => {
     if (!isDisabled) {
-      console.log('onSignIn');
+      signIn({ email, password });
     }
-  }, [isDisabled]);
+  }, [isDisabled, signIn, email, password]);
 
   const onSignUp = useCallback(() => {
     navigation.navigate('SignUp');
@@ -72,10 +84,15 @@ function SignIn({ navigation }: SignInScreenProps) {
         maxLength={16}
         returnKeyType="done"
         onChangeText={onChangePassword}
-        onSubmit={onSubmitPassword}
+        onSubmit={onSignIn}
       />
 
-      <ContainedButton isDisabled={isDisabled} text="SignIn" onPress={onSignIn} />
+      <ContainedButton
+        isDisabled={isDisabled}
+        isLoading={isLoading}
+        text="SignIn"
+        onPress={onSignIn}
+      />
 
       <TextButton text="SignUp" onPress={onSignUp} />
     </DismissKeyboardContainer>
