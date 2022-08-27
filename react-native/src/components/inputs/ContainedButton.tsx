@@ -29,7 +29,7 @@ function ContainedButton({ isDisabled, isLoading, text, onPress }: IContainedBut
   const theme = useTheme();
 
   return (
-    <StyledPressable disabled={isDisabled} onPress={onPress}>
+    <StyledPressable disabled={isDisabled || isLoading} onPress={onPress}>
       {isLoading ? (
         <ActivityIndicator color={theme.colors.white} />
       ) : (

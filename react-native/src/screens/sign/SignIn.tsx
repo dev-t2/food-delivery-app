@@ -17,10 +17,8 @@ function SignIn({ navigation }: SignInScreenProps) {
   const passwordRef = useRef<TextInput>(null);
 
   const isDisabled = useMemo(() => {
-    const isValidate = isValidateEmail(email) && isValidatePassword(password);
-
-    return isLoading || !isValidate;
-  }, [isLoading, email, password]);
+    return !email.trim() || !password.trim();
+  }, [email, password]);
 
   useEffect(() => {
     if (isSuccess) {
@@ -49,10 +47,14 @@ function SignIn({ navigation }: SignInScreenProps) {
   }, []);
 
   const onSignIn = useCallback(() => {
-    if (!isDisabled) {
+    if (!isValidateEmail(email)) {
+      console.log('올바른 이메일 주소를 입력해 주세요.');
+    } else if (!isValidatePassword(password)) {
+      console.log('비밀번호는 영문, 숫자를 모두 포함하여 8자 이상 입력해 주세요.');
+    } else {
       signIn({ email, password });
     }
-  }, [isDisabled, signIn, email, password]);
+  }, [email, password, signIn]);
 
   const onSignUp = useCallback(() => {
     navigation.navigate('SignUp');

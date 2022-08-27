@@ -19,10 +19,8 @@ function SignUp({ navigation }: SignUpScreenProps) {
   const passwordRef = useRef<TextInput>(null);
 
   const isDisabled = useMemo(() => {
-    const isValidate = isValidateEmail(email) && nickname.trim() && isValidatePassword(password);
-
-    return isLoading || !isValidate;
-  }, [isLoading, email, nickname, password]);
+    return !email.trim() || !nickname.trim() || !password.trim();
+  }, [email, nickname, password]);
 
   useEffect(() => {
     if (isSuccess) {
@@ -59,10 +57,14 @@ function SignUp({ navigation }: SignUpScreenProps) {
   }, []);
 
   const onSignUp = useCallback(() => {
-    if (!isDisabled) {
+    if (!isValidateEmail(email)) {
+      console.log('올바른 이메일 주소를 입력해 주세요.');
+    } else if (!isValidatePassword(password)) {
+      console.log('비밀번호는 영문, 숫자를 모두 포함하여 8자 이상 입력해 주세요.');
+    } else {
       signUp({ email, nickname, password });
     }
-  }, [isDisabled, signUp, email, nickname, password]);
+  }, [email, password, signUp, nickname]);
 
   return (
     <DismissKeyboardContainer>
