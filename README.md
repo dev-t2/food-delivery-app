@@ -22,3 +22,4 @@
     - [Mutations](https://redux-toolkit.js.org/rtk-query/usage/mutations)
     - [TypeScript Setup](https://redux-toolkit.js.org/rtk-query/usage-with-typescript)
 - [Android Manifest Application](https://developer.android.com/guide/topics/manifest/application-element)
+- [Socket.IO Client](https://socket.io/docs/v4/client-installation)
