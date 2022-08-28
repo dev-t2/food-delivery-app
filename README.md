@@ -21,5 +21,6 @@
     - [Code Splitting](https://redux-toolkit.js.org/rtk-query/usage/code-splitting)
     - [Mutations](https://redux-toolkit.js.org/rtk-query/usage/mutations)
     - [TypeScript Setup](https://redux-toolkit.js.org/rtk-query/usage-with-typescript)
-- [Android Manifest Application](https://developer.android.com/guide/topics/manifest/application-element)
+    - [Streaming Updates](https://redux-toolkit.js.org/rtk-query/usage/streaming-updates)
+- [Android Manifest](https://developer.android.com/guide/topics/manifest/manifest-intro)
 - [Socket.IO Client](https://socket.io/docs/v4/client-installation)
