@@ -2,13 +2,17 @@ import React, { memo, useCallback, useEffect, useMemo, useRef, useState } from '
 import { TextInput } from 'react-native';
 
 import { SignInScreenProps } from './index';
+import { useAppDispatch } from '../../store';
 import { useSignInMutation } from '../../slices/user/userApi';
+import { setUser } from '../../slices/user/userSlice';
 import { isValidateEmail, isValidatePassword } from '../../utils/validation';
 import { DismissKeyboardContainer } from '../../components/layouts';
 import { ContainedButton, TextButton, UnderlinedInput } from '../../components/inputs';
 
 function SignIn({ navigation }: SignInScreenProps) {
-  const [signIn, { isLoading, isSuccess, error }] = useSignInMutation();
+  const [signIn, { isLoading, isSuccess, data, isError, error }] = useSignInMutation();
+
+  const dispatch = useAppDispatch();
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -20,18 +24,18 @@ function SignIn({ navigation }: SignInScreenProps) {
   }, [email, password]);
 
   useEffect(() => {
-    if (isSuccess) {
-      //
+    if (isSuccess && data) {
+      dispatch(setUser(data));
     }
 
-    if (error) {
+    if (isError && error) {
       if ('status' in error) {
         console.log(error.data);
       } else {
         console.error(error);
       }
     }
-  }, [isSuccess, navigation, error]);
+  }, [isSuccess, data, dispatch, isError, error]);
 
   const onChangeEmail = useCallback((text: string) => {
     setEmail(text.trim());

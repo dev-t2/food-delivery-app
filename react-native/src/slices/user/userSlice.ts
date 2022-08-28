@@ -1,15 +1,10 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-interface InitialState {
-  email: string;
-  name: string;
-  accessToken: string;
-  refreshToken: string;
-}
+import { InitialState, ISignInResponse } from './userType';
 
 const initialState: InitialState = {
   email: '',
-  name: '',
+  nickname: '',
   accessToken: '',
   refreshToken: '',
 };
@@ -17,7 +12,16 @@ const initialState: InitialState = {
 const userSlice = createSlice({
   name: 'user',
   initialState,
-  reducers: {},
+  reducers: {
+    setUser: (state, action: PayloadAction<ISignInResponse>) => {
+      state.email = action.payload.email;
+      state.nickname = action.payload.nickname;
+      state.accessToken = action.payload.accessToken;
+      state.refreshToken = action.payload.refreshToken;
+    },
+  },
 });
+
+export const { setUser } = userSlice.actions;
 
 export default userSlice;

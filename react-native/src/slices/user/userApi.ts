@@ -1,22 +1,12 @@
 import { api } from '../index';
-
-interface ISignUpRequest {
-  email: string;
-  nickname: string;
-  password: string;
-}
-
-interface ISignInRequest {
-  email: string;
-  password: string;
-}
+import { ISignInRequest, ISignInResponse, ISignUpRequest } from './userType';
 
 const userApi = api.injectEndpoints({
   endpoints: builder => ({
     signUp: builder.mutation<void, ISignUpRequest>({
       query: body => ({ url: 'signup', method: 'POST', body }),
     }),
-    signIn: builder.mutation<void, ISignInRequest>({
+    signIn: builder.mutation<ISignInResponse, ISignInRequest>({
       query: body => ({ url: 'signin', method: 'POST', body }),
     }),
   }),
