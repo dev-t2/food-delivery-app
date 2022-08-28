@@ -6,7 +6,6 @@ const initialState: InitialState = {
   email: '',
   nickname: '',
   accessToken: '',
-  refreshToken: '',
 };
 
 const userSlice = createSlice({
@@ -17,7 +16,6 @@ const userSlice = createSlice({
       state.email = action.payload.email;
       state.nickname = action.payload.nickname;
       state.accessToken = action.payload.accessToken;
-      state.refreshToken = action.payload.refreshToken;
     },
   },
 });

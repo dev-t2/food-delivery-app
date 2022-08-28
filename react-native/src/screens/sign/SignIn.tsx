@@ -5,6 +5,7 @@ import { SignInScreenProps } from './index';
 import { useAppDispatch } from '../../store';
 import { useSignInMutation } from '../../slices/user/userApi';
 import { setUser } from '../../slices/user/userSlice';
+import { setEncryptedStorage } from '../../utils/encryptedStorage';
 import { isValidateEmail, isValidatePassword } from '../../utils/validation';
 import { DismissKeyboardContainer } from '../../components/layouts';
 import { ContainedButton, TextButton, UnderlinedInput } from '../../components/inputs';
@@ -26,6 +27,10 @@ function SignIn({ navigation }: SignInScreenProps) {
   useEffect(() => {
     if (isSuccess && data) {
       dispatch(setUser(data));
+
+      (async () => {
+        await setEncryptedStorage('refreshToken', data.refreshToken);
+      })();
     }
 
     if (isError && error) {

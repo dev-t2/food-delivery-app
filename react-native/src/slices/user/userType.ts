@@ -2,7 +2,6 @@ export interface InitialState {
   email: string;
   nickname: string;
   accessToken: string;
-  refreshToken: string;
 }
 
 export interface ISignUpRequest {
