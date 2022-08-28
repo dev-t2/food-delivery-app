@@ -3,7 +3,7 @@
 - [React Native](https://reactnative.dev/docs/environment-setup)
   - [Keyboard Aware Scroll View](https://github.com/APSL/react-native-keyboard-aware-scroll-view)
   - [Config Variables](https://github.com/luggit/react-native-config)
-  - [Async Storage](https://react-native-async-storage.github.io/async-storage/docs/install)
+  - [Encrypted Storage](https://github.com/emeraldsanto/react-native-encrypted-storage)
 - [Flipper](https://fbflipper.com/docs/getting-started)
 - [Emotion](https://emotion.sh/docs/@emotion/native)
   - [Theme Setup](https://emotion.sh/docs/typescript#define-a-theme)
