@@ -29,7 +29,11 @@ function SignIn({ navigation }: SignInScreenProps) {
       dispatch(setUser(data));
 
       (async () => {
-        await setEncryptedStorage('refreshToken', data.refreshToken);
+        try {
+          await setEncryptedStorage('refreshToken', data.refreshToken);
+        } catch (err) {
+          console.error(err);
+        }
       })();
     }
 
