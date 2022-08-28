@@ -1,12 +1,13 @@
-import { io } from 'socket.io-client';
 import Config from 'react-native-config';
+import { io } from 'socket.io-client';
 
 import { api } from '../index';
+import { IOrder } from './orderType';
 
 const orderApi = api.injectEndpoints({
   endpoints: builder => ({
-    getOrders: builder.query({
-      query: () => '/socket.io',
+    getOrders: builder.query<IOrder, void>({
+      query: () => 'orders',
       async onCacheEntryAdded(_, { cacheDataLoaded, cacheEntryRemoved }) {
         const socket = io(Config.BASE_URL, { transports: ['websocket'] });
 
@@ -17,7 +18,7 @@ const orderApi = api.injectEndpoints({
         } finally {
           await cacheEntryRemoved;
 
-          socket.close();
+          socket.disconnect();
         }
       },
     }),
@@ -25,4 +26,4 @@ const orderApi = api.injectEndpoints({
   overrideExisting: __DEV__,
 });
 
-export const {} = orderApi;
+export const { useGetOrdersQuery } = orderApi;
