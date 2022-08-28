@@ -8,7 +8,7 @@ const orderApi = api.injectEndpoints({
     getOrders: builder.query({
       query: () => '/socket.io',
       async onCacheEntryAdded(_, { cacheDataLoaded, cacheEntryRemoved }) {
-        const socket = io(Config.BASE_URL);
+        const socket = io(Config.BASE_URL, { transports: ['websocket'] });
 
         try {
           await cacheDataLoaded;
