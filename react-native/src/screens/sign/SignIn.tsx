@@ -1,5 +1,5 @@
 import React, { memo, useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import { TextInput } from 'react-native';
+import { Keyboard, TextInput } from 'react-native';
 
 import { SignInScreenProps } from './index';
 import { useAppDispatch } from '../../store';
@@ -59,6 +59,8 @@ function SignIn({ navigation }: SignInScreenProps) {
   }, []);
 
   const onSignIn = useCallback(() => {
+    Keyboard.dismiss();
+
     if (!isValidateEmail(email)) {
       console.log('올바른 이메일 주소를 입력해 주세요.');
     } else if (!isValidatePassword(password)) {
@@ -69,6 +71,8 @@ function SignIn({ navigation }: SignInScreenProps) {
   }, [email, password, signIn]);
 
   const onSignUp = useCallback(() => {
+    Keyboard.dismiss();
+
     navigation.navigate('SignUp');
   }, [navigation]);
 
@@ -108,7 +112,7 @@ function SignIn({ navigation }: SignInScreenProps) {
         onPress={onSignIn}
       />
 
-      <TextButton text="SignUp" onPress={onSignUp} />
+      <TextButton isDisabled={isLoading} text="SignUp" onPress={onSignUp} />
     </DismissKeyboardContainer>
   );
 }

@@ -1,5 +1,5 @@
 import React, { memo, useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import { TextInput } from 'react-native';
+import { Keyboard, TextInput } from 'react-native';
 
 import { SignUpScreenProps } from './index';
 import { useSignUpMutation } from '../../slices/user/userApi';
@@ -56,6 +56,8 @@ function SignUp({ navigation }: SignUpScreenProps) {
   }, []);
 
   const onSignUp = useCallback(() => {
+    Keyboard.dismiss();
+
     if (!isValidateEmail(email)) {
       console.log('올바른 이메일 주소를 입력해 주세요.');
     } else if (!isValidatePassword(password)) {

@@ -18,7 +18,9 @@ function DismissKeyboardContainer({ children }: IDismissKeyboardContainer) {
 
   return (
     <TouchableWithoutFeedback accessible={false} onPress={onPress}>
-      <StyledKeyboardAwareScrollView>{children}</StyledKeyboardAwareScrollView>
+      <StyledKeyboardAwareScrollView keyboardShouldPersistTaps="handled">
+        {children}
+      </StyledKeyboardAwareScrollView>
     </TouchableWithoutFeedback>
   );
 }

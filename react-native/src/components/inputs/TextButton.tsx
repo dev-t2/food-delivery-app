@@ -8,13 +8,14 @@ const StyledText = styled.Text({
 });
 
 interface ITextButton {
+  isDisabled?: boolean;
   text: string;
   onPress: () => void;
 }
 
-function TextButton({ text, onPress }: ITextButton) {
+function TextButton({ isDisabled, text, onPress }: ITextButton) {
   return (
-    <StyledPressable onPress={onPress}>
+    <StyledPressable disabled={isDisabled} onPress={onPress}>
       <StyledText>{text}</StyledText>
     </StyledPressable>
   );
