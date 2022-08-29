@@ -8,7 +8,6 @@ const userApi = api.injectEndpoints({
     }),
     signIn: builder.mutation<ISignInResponse, ISignInRequest>({
       query: body => ({ url: 'signin', method: 'POST', body }),
-      transformResponse: (response: { data: ISignInResponse }) => response.data,
     }),
   }),
   overrideExisting: __DEV__,

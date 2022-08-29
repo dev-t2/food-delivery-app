@@ -1,3 +1,15 @@
-export interface InitialState {}
+export interface IOrder {
+  orderId: string;
+  price: number;
+  start: {
+    latitude: number;
+    longitude: number;
+  };
+  end: {
+    latitude: number;
+    longitude: number;
+  };
+  rider?: string;
+}
 
-export interface IOrder {}
+export interface InitialState {}
