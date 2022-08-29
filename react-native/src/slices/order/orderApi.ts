@@ -5,7 +5,9 @@ import { io } from 'socket.io-client';
 import { api } from '../index';
 import { IOrder } from './orderType';
 
-const ordersAdapter = createEntityAdapter<IOrder>();
+const ordersAdapter = createEntityAdapter<IOrder>({
+  selectId: order => order.orderId,
+});
 
 const orderApi = api.injectEndpoints({
   endpoints: builder => ({
