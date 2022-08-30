@@ -73,6 +73,9 @@ function SignIn({ navigation }: SignInScreenProps) {
   const onSignUp = useCallback(() => {
     Keyboard.dismiss();
 
+    setEmail('');
+    setPassword('');
+
     navigation.navigate('SignUp');
   }, [navigation]);
 
