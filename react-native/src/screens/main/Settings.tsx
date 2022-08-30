@@ -1,12 +1,11 @@
 import React, { memo, useCallback, useEffect, useMemo } from 'react';
-import { Text } from 'react-native';
 
 import { useAppDispatch, useAppSelector } from '../../store';
 import { useSignOutMutation } from '../../slices/user/userApi';
 import { setUser } from '../../slices/user/userSlice';
 import { removeEncryptedStorage } from '../../utils/encryptedStorage';
 import { Container } from '../../components/layout';
-import { BoldText } from '../../components/display';
+import { Text } from '../../components/display';
 import { ContainedButton } from '../../components/input';
 
 function Settings() {
@@ -48,8 +47,12 @@ function Settings() {
 
   return (
     <Container>
-      <Text>
-        {nickname} 님의 수익금 <BoldText text={replacedMoney} /> 원
+      <Text fontSize={16}>
+        {nickname} 님의 수익금{' '}
+        <Text fontSize={16} isBold>
+          {replacedMoney}
+        </Text>{' '}
+        원
       </Text>
 
       <ContainedButton marginTop={20} isLoading={isLoading} text="SignOut" onPress={onSignOut} />
