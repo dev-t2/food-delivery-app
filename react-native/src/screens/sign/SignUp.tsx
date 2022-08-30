@@ -4,8 +4,8 @@ import { Keyboard, TextInput } from 'react-native';
 import { SignUpScreenProps } from './index';
 import { useSignUpMutation } from '../../slices/user/userApi';
 import { isValidateEmail, isValidatePassword } from '../../utils/validation';
-import { DismissKeyboardContainer } from '../../components/layouts';
-import { ContainedButton, UnderlinedInput } from '../../components/inputs';
+import { DismissKeyboardContainer } from '../../components/layout';
+import { ContainedButton, UnderlinedInput } from '../../components/input';
 
 function SignUp({ navigation }: SignUpScreenProps) {
   const [signUp, { isLoading, isSuccess, isError, error }] = useSignUpMutation();

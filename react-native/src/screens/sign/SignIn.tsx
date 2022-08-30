@@ -7,8 +7,8 @@ import { useSignInMutation } from '../../slices/user/userApi';
 import { setUser } from '../../slices/user/userSlice';
 import { setEncryptedStorage } from '../../utils/encryptedStorage';
 import { isValidateEmail, isValidatePassword } from '../../utils/validation';
-import { DismissKeyboardContainer } from '../../components/layouts';
-import { ContainedButton, TextButton, UnderlinedInput } from '../../components/inputs';
+import { DismissKeyboardContainer } from '../../components/layout';
+import { ContainedButton, TextButton, UnderlinedInput } from '../../components/input';
 
 function SignIn({ navigation }: SignInScreenProps) {
   const [signIn, { isLoading, isSuccess, data, isError, error }] = useSignInMutation();
