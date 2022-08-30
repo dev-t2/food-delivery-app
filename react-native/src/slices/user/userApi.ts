@@ -9,8 +9,11 @@ const userApi = api.injectEndpoints({
     signIn: builder.mutation<ISignInResponse, ISignInRequest>({
       query: body => ({ url: 'signin', method: 'POST', body }),
     }),
+    signOut: builder.mutation<void, void>({
+      query: () => ({ url: 'signout', method: 'POST' }),
+    }),
   }),
   overrideExisting: __DEV__,
 });
 
-export const { useSignUpMutation, useSignInMutation } = userApi;
+export const { useSignUpMutation, useSignInMutation, useSignOutMutation } = userApi;

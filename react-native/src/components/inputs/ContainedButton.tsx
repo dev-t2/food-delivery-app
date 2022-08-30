@@ -19,7 +19,7 @@ const StyledText = styled.Text(({ theme }) => ({
 }));
 
 interface IContainedButton {
-  isDisabled: boolean;
+  isDisabled?: boolean;
   isLoading?: boolean;
   text: string;
   onPress: () => void;

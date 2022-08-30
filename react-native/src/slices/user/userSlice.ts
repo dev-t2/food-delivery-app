@@ -12,7 +12,7 @@ const userSlice = createSlice({
   name: 'user',
   initialState,
   reducers: {
-    setUser: (state, action: PayloadAction<ISignInResponse>) => {
+    setUser: (state, action: PayloadAction<Omit<ISignInResponse, 'refreshToken'>>) => {
       state.email = action.payload.email;
       state.nickname = action.payload.nickname;
       state.accessToken = action.payload.accessToken;
