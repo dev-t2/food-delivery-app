@@ -1,13 +1,21 @@
 import Config from 'react-native-config';
+import { createEntityAdapter, EntityState } from '@reduxjs/toolkit';
 import { io } from 'socket.io-client';
 
 import { api } from '../index';
 import { IOrder } from './orderType';
 
+const ordersAdapter = createEntityAdapter<IOrder>({
+  selectId: order => order.orderId,
+});
+
 const orderApi = api.injectEndpoints({
   endpoints: builder => ({
-    getOrders: builder.query<IOrder[], void>({
+    getOrders: builder.query<EntityState<IOrder>, void>({
       query: () => 'orders',
+      transformResponse(response: IOrder[]) {
+        return ordersAdapter.addMany(ordersAdapter.getInitialState(), response);
+      },
       async onCacheEntryAdded(_, { cacheDataLoaded, cacheEntryRemoved, updateCachedData }) {
         const socket = io(Config.BASE_URL, { transports: ['websocket'] });
 
@@ -18,7 +26,7 @@ const orderApi = api.injectEndpoints({
 
           socket.on('order', (order: IOrder) => {
             updateCachedData(draft => {
-              draft.push(order);
+              ordersAdapter.upsertOne(draft, order);
             });
           });
         } catch (error) {
