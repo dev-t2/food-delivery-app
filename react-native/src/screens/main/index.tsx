@@ -18,11 +18,11 @@ const { Navigator, Screen } = createBottomTabNavigator<RootTabsParamList>();
 
 function Main() {
   const ordersOptions = useMemo<BottomTabNavigationOptions>(() => {
-    return { title: '오더 목록' };
+    return { title: 'Orders' };
   }, []);
 
   const settingsOptions = useMemo<BottomTabNavigationOptions>(() => {
-    return { title: '내 정보' };
+    return { title: 'Settings' };
   }, []);
 
   return (

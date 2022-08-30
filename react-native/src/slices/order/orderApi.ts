@@ -21,12 +21,6 @@ const orderApi = api.injectEndpoints({
 
         try {
           await cacheDataLoaded;
-
-          socket.emit('login', 'hello');
-
-          socket.on('hello', data => {
-            console.log(data);
-          });
         } catch (error) {
           console.error(error);
         } finally {
