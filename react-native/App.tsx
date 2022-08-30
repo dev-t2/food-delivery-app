@@ -4,7 +4,7 @@ import { Provider } from 'react-redux';
 
 import store from './src/store';
 import theme from './src/utils/theme';
-import RootScreen from './src/screens/RootScreen';
+import RootScreen from './src/screens';
 
 function App() {
   return (

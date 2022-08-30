@@ -21,6 +21,12 @@ const orderApi = api.injectEndpoints({
 
         try {
           await cacheDataLoaded;
+
+          socket.emit('order');
+
+          socket.on('order', (order: IOrder) => {
+            console.log(order);
+          });
         } catch (error) {
           console.error(error);
         } finally {

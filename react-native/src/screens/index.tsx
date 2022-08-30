@@ -11,9 +11,9 @@ import { setUser } from '../slices/user/userSlice';
 function RootScreen() {
   const [updateToken, { isSuccess, data, isError, error }] = useUpdateTokenMutation();
 
-  const dispatch = useAppDispatch();
-
   const { accessToken } = useAppSelector(state => state.user);
+
+  const dispatch = useAppDispatch();
 
   useLayoutEffect(() => {
     (async () => {
