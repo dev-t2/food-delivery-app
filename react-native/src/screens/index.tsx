@@ -3,10 +3,10 @@ import { NavigationContainer } from '@react-navigation/native';
 
 import { useAppDispatch, useAppSelector } from '../store';
 import { useUpdateTokenMutation } from '../slices/user/userApi';
+import { setUser } from '../slices/user/userSlice';
 import { getEncryptedStorage } from '../utils/encryptedStorage';
 import Main from './main';
 import Sign from './sign';
-import { setUser } from '../slices/user/userSlice';
 
 function RootScreen() {
   const [updateToken, { isSuccess, data, isError, error }] = useUpdateTokenMutation();
