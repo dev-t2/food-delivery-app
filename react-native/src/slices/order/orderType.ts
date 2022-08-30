@@ -12,4 +12,7 @@ export interface IOrder {
   rider?: string;
 }
 
-export interface InitialState {}
+export interface InitialState {
+  orders: IOrder[];
+  deliveries: IOrder[];
+}
