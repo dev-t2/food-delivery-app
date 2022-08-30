@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import { InitialState, ISignInResponse } from './userType';
+import { InitialState, IUser } from './userType';
 
 const initialState: InitialState = {
   email: '',
@@ -12,7 +12,7 @@ const userSlice = createSlice({
   name: 'user',
   initialState,
   reducers: {
-    setUser: (state, action: PayloadAction<Omit<ISignInResponse, 'refreshToken'>>) => {
+    setUser: (state, action: PayloadAction<IUser>) => {
       state.email = action.payload.email;
       state.nickname = action.payload.nickname;
       state.accessToken = action.payload.accessToken;

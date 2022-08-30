@@ -1,5 +1,5 @@
 import { api } from '../index';
-import { ISignInRequest, ISignInResponse, ISignUpRequest } from './userType';
+import { ISignInRequest, ISignInResponse, ISignUpRequest, IUser } from './userType';
 
 const userApi = api.injectEndpoints({
   endpoints: builder => ({
@@ -9,6 +9,9 @@ const userApi = api.injectEndpoints({
     signIn: builder.mutation<ISignInResponse, ISignInRequest>({
       query: body => ({ url: 'signin', method: 'POST', body }),
     }),
+    updateToken: builder.mutation<IUser, string>({
+      query: token => ({ url: 'token', method: 'POST', headers: { authorization: token } }),
+    }),
     signOut: builder.mutation<void, void>({
       query: () => ({ url: 'signout', method: 'POST' }),
     }),
@@ -16,4 +19,5 @@ const userApi = api.injectEndpoints({
   overrideExisting: __DEV__,
 });
 
-export const { useSignUpMutation, useSignInMutation, useSignOutMutation } = userApi;
+export const { useSignUpMutation, useSignInMutation, useUpdateTokenMutation, useSignOutMutation } =
+  userApi;
