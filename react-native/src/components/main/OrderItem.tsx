@@ -3,7 +3,7 @@ import styled from '@emotion/native';
 
 import { useAppDispatch } from '../../store';
 import { IOrder } from '../../slices/order/orderType';
-import { rejectOrder } from '../../slices/order/orderSlice';
+import { acceptOrder, rejectOrder } from '../../slices/order/orderSlice';
 import { ContainedButtons } from '../input';
 
 interface IContainer {
@@ -50,7 +50,9 @@ function OrderItem({ item }: IOrderItem) {
     setIsDetail(prevState => !prevState);
   }, []);
 
-  const onAccept = useCallback(() => {}, []);
+  const onAccept = useCallback(() => {
+    dispatch(acceptOrder(item.orderId));
+  }, [dispatch, item.orderId]);
 
   const onReject = useCallback(() => {
     dispatch(rejectOrder(item.orderId));
