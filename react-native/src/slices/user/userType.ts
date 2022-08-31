@@ -8,7 +8,6 @@ export interface InitialState {
   email: string;
   nickname: string;
   accessToken: string;
-  money: number;
 }
 
 export interface ISignUpRequest {
@@ -27,4 +26,8 @@ export interface ISignInResponse {
   nickname: string;
   accessToken: string;
   refreshToken: string;
+}
+
+export interface IMoneyResponse {
+  money: number;
 }

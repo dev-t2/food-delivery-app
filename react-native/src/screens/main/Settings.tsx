@@ -1,7 +1,7 @@
 import React, { memo, useCallback, useEffect } from 'react';
 
-import { useAppDispatch, useAppSelector } from '../../store';
-import { useSignOutMutation } from '../../slices/user/userApi';
+import { useAppDispatch } from '../../store';
+import { useMoneyQuery, useSignOutMutation } from '../../slices/user/userApi';
 import { setUser } from '../../slices/user/userSlice';
 import { removeEncryptedStorage } from '../../utils/encryptedStorage';
 import { Container } from '../../components/layout';
@@ -9,9 +9,9 @@ import { Money } from '../../components/display';
 import { ContainedButton } from '../../components/input';
 
 function Settings() {
-  const [signOut, { isLoading, isSuccess, isError, error }] = useSignOutMutation();
+  const { data } = useMoneyQuery();
 
-  const { money } = useAppSelector(state => state.user);
+  const [signOut, { isLoading, isSuccess, isError, error }] = useSignOutMutation();
 
   const dispatch = useAppDispatch();
 
@@ -43,7 +43,7 @@ function Settings() {
 
   return (
     <Container>
-      <Money money={money} />
+      <Money money={data?.money} />
 
       <ContainedButton marginTop={20} isLoading={isLoading} text="SignOut" onPress={onSignOut} />
     </Container>

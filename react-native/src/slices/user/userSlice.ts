@@ -6,7 +6,6 @@ const initialState: InitialState = {
   email: '',
   nickname: '',
   accessToken: '',
-  money: 0,
 };
 
 const userSlice = createSlice({
@@ -17,9 +16,6 @@ const userSlice = createSlice({
       state.email = action.payload.email;
       state.nickname = action.payload.nickname;
       state.accessToken = action.payload.accessToken;
-    },
-    setMoney: (state, action: PayloadAction<number>) => {
-      state.money = action.payload;
     },
   },
 });

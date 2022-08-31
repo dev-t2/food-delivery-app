@@ -8,12 +8,16 @@ const StyledText = styled.Text({
 });
 
 interface IMoney {
-  money: number;
+  money?: number;
 }
 
 function Money({ money }: IMoney) {
   const replacedMoney = useMemo(() => {
-    return money.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+    if (money) {
+      return money.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+    }
+
+    return '0';
   }, [money]);
 
   return (
