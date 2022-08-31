@@ -9,7 +9,7 @@ import { OrderItem } from '../../components/main';
 function Orders() {
   const { data } = useStreamOrdersQuery();
 
-  const style = useMemo<StyleProp<ViewStyle>>(() => {
+  const contentContainerStyle = useMemo<StyleProp<ViewStyle>>(() => {
     return { padding: 10 };
   }, []);
 
@@ -23,7 +23,7 @@ function Orders() {
 
   return (
     <FlatList
-      style={style}
+      contentContainerStyle={contentContainerStyle}
       data={data}
       keyExtractor={order => order.orderId}
       renderItem={renderItem}
