@@ -7,30 +7,24 @@ import { addOrder } from './orderSlice';
 
 const orderApi = api.injectEndpoints({
   endpoints: builder => ({
-    getOrders: builder.query<IOrder[], void>({
+    streamOrders: builder.query<IOrder[], void>({
       queryFn: () => ({ data: [] }),
-      async onCacheEntryAdded(_, { cacheDataLoaded, cacheEntryRemoved, dispatch }) {
+      async onCacheEntryAdded(_, { cacheEntryRemoved, dispatch }) {
         const socket = io(Config.BASE_URL, { transports: ['websocket'] });
 
-        try {
-          await cacheDataLoaded;
+        socket.emit('order');
 
-          socket.emit('order');
+        socket.on('order', (order: IOrder) => {
+          dispatch(addOrder(order));
+        });
 
-          socket.on('order', (order: IOrder) => {
-            dispatch(addOrder(order));
-          });
-        } catch (error) {
-          console.error(error);
-        } finally {
-          await cacheEntryRemoved;
+        await cacheEntryRemoved;
 
-          socket.disconnect();
-        }
+        socket.disconnect();
       },
     }),
   }),
   overrideExisting: __DEV__,
 });
 
-export const { useGetOrdersQuery } = orderApi;
+export const { useStreamOrdersQuery } = orderApi;
