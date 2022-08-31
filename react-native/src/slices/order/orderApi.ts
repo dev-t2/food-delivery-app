@@ -2,7 +2,7 @@ import Config from 'react-native-config';
 import { io } from 'socket.io-client';
 
 import { api } from '../index';
-import { IOrder } from './orderType';
+import { IAcceptOrderRequest, IOrder } from './orderType';
 import { addOrder } from './orderSlice';
 
 const orderApi = api.injectEndpoints({
@@ -22,6 +22,9 @@ const orderApi = api.injectEndpoints({
 
         socket.disconnect();
       },
+    }),
+    acceptOrder: builder.mutation<void, IAcceptOrderRequest>({
+      query: body => ({ url: 'accept', method: 'POST', body }),
     }),
   }),
   overrideExisting: __DEV__,

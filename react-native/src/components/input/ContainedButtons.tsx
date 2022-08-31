@@ -1,4 +1,6 @@
 import React, { memo } from 'react';
+import { ActivityIndicator } from 'react-native';
+import { useTheme } from '@emotion/react';
 import styled from '@emotion/native';
 
 interface IContainer {
@@ -61,15 +63,23 @@ function ContainedButtons({
   onLeftPress,
   onRightPress,
 }: IContainedButtons) {
+  const theme = useTheme();
+
   return (
     <Container marginTop={marginTop} marginBottom={marginBottom}>
-      <LeftPressable disabled={isLoading} onPress={onLeftPress}>
-        <LeftText>{leftText}</LeftText>
-      </LeftPressable>
+      {isLoading ? (
+        <ActivityIndicator color={theme.colors.white} />
+      ) : (
+        <>
+          <LeftPressable onPress={onLeftPress}>
+            <LeftText>{leftText}</LeftText>
+          </LeftPressable>
 
-      <RightPressable disabled={isLoading} onPress={onRightPress}>
-        <RightText>{rightText}</RightText>
-      </RightPressable>
+          <RightPressable onPress={onRightPress}>
+            <RightText>{rightText}</RightText>
+          </RightPressable>
+        </>
+      )}
     </Container>
   );
 }
