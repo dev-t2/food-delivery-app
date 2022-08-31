@@ -22,7 +22,7 @@
     - [Mutations](https://redux-toolkit.js.org/rtk-query/usage/mutations)
     - [TypeScript Setup](https://redux-toolkit.js.org/rtk-query/usage-with-typescript)
     - [Streaming Updates](https://redux-toolkit.js.org/rtk-query/usage/streaming-updates)
-      - [Streaming data with no initial request](https://redux-toolkit.js.org/rtk-query/usage/customizing-queries#streaming-data-with-no-initial-request)
+    - [Streaming data with no initial request](https://redux-toolkit.js.org/rtk-query/usage/customizing-queries#streaming-data-with-no-initial-request)
 - [Android Manifest](https://developer.android.com/guide/topics/manifest/manifest-intro)
 - [Socket.IO Client](https://socket.io/docs/v4/client-installation)
   - [API](https://socket.io/docs/v4/client-api)
