@@ -1,10 +1,12 @@
 import React, { memo, useCallback, useEffect, useMemo, useState } from 'react';
+import { useNavigation } from '@react-navigation/native';
 import styled from '@emotion/native';
 
 import { useAppDispatch } from '../../store';
 import { IOrder } from '../../slices/order/orderType';
 import { useAcceptMutation } from '../../slices/order/orderApi';
 import { acceptOrder, rejectOrder } from '../../slices/order/orderSlice';
+import { OrdersScreenNavigationProp } from '../../screens/main';
 import { ContainedButtons } from '../input';
 
 interface IContainer {
@@ -43,6 +45,8 @@ function OrderItem({ item }: IOrderItem) {
 
   const dispatch = useAppDispatch();
 
+  const navigation = useNavigation<OrdersScreenNavigationProp>();
+
   const [isDetail, setIsDetail] = useState(false);
 
   const price = useMemo(() => {
@@ -52,16 +56,20 @@ function OrderItem({ item }: IOrderItem) {
   useEffect(() => {
     if (isSuccess) {
       dispatch(acceptOrder(item.orderId));
+
+      navigation.navigate('Delivery');
     }
 
     if (isError && error) {
+      dispatch(rejectOrder(item.orderId));
+
       if ('status' in error) {
         console.log(error.data);
       } else {
         console.error(error);
       }
     }
-  }, [isSuccess, dispatch, item.orderId, isError, error]);
+  }, [isSuccess, dispatch, item.orderId, navigation, isError, error]);
 
   const onDetail = useCallback(() => {
     setIsDetail(prevState => !prevState);

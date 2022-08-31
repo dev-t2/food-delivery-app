@@ -1,6 +1,7 @@
 import React, { memo, useMemo } from 'react';
 import {
   BottomTabNavigationOptions,
+  BottomTabNavigationProp,
   createBottomTabNavigator,
 } from '@react-navigation/bottom-tabs';
 
@@ -13,6 +14,8 @@ export type RootTabsParamList = {
   Delivery: undefined;
   Settings: undefined;
 };
+
+export type OrdersScreenNavigationProp = BottomTabNavigationProp<RootTabsParamList, 'Orders'>;
 
 const { Navigator, Screen } = createBottomTabNavigator<RootTabsParamList>();
 
