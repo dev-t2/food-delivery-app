@@ -5,8 +5,8 @@ import { useMoneyQuery, useSignOutMutation } from '../../slices/user/userApi';
 import { setUser } from '../../slices/user/userSlice';
 import { removeEncryptedStorage } from '../../utils/encryptedStorage';
 import { Container } from '../../components/layout';
-import { Money } from '../../components/display';
 import { ContainedButton } from '../../components/input';
+import { Money } from '../../components/main';
 
 function Settings() {
   const { data } = useMoneyQuery();

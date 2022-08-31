@@ -1,19 +1,34 @@
-import React, { memo } from 'react';
-import styled from '@emotion/native';
+import React, { memo, useCallback, useMemo } from 'react';
+import { FlatList, ListRenderItem, StyleProp, ViewStyle } from 'react-native';
 
-import { useGetOrdersQuery } from '../../slices/order/orderApi';
-
-const Container = styled.View({});
-
-const StyledText = styled.Text({});
+import { IOrder } from '../../slices/order/orderType';
+import { useStreamOrdersQuery } from '../../slices/order/orderApi';
+import { Separator } from '../../components/layout';
+import { OrderItem } from '../../components/main';
 
 function Orders() {
-  useGetOrdersQuery();
+  const { data } = useStreamOrdersQuery();
+
+  const style = useMemo<StyleProp<ViewStyle>>(() => {
+    return { padding: 10 };
+  }, []);
+
+  const renderItem = useCallback<ListRenderItem<IOrder>>(({ item }) => {
+    return <OrderItem item={item} />;
+  }, []);
+
+  const ItemSeparatorComponent = useCallback(() => {
+    return <Separator height={10} />;
+  }, []);
 
   return (
-    <Container>
-      <StyledText>주문</StyledText>
-    </Container>
+    <FlatList
+      style={style}
+      data={data}
+      keyExtractor={order => order.orderId}
+      renderItem={renderItem}
+      ItemSeparatorComponent={ItemSeparatorComponent}
+    />
   );
 }
 
