@@ -109,6 +109,7 @@ function SignIn({ navigation }: SignInScreenProps) {
       />
 
       <ContainedButton
+        marginBottom={10}
         isDisabled={isDisabled}
         isLoading={isLoading}
         text="SignIn"

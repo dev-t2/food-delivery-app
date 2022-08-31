@@ -2,10 +2,11 @@ import React, { memo, useMemo } from 'react';
 import { View } from 'react-native';
 import styled from '@emotion/native';
 
-const StyledText = styled.Text({
+const StyledText = styled.Text(({ theme }) => ({
   fontSize: 16,
   fontWeight: 'bold',
-});
+  color: theme.colors.black,
+}));
 
 interface IMoney {
   money?: number;
@@ -22,9 +23,7 @@ function Money({ money }: IMoney) {
 
   return (
     <View>
-      <StyledText>
-        현재 수익금은 <StyledText>{replacedMoney}</StyledText> 원입니다.
-      </StyledText>
+      <StyledText>{`The current proceeds are ￦ ${replacedMoney}`}</StyledText>
     </View>
   );
 }

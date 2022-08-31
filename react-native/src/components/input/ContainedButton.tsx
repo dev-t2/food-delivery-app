@@ -5,16 +5,19 @@ import styled from '@emotion/native';
 
 interface IStyledPressable {
   marginTop?: number;
+  marginBottom?: number;
 }
 
-const StyledPressable = styled.Pressable<IStyledPressable>(({ theme, marginTop, disabled }) => ({
-  backgroundColor: disabled ? theme.colors.gray : theme.colors.blue,
-  paddingVertical: 10,
-  paddingHorizontal: 20,
-  borderRadius: 4,
-  marginTop,
-  marginBottom: 10,
-}));
+const StyledPressable = styled.Pressable<IStyledPressable>(
+  ({ theme, marginTop, marginBottom, disabled }) => ({
+    backgroundColor: disabled ? theme.colors.gray : theme.colors.blue,
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    borderRadius: 4,
+    marginTop,
+    marginBottom,
+  }),
+);
 
 const StyledText = styled.Text(({ theme }) => ({
   textAlign: 'center',
@@ -25,17 +28,29 @@ const StyledText = styled.Text(({ theme }) => ({
 
 interface IContainedButton {
   marginTop?: number;
+  marginBottom?: number;
   isDisabled?: boolean;
   isLoading?: boolean;
   text: string;
   onPress: () => void;
 }
 
-function ContainedButton({ marginTop, isDisabled, isLoading, text, onPress }: IContainedButton) {
+function ContainedButton({
+  marginTop,
+  marginBottom,
+  isDisabled,
+  isLoading,
+  text,
+  onPress,
+}: IContainedButton) {
   const theme = useTheme();
 
   return (
-    <StyledPressable marginTop={marginTop} disabled={isDisabled || isLoading} onPress={onPress}>
+    <StyledPressable
+      marginTop={marginTop}
+      marginBottom={marginBottom}
+      disabled={isDisabled || isLoading}
+      onPress={onPress}>
       {isLoading ? (
         <ActivityIndicator color={theme.colors.white} />
       ) : (

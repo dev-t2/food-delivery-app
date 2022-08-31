@@ -2,21 +2,34 @@ import React, { memo, useCallback, useMemo, useState } from 'react';
 import styled from '@emotion/native';
 
 import { IOrder } from '../../slices/order/orderType';
+import { ContainedButtons } from '../input';
 
-const Container = styled.View(({ theme }) => ({
-  borderRadius: 8,
+interface IContainer {
+  isDetail: boolean;
+}
+
+const Container = styled.Pressable<IContainer>(({ theme, isDetail }) => ({
+  borderRadius: 4,
   padding: 10,
-  backgroundColor: theme.colors.blue,
+  backgroundColor: isDetail ? theme.colors.white : theme.colors.gray,
 }));
 
-const StyledPressable = styled.Pressable({
-  flexDirection: 'row',
+interface IStyledText {
+  isDetail: boolean;
+}
+
+const StyledText = styled.Text<IStyledText>(({ theme, isDetail }) => ({
+  flex: 1,
+  fontSize: 16,
+  fontWeight: 'bold',
+  color: isDetail ? theme.colors.black : theme.colors.white,
+}));
+
+const DetailContainer = styled.View({
+  marginTop: 10,
 });
 
-const StyledText = styled.Text(({ theme }) => ({
-  flex: 1,
-  color: theme.colors.white,
-}));
+const MapContainer = styled.View({});
 
 interface IOrderItem {
   item: IOrder;
@@ -33,13 +46,26 @@ function OrderItem({ item }: IOrderItem) {
     setIsDetail(prevState => !prevState);
   }, []);
 
-  return (
-    <Container>
-      <StyledPressable onPress={onDetail}>
-        <StyledText>{`${price} 원`}</StyledText>
-      </StyledPressable>
+  const onAccept = useCallback(() => {}, []);
 
-      {isDetail && null}
+  const onReject = useCallback(() => {}, []);
+
+  return (
+    <Container isDetail={isDetail} onPress={onDetail}>
+      <StyledText isDetail={isDetail}>{`￦ ${price}`}</StyledText>
+
+      {isDetail && (
+        <DetailContainer>
+          <MapContainer />
+
+          <ContainedButtons
+            leftText="ACCEPT"
+            rightText="REJECT"
+            onLeftPress={onAccept}
+            onRightPress={onReject}
+          />
+        </DetailContainer>
+      )}
     </Container>
   );
 }

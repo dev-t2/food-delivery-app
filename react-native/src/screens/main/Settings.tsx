@@ -6,7 +6,7 @@ import { setUser } from '../../slices/user/userSlice';
 import { removeEncryptedStorage } from '../../utils/encryptedStorage';
 import { Container } from '../../components/layout';
 import { ContainedButton } from '../../components/input';
-import { Money } from '../../components/main';
+import { MoneyInfo } from '../../components/main';
 
 function Settings() {
   const { data } = useMoneyQuery();
@@ -43,7 +43,7 @@ function Settings() {
 
   return (
     <Container>
-      <Money money={data?.money} />
+      <MoneyInfo money={data?.money} />
 
       <ContainedButton marginTop={20} isLoading={isLoading} text="SignOut" onPress={onSignOut} />
     </Container>
