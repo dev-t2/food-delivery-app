@@ -45,7 +45,6 @@ const RightText = styled.Text(({ theme }) => ({
 interface IContainedButtons {
   marginTop?: number;
   marginBottom?: number;
-  isDisabled?: boolean;
   isLoading?: boolean;
   leftText: string;
   rightText: string;
@@ -56,7 +55,6 @@ interface IContainedButtons {
 function ContainedButtons({
   marginTop,
   marginBottom,
-  isDisabled,
   isLoading,
   leftText,
   rightText,
@@ -65,11 +63,11 @@ function ContainedButtons({
 }: IContainedButtons) {
   return (
     <Container marginTop={marginTop} marginBottom={marginBottom}>
-      <LeftPressable disabled={isDisabled || isLoading} onPress={onLeftPress}>
+      <LeftPressable disabled={isLoading} onPress={onLeftPress}>
         <LeftText>{leftText}</LeftText>
       </LeftPressable>
 
-      <RightPressable disabled={isDisabled || isLoading} onPress={onRightPress}>
+      <RightPressable disabled={isLoading} onPress={onRightPress}>
         <RightText>{rightText}</RightText>
       </RightPressable>
     </Container>
