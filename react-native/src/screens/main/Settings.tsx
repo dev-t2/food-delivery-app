@@ -1,23 +1,19 @@
-import React, { memo, useCallback, useEffect, useMemo } from 'react';
+import React, { memo, useCallback, useEffect } from 'react';
 
 import { useAppDispatch, useAppSelector } from '../../store';
 import { useSignOutMutation } from '../../slices/user/userApi';
 import { setUser } from '../../slices/user/userSlice';
 import { removeEncryptedStorage } from '../../utils/encryptedStorage';
 import { Container } from '../../components/layout';
-import { Text } from '../../components/display';
+import { Money } from '../../components/display';
 import { ContainedButton } from '../../components/input';
 
 function Settings() {
   const [signOut, { isLoading, isSuccess, isError, error }] = useSignOutMutation();
 
-  const { money, nickname } = useAppSelector(state => state.user);
+  const { money } = useAppSelector(state => state.user);
 
   const dispatch = useAppDispatch();
-
-  const replacedMoney = useMemo(() => {
-    return money.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-  }, [money]);
 
   useEffect(() => {
     if (isSuccess) {
@@ -47,13 +43,7 @@ function Settings() {
 
   return (
     <Container>
-      <Text fontSize={16}>
-        {nickname} 님의 수익금{' '}
-        <Text fontSize={16} isBold>
-          {replacedMoney}
-        </Text>{' '}
-        원
-      </Text>
+      <Money money={money} />
 
       <ContainedButton marginTop={20} isLoading={isLoading} text="SignOut" onPress={onSignOut} />
     </Container>
