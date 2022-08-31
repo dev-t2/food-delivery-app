@@ -2,7 +2,7 @@ import Config from 'react-native-config';
 import { io } from 'socket.io-client';
 
 import { api } from '../index';
-import { IAcceptOrderRequest, IOrder } from './orderType';
+import { IAcceptRequest, IOrder } from './orderType';
 import { addOrder } from './orderSlice';
 
 const orderApi = api.injectEndpoints({
@@ -23,11 +23,11 @@ const orderApi = api.injectEndpoints({
         socket.disconnect();
       },
     }),
-    acceptOrder: builder.mutation<void, IAcceptOrderRequest>({
+    accept: builder.mutation<void, IAcceptRequest>({
       query: body => ({ url: 'accept', method: 'POST', body }),
     }),
   }),
   overrideExisting: __DEV__,
 });
 
-export const { useStreamOrdersQuery } = orderApi;
+export const { useStreamOrdersQuery, useAcceptMutation } = orderApi;

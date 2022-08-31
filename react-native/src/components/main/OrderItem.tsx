@@ -1,8 +1,9 @@
-import React, { memo, useCallback, useMemo, useState } from 'react';
+import React, { memo, useCallback, useEffect, useMemo, useState } from 'react';
 import styled from '@emotion/native';
 
 import { useAppDispatch } from '../../store';
 import { IOrder } from '../../slices/order/orderType';
+import { useAcceptMutation } from '../../slices/order/orderApi';
 import { acceptOrder, rejectOrder } from '../../slices/order/orderSlice';
 import { ContainedButtons } from '../input';
 
@@ -38,6 +39,8 @@ interface IOrderItem {
 }
 
 function OrderItem({ item }: IOrderItem) {
+  const [accept, { isSuccess, isError, error }] = useAcceptMutation();
+
   const dispatch = useAppDispatch();
 
   const [isDetail, setIsDetail] = useState(false);
@@ -46,13 +49,27 @@ function OrderItem({ item }: IOrderItem) {
     return item.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
   }, [item.price]);
 
+  useEffect(() => {
+    if (isSuccess) {
+      dispatch(acceptOrder(item.orderId));
+    }
+
+    if (isError && error) {
+      if ('status' in error) {
+        console.log(error.data);
+      } else {
+        console.error(error);
+      }
+    }
+  }, [isSuccess, dispatch, item.orderId, isError, error]);
+
   const onDetail = useCallback(() => {
     setIsDetail(prevState => !prevState);
   }, []);
 
   const onAccept = useCallback(() => {
-    dispatch(acceptOrder(item.orderId));
-  }, [dispatch, item.orderId]);
+    accept({ orderId: item.orderId });
+  }, [accept, item.orderId]);
 
   const onReject = useCallback(() => {
     dispatch(rejectOrder(item.orderId));

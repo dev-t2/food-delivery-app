@@ -1,5 +1,6 @@
 import React, { memo, useCallback, useMemo } from 'react';
-import { FlatList, ListRenderItem, StyleProp, ViewStyle } from 'react-native';
+import { ActivityIndicator, FlatList, ListRenderItem, StyleProp, ViewStyle } from 'react-native';
+import { useTheme } from '@emotion/react';
 
 import { useAppSelector } from '../../store';
 import { IOrder } from '../../slices/order/orderType';
@@ -8,9 +9,11 @@ import { Separator } from '../../components/layout';
 import { OrderItem } from '../../components/main';
 
 function Orders() {
-  useStreamOrdersQuery();
+  const { isSuccess } = useStreamOrdersQuery();
 
   const { orders } = useAppSelector(state => state.order);
+
+  const theme = useTheme();
 
   const contentContainerStyle = useMemo<StyleProp<ViewStyle>>(() => {
     return { padding: 10 };
@@ -24,7 +27,7 @@ function Orders() {
     return <Separator height={10} />;
   }, []);
 
-  return (
+  return isSuccess ? (
     <FlatList
       contentContainerStyle={contentContainerStyle}
       data={orders}
@@ -32,6 +35,8 @@ function Orders() {
       renderItem={renderItem}
       ItemSeparatorComponent={ItemSeparatorComponent}
     />
+  ) : (
+    <ActivityIndicator color={theme.colors.white} />
   );
 }
 
