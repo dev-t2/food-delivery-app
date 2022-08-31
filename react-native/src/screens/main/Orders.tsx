@@ -1,13 +1,16 @@
 import React, { memo, useCallback, useMemo } from 'react';
 import { FlatList, ListRenderItem, StyleProp, ViewStyle } from 'react-native';
 
+import { useAppSelector } from '../../store';
 import { IOrder } from '../../slices/order/orderType';
 import { useStreamOrdersQuery } from '../../slices/order/orderApi';
 import { Separator } from '../../components/layout';
 import { OrderItem } from '../../components/main';
 
 function Orders() {
-  const { data } = useStreamOrdersQuery();
+  useStreamOrdersQuery();
+
+  const { orders } = useAppSelector(state => state.order);
 
   const contentContainerStyle = useMemo<StyleProp<ViewStyle>>(() => {
     return { padding: 10 };
@@ -24,7 +27,7 @@ function Orders() {
   return (
     <FlatList
       contentContainerStyle={contentContainerStyle}
-      data={data}
+      data={orders}
       keyExtractor={order => order.orderId}
       renderItem={renderItem}
       ItemSeparatorComponent={ItemSeparatorComponent}

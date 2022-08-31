@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import { InitialState } from './orderType';
+import { InitialState, IOrder } from './orderType';
 
 const initialState: InitialState = {
   orders: [],
@@ -11,6 +11,9 @@ const orderSlice = createSlice({
   name: 'order',
   initialState,
   reducers: {
+    addOrder: (state, action: PayloadAction<IOrder>) => {
+      state.orders = [...state.orders, action.payload];
+    },
     acceptOrder: (state, action: PayloadAction<string>) => {
       const findOrder = state.orders.find(order => order.orderId === action.payload);
 
@@ -26,6 +29,6 @@ const orderSlice = createSlice({
   },
 });
 
-export const { acceptOrder, rejectOrder } = orderSlice.actions;
+export const { addOrder, acceptOrder, rejectOrder } = orderSlice.actions;
 
 export default orderSlice;

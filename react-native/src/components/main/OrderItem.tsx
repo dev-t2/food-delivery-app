@@ -1,7 +1,9 @@
 import React, { memo, useCallback, useMemo, useState } from 'react';
 import styled from '@emotion/native';
 
+import { useAppDispatch } from '../../store';
 import { IOrder } from '../../slices/order/orderType';
+import { rejectOrder } from '../../slices/order/orderSlice';
 import { ContainedButtons } from '../input';
 
 interface IContainer {
@@ -36,6 +38,8 @@ interface IOrderItem {
 }
 
 function OrderItem({ item }: IOrderItem) {
+  const dispatch = useAppDispatch();
+
   const [isDetail, setIsDetail] = useState(false);
 
   const price = useMemo(() => {
@@ -48,7 +52,9 @@ function OrderItem({ item }: IOrderItem) {
 
   const onAccept = useCallback(() => {}, []);
 
-  const onReject = useCallback(() => {}, []);
+  const onReject = useCallback(() => {
+    dispatch(rejectOrder(item.orderId));
+  }, [dispatch, item.orderId]);
 
   return (
     <Container isDetail={isDetail} onPress={onDetail}>
