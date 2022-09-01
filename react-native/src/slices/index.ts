@@ -1,3 +1,4 @@
+import Config from 'react-native-config';
 import { combineReducers } from '@reduxjs/toolkit';
 import {
   BaseQueryFn,
@@ -6,13 +7,15 @@ import {
   fetchBaseQuery,
   FetchBaseQueryError,
 } from '@reduxjs/toolkit/query/react';
-import Config from 'react-native-config';
+import { Mutex } from 'async-mutex';
 
 import { RootState } from '../store';
 import { IUser } from './user/userType';
 import userSlice, { setUser } from './user/userSlice';
 import orderSlice from './order/orderSlice';
 import { getEncryptedStorage } from '../utils/encryptedStorage';
+
+const mutex = new Mutex();
 
 const baseQuery = fetchBaseQuery({
   baseUrl: Config.BASE_URL,
@@ -34,6 +37,8 @@ const fetchBaseQueryWithReauth: BaseQueryFn<
   unknown,
   FetchBaseQueryError
 > = async (args, api, extraOptions) => {
+  await mutex.waitForUnlock();
+
   let result = await baseQuery(args, api, extraOptions);
 
   if (
@@ -42,22 +47,36 @@ const fetchBaseQueryWithReauth: BaseQueryFn<
     result.error.data &&
     (result.error.data as { code: string }).code === 'expired'
   ) {
-    const token = await getEncryptedStorage('refreshToken');
+    if (!mutex.isLocked()) {
+      const release = await mutex.acquire();
 
-    if (token) {
-      const response = await baseQuery(
-        { url: 'refreshToken', method: 'POST', headers: { authorization: `Bearer ${token}` } },
-        api,
-        extraOptions,
-      );
+      try {
+        const token = await getEncryptedStorage('refreshToken');
 
-      if (response.data) {
-        api.dispatch(setUser(response.data as IUser));
+        if (token) {
+          const response = await baseQuery(
+            { url: 'refreshToken', method: 'POST', headers: { authorization: `Bearer ${token}` } },
+            api,
+            extraOptions,
+          );
 
-        result = await baseQuery(args, api, extraOptions);
-      } else {
-        api.dispatch(setUser({ email: '', nickname: '', accessToken: '' }));
+          if (response.data) {
+            api.dispatch(setUser(response.data as IUser));
+
+            result = await baseQuery(args, api, extraOptions);
+          } else {
+            api.dispatch(setUser({ email: '', nickname: '', accessToken: '' }));
+          }
+        }
+      } catch (error) {
+        console.error(error);
+      } finally {
+        release();
       }
+    } else {
+      await mutex.waitForUnlock();
+
+      result = await baseQuery(args, api, extraOptions);
     }
   }
 
