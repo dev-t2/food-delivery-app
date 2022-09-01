@@ -24,5 +24,6 @@
     - [TypeScript Setup](https://redux-toolkit.js.org/rtk-query/usage-with-typescript)
     - [Streaming Updates](https://redux-toolkit.js.org/rtk-query/usage/streaming-updates)
     - [Customizing queries](https://redux-toolkit.js.org/rtk-query/usage/customizing-queries)
+    - [Async Mutex](https://github.com/DirtyHairy/async-mutex)
 - [Socket.IO Client](https://socket.io/docs/v4/client-installation)
   - [API](https://socket.io/docs/v4/client-api)
