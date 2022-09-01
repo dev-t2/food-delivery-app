@@ -96,6 +96,7 @@ function OrderItem({ item }: IOrderItem) {
           <NaverMap item={item} />
 
           <ContainedButtons
+            marginTop={10}
             leftText="ACCEPT"
             rightText="REJECT"
             onLeftPress={onAccept}

@@ -1,19 +1,13 @@
 import React, { memo, useMemo } from 'react';
-import { useWindowDimensions } from 'react-native';
 import NaverMapView, { Marker, Path } from 'react-native-nmap';
 import styled from '@emotion/native';
 
 import { IOrder } from '../../slices/order/orderType';
 
-interface IContainer {
-  width: number;
-}
-
-const Container = styled.View<IContainer>(({ width }) => ({
-  width: width - 20,
+const Container = styled.View({
+  width: '100%',
   height: 200,
-  marginTop: 10,
-}));
+});
 
 const StyledNaverMapView = styled(NaverMapView)({ width: '100%', height: '100%' });
 
@@ -22,16 +16,13 @@ interface INaverMap {
 }
 
 function NaverMap({ item }: INaverMap) {
-  const { width } = useWindowDimensions();
-
   const center = useMemo(() => {
     return {
       zoom: 10,
-      tilt: 50,
-      latitude: (item.start.latitude + item.end.latitude) / 2,
-      longitude: (item.start.longitude + item.end.longitude) / 2,
+      latitude: item.start.latitude,
+      longitude: item.start.longitude,
     };
-  }, [item.start, item.end]);
+  }, [item.start]);
 
   const startCoordinate = useMemo(() => {
     return { latitude: item.start.latitude, longitude: item.start.longitude };
@@ -49,9 +40,9 @@ function NaverMap({ item }: INaverMap) {
   }, [item.end]);
 
   return (
-    <Container width={width}>
+    <Container>
       {/* @ts-ignore: React Native Naver Map React 18 Version Compatibility Issues */}
-      <StyledNaverMapView zoomControl={false} center={center}>
+      <StyledNaverMapView zoomControl={__DEV__} center={center}>
         <Marker coordinate={startCoordinate} pinColor="blue" />
         <Path coordinates={pathCoordinate} />
         <Marker coordinate={endCoordinate} />
