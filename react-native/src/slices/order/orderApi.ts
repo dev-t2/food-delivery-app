@@ -2,25 +2,31 @@ import Config from 'react-native-config';
 import { io } from 'socket.io-client';
 
 import { api } from '../index';
-import { IAcceptRequest, IOrder } from './orderType';
+import { IAcceptRequest, IOrder, IOrdersResponse } from './orderType';
 import { addOrder } from './orderSlice';
 
 const orderApi = api.injectEndpoints({
   endpoints: builder => ({
-    streamOrders: builder.query<IOrder[], void>({
-      queryFn: () => ({ data: [] }),
-      async onCacheEntryAdded(_, { cacheEntryRemoved, dispatch }) {
+    orders: builder.query<IOrdersResponse, void>({
+      query: () => 'orders',
+      async onCacheEntryAdded(_, { cacheDataLoaded, cacheEntryRemoved, dispatch }) {
         const socket = io(Config.BASE_URL, { transports: ['websocket'] });
 
-        socket.emit('order');
+        try {
+          await cacheDataLoaded;
 
-        socket.on('order', (order: IOrder) => {
-          dispatch(addOrder(order));
-        });
+          socket.emit('order', () => {
+            socket.on('order', (order: IOrder) => {
+              dispatch(addOrder(order));
+            });
+          });
+        } catch (error) {
+          console.error(error);
+        } finally {
+          await cacheEntryRemoved;
 
-        await cacheEntryRemoved;
-
-        socket.disconnect();
+          socket.disconnect();
+        }
       },
     }),
     accept: builder.mutation<void, IAcceptRequest>({
@@ -30,4 +36,4 @@ const orderApi = api.injectEndpoints({
   overrideExisting: __DEV__,
 });
 
-export const { useStreamOrdersQuery, useAcceptMutation } = orderApi;
+export const { useOrdersQuery, useAcceptMutation } = orderApi;

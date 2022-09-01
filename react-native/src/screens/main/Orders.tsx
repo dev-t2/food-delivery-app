@@ -1,23 +1,39 @@
-import React, { memo, useCallback, useMemo } from 'react';
-import { ActivityIndicator, FlatList, ListRenderItem, StyleProp, ViewStyle } from 'react-native';
-import { useTheme } from '@emotion/react';
+import React, { memo, useCallback, useLayoutEffect, useMemo } from 'react';
+import { FlatList, ListRenderItem, StyleProp, ViewStyle } from 'react-native';
 
-import { useAppSelector } from '../../store';
+import { useAppDispatch, useAppSelector } from '../../store';
 import { IOrder } from '../../slices/order/orderType';
-import { useStreamOrdersQuery } from '../../slices/order/orderApi';
+import { useOrdersQuery } from '../../slices/order/orderApi';
+import { addOrders } from '../../slices/order/orderSlice';
 import { Separator } from '../../components/layout';
 import { OrderItem } from '../../components/main';
 
 function Orders() {
-  const { isSuccess } = useStreamOrdersQuery();
+  const { isSuccess, data, isError, error } = useOrdersQuery();
 
   const { orders } = useAppSelector(state => state.order);
 
-  const theme = useTheme();
+  const dispatch = useAppDispatch();
 
   const contentContainerStyle = useMemo<StyleProp<ViewStyle>>(() => {
     return { padding: 10 };
   }, []);
+
+  useLayoutEffect(() => {
+    if (isSuccess && data) {
+      dispatch(addOrders(data));
+    }
+
+    if (isError && error) {
+      if ('status' in error) {
+        console.log(error.data);
+      } else {
+        console.error(error);
+      }
+    }
+  }, [isSuccess, data, dispatch, isError, error]);
+
+  const keyExtractor = useCallback((order: IOrder) => order.orderId, []);
 
   const renderItem = useCallback<ListRenderItem<IOrder>>(({ item }) => {
     return <OrderItem item={item} />;
@@ -27,16 +43,14 @@ function Orders() {
     return <Separator height={10} />;
   }, []);
 
-  return isSuccess ? (
+  return (
     <FlatList
       contentContainerStyle={contentContainerStyle}
       data={orders}
-      keyExtractor={order => order.orderId}
+      keyExtractor={keyExtractor}
       renderItem={renderItem}
       ItemSeparatorComponent={ItemSeparatorComponent}
     />
-  ) : (
-    <ActivityIndicator color={theme.colors.white} />
   );
 }
 

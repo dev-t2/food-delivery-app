@@ -17,6 +17,10 @@ export interface InitialState {
   deliveries: IOrder[];
 }
 
+export interface IOrdersResponse {
+  orders: IOrder[];
+}
+
 export interface IAcceptRequest {
   orderId: string;
 }
