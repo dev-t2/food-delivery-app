@@ -1,7 +1,7 @@
 # React Native References
 
 - [React Native](https://reactnative.dev/docs/environment-setup)
-  - [Flipper](https://fbflipper.com/docs/getting-started)
+  - [Flipper Desktop App](https://fbflipper.com/docs/getting-started)
   - [Material Design Color System](https://material.io/design/color/the-color-system.html)
   - [Keyboard Aware Scroll View](https://github.com/APSL/react-native-keyboard-aware-scroll-view)
   - [Android Manifest](https://developer.android.com/guide/topics/manifest/manifest-intro)
@@ -26,4 +26,4 @@
     - [Customizing queries](https://redux-toolkit.js.org/rtk-query/usage/customizing-queries)
     - [Async Mutex](https://github.com/DirtyHairy/async-mutex)
 - [Socket.IO Client](https://socket.io/docs/v4/client-installation)
-  - [API](https://socket.io/docs/v4/client-api)
+  - [Client API](https://socket.io/docs/v4/client-api)
