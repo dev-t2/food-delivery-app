@@ -9,11 +9,11 @@ const userApi = api.injectEndpoints({
     signIn: builder.mutation<ISignInResponse, ISignInRequest>({
       query: body => ({ url: 'signin', method: 'POST', body }),
     }),
-    updateAccessToken: builder.mutation<IUser, string>({
-      query: accessToken => ({
-        url: 'accessToken',
+    refreshToken: builder.mutation<IUser, string>({
+      query: token => ({
+        url: 'refreshToken',
         method: 'POST',
-        headers: { authorization: accessToken },
+        headers: { authorization: token },
       }),
     }),
     money: builder.query<IMoneyResponse, void>({
@@ -29,7 +29,7 @@ const userApi = api.injectEndpoints({
 export const {
   useSignUpMutation,
   useSignInMutation,
-  useUpdateAccessTokenMutation,
+  useRefreshTokenMutation,
   useMoneyQuery,
   useSignOutMutation,
 } = userApi;
