@@ -10,6 +10,7 @@ import { acceptOrder, rejectOrder } from '../../slices/order/orderSlice';
 import { OrdersScreenNavigationProp } from '../../screens/main';
 import { ContainedButtons } from '../input';
 import NaverMap from './NaverMap';
+import { getDistanceFromCoordinates } from '../../utils/distance';
 
 interface IContainer {
   isDetail: boolean;
@@ -21,12 +22,16 @@ const Container = styled.Pressable<IContainer>(({ theme, isDetail }) => ({
   backgroundColor: isDetail ? theme.colors.white : theme.colors.gray,
 }));
 
+const TextContainer = styled.View({
+  flexDirection: 'row',
+  justifyContent: 'space-between',
+});
+
 interface IStyledText {
   isDetail: boolean;
 }
 
 const StyledText = styled.Text<IStyledText>(({ theme, isDetail }) => ({
-  flex: 1,
   fontSize: 16,
   fontWeight: 'bold',
   color: isDetail ? theme.colors.black : theme.colors.white,
@@ -52,6 +57,15 @@ function OrderItem({ item }: IOrderItem) {
   const price = useMemo(() => {
     return item.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
   }, [item.price]);
+
+  const distance = useMemo(() => {
+    return getDistanceFromCoordinates(
+      item.start.latitude,
+      item.start.longitude,
+      item.end.latitude,
+      item.end.longitude,
+    ).toFixed(1);
+  }, [item.start, item.end]);
 
   useEffect(() => {
     if (isSuccess) {
@@ -89,7 +103,10 @@ function OrderItem({ item }: IOrderItem) {
 
   return (
     <Container isDetail={isDetail} onPress={onDetail}>
-      <StyledText isDetail={isDetail}>{`￦ ${price}`}</StyledText>
+      <TextContainer>
+        <StyledText isDetail={isDetail}>{`￦ ${price}`}</StyledText>
+        <StyledText isDetail={isDetail}>{`${distance} km`}</StyledText>
+      </TextContainer>
 
       {isDetail && (
         <DetailContainer>
