@@ -17,6 +17,8 @@ const orderApi = api.injectEndpoints({
 
           socket.emit('order', () => {
             socket.on('order', (order: IOrder) => {
+              console.log(order);
+
               dispatch(addOrder(order));
             });
           });

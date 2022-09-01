@@ -8,6 +8,7 @@ import { useAcceptMutation } from '../../slices/order/orderApi';
 import { acceptOrder, rejectOrder } from '../../slices/order/orderSlice';
 import { OrdersScreenNavigationProp } from '../../screens/main';
 import { ContainedButtons } from '../input';
+import { Alert } from 'react-native';
 
 interface IContainer {
   isDetail: boolean;
@@ -61,10 +62,14 @@ function OrderItem({ item }: IOrderItem) {
     }
 
     if (isError && error) {
-      dispatch(rejectOrder(item.orderId));
-
       if ('status' in error) {
-        console.log(error.data);
+        if (error.status === 400) {
+          Alert.alert('Notification', (error.data as { message: string }).message);
+
+          dispatch(rejectOrder(item.orderId));
+        } else {
+          console.log(error.data);
+        }
       } else {
         console.error(error);
       }
