@@ -2,14 +2,14 @@ import React, { memo, useEffect, useLayoutEffect } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 
 import { useAppDispatch, useAppSelector } from '../store';
-import { useUpdateTokenMutation } from '../slices/user/userApi';
+import { useUpdateAccessTokenMutation } from '../slices/user/userApi';
 import { setUser } from '../slices/user/userSlice';
 import { getEncryptedStorage } from '../utils/encryptedStorage';
 import Main from './main';
 import Sign from './sign';
 
 function RootScreen() {
-  const [updateToken, { isSuccess, data, isError, error }] = useUpdateTokenMutation();
+  const [updateAccessToken, { isSuccess, data, isError, error }] = useUpdateAccessTokenMutation();
 
   const { accessToken } = useAppSelector(state => state.user);
 
@@ -20,10 +20,10 @@ function RootScreen() {
       const refreshToken = await getEncryptedStorage('refreshToken');
 
       if (refreshToken) {
-        updateToken(refreshToken);
+        updateAccessToken(refreshToken);
       }
     })();
-  }, [updateToken]);
+  }, [updateAccessToken]);
 
   useEffect(() => {
     if (isSuccess && data) {

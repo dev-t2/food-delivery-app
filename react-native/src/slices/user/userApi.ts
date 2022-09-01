@@ -9,14 +9,18 @@ const userApi = api.injectEndpoints({
     signIn: builder.mutation<ISignInResponse, ISignInRequest>({
       query: body => ({ url: 'signin', method: 'POST', body }),
     }),
-    updateToken: builder.mutation<IUser, string>({
-      query: token => ({ url: 'token', method: 'POST', headers: { authorization: token } }),
-    }),
-    signOut: builder.mutation<void, void>({
-      query: () => ({ url: 'signout', method: 'POST' }),
+    updateAccessToken: builder.mutation<IUser, string>({
+      query: accessToken => ({
+        url: 'accessToken',
+        method: 'POST',
+        headers: { authorization: accessToken },
+      }),
     }),
     money: builder.query<IMoneyResponse, void>({
       query: () => ({ url: 'money' }),
+    }),
+    signOut: builder.mutation<void, void>({
+      query: () => ({ url: 'signout', method: 'POST' }),
     }),
   }),
   overrideExisting: __DEV__,
@@ -25,7 +29,7 @@ const userApi = api.injectEndpoints({
 export const {
   useSignUpMutation,
   useSignInMutation,
-  useUpdateTokenMutation,
-  useSignOutMutation,
+  useUpdateAccessTokenMutation,
   useMoneyQuery,
+  useSignOutMutation,
 } = userApi;
