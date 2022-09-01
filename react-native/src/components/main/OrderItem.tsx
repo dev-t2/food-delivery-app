@@ -1,4 +1,5 @@
 import React, { memo, useCallback, useEffect, useMemo, useState } from 'react';
+import { Alert } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import styled from '@emotion/native';
 
@@ -8,7 +9,7 @@ import { useAcceptMutation } from '../../slices/order/orderApi';
 import { acceptOrder, rejectOrder } from '../../slices/order/orderSlice';
 import { OrdersScreenNavigationProp } from '../../screens/main';
 import { ContainedButtons } from '../input';
-import { Alert } from 'react-native';
+import NaverMap from './NaverMap';
 
 interface IContainer {
   isDetail: boolean;
@@ -34,8 +35,6 @@ const StyledText = styled.Text<IStyledText>(({ theme, isDetail }) => ({
 const DetailContainer = styled.View({
   marginTop: 10,
 });
-
-const MapContainer = styled.View({});
 
 interface IOrderItem {
   item: IOrder;
@@ -94,7 +93,7 @@ function OrderItem({ item }: IOrderItem) {
 
       {isDetail && (
         <DetailContainer>
-          <MapContainer />
+          <NaverMap item={item} />
 
           <ContainedButtons
             leftText="ACCEPT"
