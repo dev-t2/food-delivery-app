@@ -42,7 +42,7 @@ function Settings() {
   }, [signOut]);
 
   return (
-    <Container>
+    <Container padding={20}>
       <MoneyInfo money={data?.money} />
 
       <ContainedButton marginTop={20} isLoading={isLoading} text="SignOut" onPress={onSignOut} />

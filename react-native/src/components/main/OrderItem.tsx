@@ -1,6 +1,7 @@
 import React, { memo, useCallback, useEffect, useMemo, useState } from 'react';
 import { Alert } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import NaverMapView, { Marker, Path } from 'react-native-nmap';
 import styled from '@emotion/native';
 
 import { useAppDispatch } from '../../store';
@@ -8,9 +9,8 @@ import { IOrder } from '../../slices/order/orderType';
 import { useAcceptMutation } from '../../slices/order/orderApi';
 import { acceptOrder, rejectOrder } from '../../slices/order/orderSlice';
 import { OrdersScreenNavigationProp } from '../../screens/main';
-import { ContainedButtons } from '../input';
-import NaverMap from './NaverMap';
 import { getDistanceFromCoordinates } from '../../utils/distance';
+import { ContainedButtons } from '../input';
 
 interface IContainer {
   isDetail: boolean;
@@ -41,6 +41,16 @@ const DetailContainer = styled.View({
   marginTop: 10,
 });
 
+const MapContainer = styled.View({
+  width: '100%',
+  height: 200,
+});
+
+const StyledNaverMapView = styled(NaverMapView)({
+  width: '100%',
+  height: '100%',
+});
+
 interface IOrderItem {
   item: IOrder;
 }
@@ -59,13 +69,18 @@ function OrderItem({ item }: IOrderItem) {
   }, [item.price]);
 
   const distance = useMemo(() => {
-    return getDistanceFromCoordinates(
-      item.start.latitude,
-      item.start.longitude,
-      item.end.latitude,
-      item.end.longitude,
-    ).toFixed(1);
+    return getDistanceFromCoordinates(item.start, item.end).toFixed(1);
   }, [item.start, item.end]);
+
+  const center = useMemo(() => {
+    return {
+      zoom: 9,
+      latitude: (item.start.latitude + item.end.latitude) / 2,
+      longitude: (item.start.longitude + item.end.longitude) / 2,
+    };
+  }, [item.start, item.end]);
+
+  const path = useMemo(() => [item.start, item.end], [item.start, item.end]);
 
   useEffect(() => {
     if (isSuccess) {
@@ -110,7 +125,14 @@ function OrderItem({ item }: IOrderItem) {
 
       {isDetail && (
         <DetailContainer>
-          <NaverMap item={item} />
+          <MapContainer>
+            {/* @ts-ignore: React Native Naver Map React 18 Version Compatibility Issues */}
+            <StyledNaverMapView zoomControl={__DEV__} center={center}>
+              <Marker coordinate={item.start} />
+              <Path coordinates={path} />
+              <Marker coordinate={item.end} />
+            </StyledNaverMapView>
+          </MapContainer>
 
           <ContainedButtons
             marginTop={10}

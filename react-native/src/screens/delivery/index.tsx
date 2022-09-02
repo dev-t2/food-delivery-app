@@ -2,6 +2,7 @@ import React, { memo, useMemo } from 'react';
 import {
   createNativeStackNavigator,
   NativeStackNavigationOptions,
+  NativeStackScreenProps,
 } from '@react-navigation/native-stack';
 
 import Proceed from './Proceed';
@@ -11,6 +12,8 @@ export type RootStackParamList = {
   Proceed: undefined;
   Complete: { orderId: string };
 };
+
+export type ProceedScreenProps = NativeStackScreenProps<RootStackParamList, 'Proceed'>;
 
 const { Navigator, Screen } = createNativeStackNavigator<RootStackParamList>();
 
