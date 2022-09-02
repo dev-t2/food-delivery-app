@@ -44,6 +44,8 @@ function Proceed({ navigation }: ProceedScreenProps) {
 
   const anchor = useMemo(() => ({ x: 0.5, y: 0.5 }), []);
 
+  const myCaption = useMemo(() => ({ text: '현재 위치' }), []);
+
   const startPath = useMemo(() => {
     if (!myPosition || !delivery) {
       return [];
@@ -111,6 +113,7 @@ function Proceed({ navigation }: ProceedScreenProps) {
           width={20}
           height={20}
           anchor={anchor}
+          caption={myCaption}
         />
 
         <Path coordinates={startPath} />
