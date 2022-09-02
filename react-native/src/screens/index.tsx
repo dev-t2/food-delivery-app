@@ -4,6 +4,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { useAppDispatch, useAppSelector } from '../store';
 import { useRefreshTokenMutation } from '../slices/user/userApi';
 import { setUser } from '../slices/user/userSlice';
+import { usePermissions } from '../hooks';
 import { getEncryptedStorage } from '../utils/encryptedStorage';
 import Main from './main';
 import Sign from './sign';
@@ -14,6 +15,8 @@ function RootScreen() {
   const { accessToken } = useAppSelector(state => state.user);
 
   const dispatch = useAppDispatch();
+
+  usePermissions();
 
   useLayoutEffect(() => {
     (async () => {
