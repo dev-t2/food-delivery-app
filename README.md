@@ -9,6 +9,7 @@
   - [Encrypted Storage](https://github.com/emeraldsanto/react-native-encrypted-storage)
   - [Naver Map](https://github.com/quadflask/react-native-naver-map)
     - [Naver Maps API](https://www.ncloud.com/product/applicationService/maps)
+  - [Permissions](https://github.com/zoontek/react-native-permissions)
 - [Emotion](https://emotion.sh/docs/@emotion/native)
   - [Theme Setup](https://emotion.sh/docs/typescript#define-a-theme)
 - [React Navigation](https://reactnavigation.org/docs/getting-started)
