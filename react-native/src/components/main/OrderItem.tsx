@@ -92,7 +92,7 @@ function OrderItem({ item }: IOrderItem) {
     if (isError && error) {
       if ('status' in error) {
         if (error.status === 400) {
-          Alert.alert('Notification', (error.data as { message: string }).message);
+          Alert.alert('알림', (error.data as { message: string }).message);
 
           dispatch(rejectOrder(item.orderId));
         } else {

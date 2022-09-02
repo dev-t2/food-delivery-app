@@ -13,7 +13,10 @@ const StyledNaverMapView = styled(NaverMapView)({
   height: '100%',
 });
 
-const StyledText = styled.Text({});
+const StyledText = styled.Text({
+  fontSize: 16,
+  fontWeight: 'bold',
+});
 
 interface IPosition {
   latitude: number;
@@ -43,8 +46,6 @@ function Proceed({ navigation }: ProceedScreenProps) {
     return { x: 0.5, y: 0.5 };
   }, []);
 
-  const myCaption = useMemo(() => ({ text: 'Current Location' }), []);
-
   const path1 = useMemo(() => {
     if (!myPosition || !delivery) {
       return [];
@@ -53,7 +54,7 @@ function Proceed({ navigation }: ProceedScreenProps) {
     return [myPosition, delivery.start];
   }, [delivery, myPosition]);
 
-  const startingCaption = useMemo(() => ({ text: 'Starting Position' }), []);
+  const startingCaption = useMemo(() => ({ text: '출발' }), []);
 
   const path2 = useMemo(() => {
     if (!delivery) {
@@ -63,10 +64,10 @@ function Proceed({ navigation }: ProceedScreenProps) {
     return [delivery.start, delivery.end];
   }, [delivery]);
 
-  const arrivalCaption = useMemo(() => ({ text: 'Arrival Location' }), []);
+  const arrivalCaption = useMemo(() => ({ text: '도착' }), []);
 
   useLayoutEffect(() => {
-    Geolocation.watchPosition(
+    Geolocation.getCurrentPosition(
       info => {
         setMyPosition({
           latitude: info.coords.latitude,
@@ -74,7 +75,7 @@ function Proceed({ navigation }: ProceedScreenProps) {
         });
       },
       console.error,
-      { distanceFilter: 100, enableHighAccuracy: true, timeout: 10000 },
+      { enableHighAccuracy: true, timeout: 10000 },
     );
   }, []);
 
@@ -86,7 +87,7 @@ function Proceed({ navigation }: ProceedScreenProps) {
 
   if (!delivery) {
     return (
-      <Container isCenter>
+      <Container padding={20} isCenter>
         <StyledText>No order selected.</StyledText>
       </Container>
     );
@@ -94,7 +95,7 @@ function Proceed({ navigation }: ProceedScreenProps) {
 
   if (!myPosition) {
     return (
-      <Container isCenter>
+      <Container padding={20} isCenter>
         <StyledText>
           Loading my location. Please check if you have allowed the location permission.
         </StyledText>
@@ -112,7 +113,6 @@ function Proceed({ navigation }: ProceedScreenProps) {
           width={15}
           height={15}
           anchor={anchor}
-          caption={myCaption}
         />
 
         <Path coordinates={path1} color="orange" />
