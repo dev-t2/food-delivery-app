@@ -19,10 +19,10 @@ function NaverMap({ item }: INaverMap) {
   const center = useMemo(() => {
     return {
       zoom: 10,
-      latitude: item.start.latitude,
-      longitude: item.start.longitude,
+      latitude: (item.start.latitude + item.end.latitude) / 2,
+      longitude: (item.start.longitude + item.end.longitude) / 2,
     };
-  }, [item.start]);
+  }, [item.start, item.end]);
 
   const startCoordinate = useMemo(() => {
     return { latitude: item.start.latitude, longitude: item.start.longitude };

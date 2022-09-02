@@ -4,7 +4,7 @@ import { InitialState, IOrder, IOrdersResponse } from './orderType';
 
 const initialState: InitialState = {
   orders: [],
-  deliveries: [],
+  delivery: null,
 };
 
 const orderSlice = createSlice({
@@ -18,12 +18,12 @@ const orderSlice = createSlice({
       state.orders = [...state.orders, action.payload];
     },
     acceptOrder: (state, action: PayloadAction<string>) => {
-      const findOrder = state.orders.find(order => order.orderId === action.payload);
+      const deliveryOrder = state.orders.find(order => order.orderId === action.payload);
 
-      if (findOrder) {
-        state.deliveries = [...state.deliveries, findOrder];
-
+      if (deliveryOrder) {
         state.orders = state.orders.filter(order => order.orderId !== action.payload);
+
+        state.delivery = deliveryOrder;
       }
     },
     rejectOrder: (state, action: PayloadAction<string>) => {

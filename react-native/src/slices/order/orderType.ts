@@ -14,7 +14,7 @@ export interface IOrder {
 
 export interface InitialState {
   orders: IOrder[];
-  deliveries: IOrder[];
+  delivery: IOrder | null;
 }
 
 export interface IOrdersResponse {
