@@ -42,11 +42,9 @@ function Proceed({ navigation }: ProceedScreenProps) {
     return undefined;
   }, [delivery]);
 
-  const anchor = useMemo(() => {
-    return { x: 0.5, y: 0.5 };
-  }, []);
+  const anchor = useMemo(() => ({ x: 0.5, y: 0.5 }), []);
 
-  const path1 = useMemo(() => {
+  const startPath = useMemo(() => {
     if (!myPosition || !delivery) {
       return [];
     }
@@ -54,9 +52,9 @@ function Proceed({ navigation }: ProceedScreenProps) {
     return [myPosition, delivery.start];
   }, [delivery, myPosition]);
 
-  const startingCaption = useMemo(() => ({ text: '출발' }), []);
+  const startCaption = useMemo(() => ({ text: '출발' }), []);
 
-  const path2 = useMemo(() => {
+  const endPath = useMemo(() => {
     if (!delivery) {
       return [];
     }
@@ -64,7 +62,7 @@ function Proceed({ navigation }: ProceedScreenProps) {
     return [delivery.start, delivery.end];
   }, [delivery]);
 
-  const arrivalCaption = useMemo(() => ({ text: '도착' }), []);
+  const endCaption = useMemo(() => ({ text: '도착' }), []);
 
   useLayoutEffect(() => {
     Geolocation.getCurrentPosition(
@@ -79,7 +77,7 @@ function Proceed({ navigation }: ProceedScreenProps) {
     );
   }, []);
 
-  const onArrival = useCallback(() => {
+  const onEnd = useCallback(() => {
     if (delivery) {
       navigation.push('Complete', { orderId: delivery.orderId });
     }
@@ -110,32 +108,32 @@ function Proceed({ navigation }: ProceedScreenProps) {
         <Marker
           coordinate={myPosition}
           image={require('../../assets/red-dot.png')}
-          width={15}
-          height={15}
+          width={20}
+          height={20}
           anchor={anchor}
         />
 
-        <Path coordinates={path1} color="orange" />
+        <Path coordinates={startPath} />
 
         <Marker
           coordinate={delivery.start}
           image={require('../../assets/blue-dot.png')}
-          width={15}
-          height={15}
+          width={20}
+          height={20}
           anchor={anchor}
-          caption={startingCaption}
+          caption={startCaption}
         />
 
-        <Path coordinates={path2} color="orange" />
+        <Path coordinates={endPath} />
 
         <Marker
           coordinate={delivery.end}
           image={require('../../assets/green-dot.png')}
-          width={15}
-          height={15}
+          width={20}
+          height={20}
           anchor={anchor}
-          caption={arrivalCaption}
-          onClick={onArrival}
+          caption={endCaption}
+          onClick={onEnd}
         />
       </StyledNaverMapView>
     </Container>

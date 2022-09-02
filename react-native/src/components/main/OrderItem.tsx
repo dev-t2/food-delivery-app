@@ -80,7 +80,13 @@ function OrderItem({ item }: IOrderItem) {
     };
   }, [item.start, item.end]);
 
+  const anchor = useMemo(() => ({ x: 0.5, y: 0.5 }), []);
+
+  const startCaption = useMemo(() => ({ text: '출발' }), []);
+
   const path = useMemo(() => [item.start, item.end], [item.start, item.end]);
+
+  const endCaption = useMemo(() => ({ text: '도착' }), []);
 
   useEffect(() => {
     if (isSuccess) {
@@ -128,9 +134,25 @@ function OrderItem({ item }: IOrderItem) {
           <MapContainer>
             {/* @ts-ignore: React Native Naver Map React 18 Version Compatibility Issues */}
             <StyledNaverMapView zoomControl={__DEV__} center={center}>
-              <Marker coordinate={item.start} />
+              <Marker
+                coordinate={item.start}
+                image={require('../../assets/blue-dot.png')}
+                width={20}
+                height={20}
+                anchor={anchor}
+                caption={startCaption}
+              />
+
               <Path coordinates={path} />
-              <Marker coordinate={item.end} />
+
+              <Marker
+                coordinate={item.end}
+                image={require('../../assets/green-dot.png')}
+                width={20}
+                height={20}
+                anchor={anchor}
+                caption={endCaption}
+              />
             </StyledNaverMapView>
           </MapContainer>
 
