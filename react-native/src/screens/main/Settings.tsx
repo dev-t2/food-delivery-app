@@ -1,4 +1,5 @@
-import React, { memo, useCallback, useEffect } from 'react';
+import React, { memo, useCallback, useEffect, useMemo } from 'react';
+import styled from '@emotion/native';
 
 import { useAppDispatch } from '../../store';
 import { useMoneyQuery, useSignOutMutation } from '../../slices/user/userApi';
@@ -6,7 +7,12 @@ import { setUser } from '../../slices/user/userSlice';
 import { removeEncryptedStorage } from '../../utils/encryptedStorage';
 import { Container } from '../../components/layout';
 import { ContainedButton } from '../../components/input';
-import { MoneyInfo } from '../../components/main';
+
+const StyledText = styled.Text(({ theme }) => ({
+  fontSize: 16,
+  fontWeight: 'bold',
+  color: theme.colors.black,
+}));
 
 function Settings() {
   const { data } = useMoneyQuery();
@@ -14,6 +20,14 @@ function Settings() {
   const [signOut, { isLoading, isSuccess, isError, error }] = useSignOutMutation();
 
   const dispatch = useAppDispatch();
+
+  const replacedMoney = useMemo(() => {
+    if (data?.money) {
+      return data.money.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+    }
+
+    return '0';
+  }, [data?.money]);
 
   useEffect(() => {
     if (isSuccess) {
@@ -43,7 +57,7 @@ function Settings() {
 
   return (
     <Container padding={20}>
-      <MoneyInfo money={data?.money} />
+      <StyledText>{`The current proceeds are ￦ ${replacedMoney}`}</StyledText>
 
       <ContainedButton marginTop={20} isLoading={isLoading} text="SignOut" onPress={onSignOut} />
     </Container>

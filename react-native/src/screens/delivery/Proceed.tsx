@@ -13,10 +13,11 @@ const StyledNaverMapView = styled(NaverMapView)({
   height: '100%',
 });
 
-const StyledText = styled.Text({
+const StyledText = styled.Text(({ theme }) => ({
   fontSize: 16,
   fontWeight: 'bold',
-});
+  color: theme.colors.black,
+}));
 
 interface IPosition {
   latitude: number;

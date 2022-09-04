@@ -24,6 +24,10 @@ function Main() {
     return { title: 'Orders' };
   }, []);
 
+  const deliveryOptions = useMemo<BottomTabNavigationOptions>(() => {
+    return { headerShown: false };
+  }, []);
+
   const settingsOptions = useMemo<BottomTabNavigationOptions>(() => {
     return { title: 'Settings' };
   }, []);
@@ -31,7 +35,7 @@ function Main() {
   return (
     <Navigator initialRouteName="Orders">
       <Screen name="Orders" component={Orders} options={ordersOptions} />
-      <Screen name="Delivery" component={Delivery} />
+      <Screen name="Delivery" component={Delivery} options={deliveryOptions} />
       <Screen name="Settings" component={Settings} options={settingsOptions} />
     </Navigator>
   );

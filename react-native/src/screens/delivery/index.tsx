@@ -14,6 +14,7 @@ export type RootStackParamList = {
 };
 
 export type ProceedScreenProps = NativeStackScreenProps<RootStackParamList, 'Proceed'>;
+export type CompleteScreenProps = NativeStackScreenProps<RootStackParamList, 'Complete'>;
 
 const { Navigator, Screen } = createNativeStackNavigator<RootStackParamList>();
 

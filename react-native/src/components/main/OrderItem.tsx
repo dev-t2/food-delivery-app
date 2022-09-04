@@ -2,15 +2,15 @@ import React, { memo, useCallback, useEffect, useMemo, useState } from 'react';
 import { Alert } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import NaverMapView, { Marker, Path } from 'react-native-nmap';
+import { useTheme } from '@emotion/react';
 import styled from '@emotion/native';
 
 import { useAppDispatch } from '../../store';
 import { IOrder } from '../../slices/order/orderType';
 import { useAcceptMutation } from '../../slices/order/orderApi';
 import { acceptOrder, rejectOrder } from '../../slices/order/orderSlice';
-import { OrdersScreenNavigationProp } from '../../screens/main';
 import { getDistanceFromCoordinates } from '../../utils/distance';
-import { ContainedButtons } from '../input';
+import { OrdersScreenNavigationProp } from '../../screens/main';
 
 interface IContainer {
   isDetail: boolean;
@@ -51,6 +51,34 @@ const StyledNaverMapView = styled(NaverMapView)({
   height: '100%',
 });
 
+const ButtonContainer = styled.View({
+  flexDirection: 'row',
+  marginTop: 10,
+});
+
+interface StyledPressable {
+  borderColor: string;
+}
+
+const StyledPressable = styled.Pressable<StyledPressable>(({ borderColor }) => ({
+  flex: 1,
+  paddingVertical: 4,
+  borderWidth: 1,
+  borderColor,
+  borderRadius: 4,
+  marginRight: 5,
+}));
+
+interface IButtonText {
+  color: string;
+}
+
+const ButtonText = styled.Text<IButtonText>(({ color }) => ({
+  textAlign: 'center',
+  fontWeight: 'bold',
+  color,
+}));
+
 interface IOrderItem {
   item: IOrder;
 }
@@ -61,6 +89,8 @@ function OrderItem({ item }: IOrderItem) {
   const dispatch = useAppDispatch();
 
   const navigation = useNavigation<OrdersScreenNavigationProp>();
+
+  const theme = useTheme();
 
   const [isDetail, setIsDetail] = useState(false);
 
@@ -156,13 +186,15 @@ function OrderItem({ item }: IOrderItem) {
             </StyledNaverMapView>
           </MapContainer>
 
-          <ContainedButtons
-            marginTop={10}
-            leftText="ACCEPT"
-            rightText="REJECT"
-            onLeftPress={onAccept}
-            onRightPress={onReject}
-          />
+          <ButtonContainer>
+            <StyledPressable borderColor={theme.colors.blue} onPress={onAccept}>
+              <ButtonText color={theme.colors.blue}>ACCEPT</ButtonText>
+            </StyledPressable>
+
+            <StyledPressable borderColor={theme.colors.red} onPress={onReject}>
+              <ButtonText color={theme.colors.red}>REJECT</ButtonText>
+            </StyledPressable>
+          </ButtonContainer>
         </DetailContainer>
       )}
     </Container>
