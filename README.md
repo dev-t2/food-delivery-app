@@ -31,5 +31,6 @@
     - [Streaming Updates](https://redux-toolkit.js.org/rtk-query/usage/streaming-updates)
     - [Customizing queries](https://redux-toolkit.js.org/rtk-query/usage/customizing-queries)
     - [Async Mutex](https://github.com/DirtyHairy/async-mutex)
+    - [Automated Re-fetching](https://redux-toolkit.js.org/rtk-query/usage/automated-refetching)
 - [Socket.IO Client](https://socket.io/docs/v4/client-installation)
   - [Client API](https://socket.io/docs/v4/client-api)
