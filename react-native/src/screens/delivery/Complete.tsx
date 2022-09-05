@@ -113,6 +113,7 @@ function Complete({ route }: CompleteScreenProps) {
       mediaType: 'photo',
       includeExif: true,
       includeBase64: true,
+      saveToPhotos: true,
     })
       .then(onImage)
       .catch(console.error);
