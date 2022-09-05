@@ -13,6 +13,7 @@
   - [Geolocation](https://github.com/michalchudziak/react-native-geolocation)
   - [Image Crop Picker](https://github.com/ivpusic/react-native-image-crop-picker)
   - [Image Resizer](https://www.npmjs.com/package/react-native-image-resizer)
+  - [Patch Package](https://github.com/ds300/patch-package)
 - [Emotion](https://emotion.sh/docs/@emotion/native)
   - [Theme Setup](https://emotion.sh/docs/typescript#define-a-theme)
 - [React Navigation](https://reactnavigation.org/docs/getting-started)
