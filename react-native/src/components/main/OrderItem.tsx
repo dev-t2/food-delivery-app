@@ -10,7 +10,7 @@ import { IOrder } from '../../slices/order/orderType';
 import { useAcceptMutation } from '../../slices/order/orderApi';
 import { acceptOrder, rejectOrder } from '../../slices/order/orderSlice';
 import { getDistanceFromCoordinates } from '../../utils/distance';
-import { OrdersScreenNavigationProp } from '../../screens/main';
+import { OrdersScreenProp } from '../../screens/main';
 
 interface IContainer {
   isDetail: boolean;
@@ -88,7 +88,7 @@ function OrderItem({ item }: IOrderItem) {
 
   const dispatch = useAppDispatch();
 
-  const navigation = useNavigation<OrdersScreenNavigationProp>();
+  const navigation = useNavigation<OrdersScreenProp['navigation']>();
 
   const theme = useTheme();
 

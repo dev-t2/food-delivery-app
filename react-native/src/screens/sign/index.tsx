@@ -8,7 +8,7 @@ import {
 import SignIn from './SignIn';
 import SignUp from './SignUp';
 
-export type RootStackParamList = {
+type RootStackParamList = {
   SignIn: undefined;
   SignUp: undefined;
 };

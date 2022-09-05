@@ -29,9 +29,12 @@ const orderSlice = createSlice({
     rejectOrder: (state, action: PayloadAction<string>) => {
       state.orders = state.orders.filter(order => order.orderId !== action.payload);
     },
+    resetOrder: state => {
+      state.delivery = null;
+    },
   },
 });
 
-export const { addOrders, addOrder, acceptOrder, rejectOrder } = orderSlice.actions;
+export const { addOrders, addOrder, acceptOrder, rejectOrder, resetOrder } = orderSlice.actions;
 
 export default orderSlice;

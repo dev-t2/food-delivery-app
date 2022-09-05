@@ -18,6 +18,7 @@ const userApi = api.injectEndpoints({
     }),
     money: builder.query<IMoneyResponse, void>({
       query: () => ({ url: 'money' }),
+      providesTags: ['Money'],
     }),
     signOut: builder.mutation<void, void>({
       query: () => ({ url: 'signout', method: 'POST' }),

@@ -1,11 +1,16 @@
-import React, { memo, useCallback, useState } from 'react';
-import { ImageSourcePropType, useWindowDimensions } from 'react-native';
+import React, { memo, useCallback, useEffect, useMemo, useState } from 'react';
+import { Alert, ImageSourcePropType, useWindowDimensions } from 'react-native';
 import { Image, openCamera, openPicker } from 'react-native-image-crop-picker';
 import ImageResizer from 'react-native-image-resizer';
 import styled from '@emotion/native';
 
+import { DeliveryScreenProp } from '../main';
 import { CompleteScreenProps } from './index';
+import { useAppDispatch } from '../../store';
+import { useCompleteMutation } from '../../slices/order/orderApi';
+import { resetOrder } from '../../slices/order/orderSlice';
 import { Container } from '../../components/layout';
+import { useNavigation } from '@react-navigation/native';
 
 const StyledText = styled.Text(({ theme }) => ({
   fontSize: 16,
@@ -57,8 +62,37 @@ interface IResizedImage {
 function Complete({ route }: CompleteScreenProps) {
   const { width } = useWindowDimensions();
 
+  const navigation = useNavigation<DeliveryScreenProp['navigation']>();
+
+  const [complete, { isLoading, isSuccess, isError, error }] = useCompleteMutation();
+
+  const dispatch = useAppDispatch();
+
   const [preview, setPreview] = useState<ImageSourcePropType>();
   const [resizedImage, setResizedImage] = useState<IResizedImage>();
+
+  const isDisable = useMemo(() => {
+    return !resizedImage || isLoading;
+  }, [resizedImage, isLoading]);
+
+  useEffect(() => {
+    if (isSuccess) {
+      Alert.alert('알림', '주문이 완료 처리 되었습니다.');
+
+      dispatch(resetOrder());
+
+      navigation.goBack();
+      navigation.navigate('Settings');
+    }
+
+    if (isError && error) {
+      if ('status' in error) {
+        console.log(error.data);
+      } else {
+        console.error(error);
+      }
+    }
+  }, [isSuccess, dispatch, navigation, isError, error]);
 
   const onImage = useCallback(({ data, mime, path }: Image) => {
     setPreview({ uri: `data:${mime};base64,${data}` });
@@ -94,7 +128,14 @@ function Complete({ route }: CompleteScreenProps) {
       .catch(console.error);
   }, [onImage]);
 
-  const onComplete = useCallback(() => {}, []);
+  const onComplete = useCallback(() => {
+    const formData = new FormData();
+
+    formData.append('orderId', route.params.orderId);
+    formData.append('image', resizedImage);
+
+    complete(formData);
+  }, [route.params.orderId, resizedImage, complete]);
 
   return (
     <Container padding={20}>
@@ -105,15 +146,15 @@ function Complete({ route }: CompleteScreenProps) {
       </PreviewContainer>
 
       <ButtonContainer>
-        <StyledPressable onPress={onCamera}>
+        <StyledPressable disabled={isLoading} onPress={onCamera}>
           <ButtonText>Camera</ButtonText>
         </StyledPressable>
 
-        <StyledPressable onPress={onGallery}>
+        <StyledPressable disabled={isLoading} onPress={onGallery}>
           <ButtonText>Gallery</ButtonText>
         </StyledPressable>
 
-        <StyledPressable disabled={!resizedImage} onPress={onComplete}>
+        <StyledPressable disabled={isDisable} onPress={onComplete}>
           <ButtonText>Complete</ButtonText>
         </StyledPressable>
       </ButtonContainer>

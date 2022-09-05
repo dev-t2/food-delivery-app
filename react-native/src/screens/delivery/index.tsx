@@ -8,15 +8,15 @@ import {
 import Proceed from './Proceed';
 import Complete from './Complete';
 
-export type RootStackParamList = {
+export type DeliveryStackParamList = {
   Proceed: undefined;
   Complete: { orderId: string };
 };
 
-export type ProceedScreenProps = NativeStackScreenProps<RootStackParamList, 'Proceed'>;
-export type CompleteScreenProps = NativeStackScreenProps<RootStackParamList, 'Complete'>;
+export type ProceedScreenProps = NativeStackScreenProps<DeliveryStackParamList, 'Proceed'>;
+export type CompleteScreenProps = NativeStackScreenProps<DeliveryStackParamList, 'Complete'>;
 
-const { Navigator, Screen } = createNativeStackNavigator<RootStackParamList>();
+const { Navigator, Screen } = createNativeStackNavigator<DeliveryStackParamList>();
 
 function Delivery() {
   const screenOptions = useMemo<NativeStackNavigationOptions>(() => {

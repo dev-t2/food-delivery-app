@@ -32,8 +32,12 @@ const orderApi = api.injectEndpoints({
     accept: builder.mutation<void, IAcceptRequest>({
       query: body => ({ url: 'accept', method: 'POST', body }),
     }),
+    complete: builder.mutation<void, FormData>({
+      query: body => ({ url: 'complete', method: 'POST', body }),
+      invalidatesTags: ['Money'],
+    }),
   }),
   overrideExisting: __DEV__,
 });
 
-export const { useOrdersQuery, useAcceptMutation } = orderApi;
+export const { useOrdersQuery, useAcceptMutation, useCompleteMutation } = orderApi;

@@ -1,21 +1,23 @@
 import React, { memo, useMemo } from 'react';
+import { NavigatorScreenParams } from '@react-navigation/native';
 import {
   BottomTabNavigationOptions,
-  BottomTabNavigationProp,
+  BottomTabScreenProps,
   createBottomTabNavigator,
 } from '@react-navigation/bottom-tabs';
 
 import Orders from './Orders';
-import Delivery from '../delivery';
+import Delivery, { DeliveryStackParamList } from '../delivery';
 import Settings from './Settings';
 
-export type RootTabsParamList = {
+type RootTabsParamList = {
   Orders: undefined;
-  Delivery: undefined;
+  Delivery: NavigatorScreenParams<DeliveryStackParamList>;
   Settings: undefined;
 };
 
-export type OrdersScreenNavigationProp = BottomTabNavigationProp<RootTabsParamList, 'Orders'>;
+export type OrdersScreenProp = BottomTabScreenProps<RootTabsParamList, 'Orders'>;
+export type DeliveryScreenProp = BottomTabScreenProps<RootTabsParamList, 'Delivery'>;
 
 const { Navigator, Screen } = createBottomTabNavigator<RootTabsParamList>();
 
