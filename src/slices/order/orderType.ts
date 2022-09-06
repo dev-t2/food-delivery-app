@@ -24,3 +24,7 @@ export interface IOrdersResponse {
 export interface IAcceptRequest {
   orderId: string;
 }
+
+export interface ICompletesResponse {
+  orders: IOrder[];
+}

@@ -87,7 +87,7 @@ export const api = createApi({
   reducerPath: 'api',
   baseQuery: fetchBaseQueryWithReauth,
   endpoints: () => ({}),
-  tagTypes: ['Money'],
+  tagTypes: ['Money', 'Complete'],
 });
 
 export const rootReducer = combineReducers({

@@ -2,7 +2,7 @@ import Config from 'react-native-config';
 import { io } from 'socket.io-client';
 
 import { api } from '../index';
-import { IAcceptRequest, IOrder, IOrdersResponse } from './orderType';
+import { IAcceptRequest, ICompletesResponse, IOrder, IOrdersResponse } from './orderType';
 import { addOrder } from './orderSlice';
 
 const orderApi = api.injectEndpoints({
@@ -34,10 +34,15 @@ const orderApi = api.injectEndpoints({
     }),
     complete: builder.mutation<void, FormData>({
       query: body => ({ url: 'complete', method: 'POST', body }),
-      invalidatesTags: ['Money'],
+      invalidatesTags: ['Money', 'Complete'],
+    }),
+    completes: builder.query<ICompletesResponse, void>({
+      query: () => ({ url: 'completes' }),
+      providesTags: ['Complete'],
     }),
   }),
   overrideExisting: __DEV__,
 });
 
-export const { useOrdersQuery, useAcceptMutation, useCompleteMutation } = orderApi;
+export const { useOrdersQuery, useAcceptMutation, useCompleteMutation, useCompletesQuery } =
+  orderApi;
