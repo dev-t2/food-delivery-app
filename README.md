@@ -1,4 +1,4 @@
-# React Native References
+# References
 
 - [React Native](https://reactnative.dev/docs/environment-setup)
   - [Keyboard Aware Scroll View](https://github.com/APSL/react-native-keyboard-aware-scroll-view)
