@@ -1,11 +1,12 @@
 import React, { memo, useCallback, useLayoutEffect, useMemo, useState } from 'react';
-import { useWindowDimensions } from 'react-native';
+import { Alert, useWindowDimensions } from 'react-native';
 import Geolocation from '@react-native-community/geolocation';
 import NaverMapView, { Marker, Path } from 'react-native-nmap';
 import styled from '@emotion/native';
 
-import { useAppSelector } from '../../store';
+import { TMap } from '../../modules';
 import { ProceedScreenProps } from './index';
+import { useAppSelector } from '../../store';
 import { Container } from '../../components/layout';
 
 const StyledNaverMapView = styled(NaverMapView)({
@@ -80,6 +81,38 @@ function Proceed({ navigation }: ProceedScreenProps) {
     );
   }, []);
 
+  const onMyPosition = useCallback(() => {
+    if (delivery) {
+      TMap.openNavi(
+        '출발지',
+        delivery.start.longitude.toString(),
+        delivery.start.latitude.toString(),
+        'MOTORCYCLE',
+      ).then(data => {
+        console.log('TMap callback', data);
+        if (!data) {
+          Alert.alert('알림', '티맵을 설치하세요.');
+        }
+      });
+    }
+  }, [delivery]);
+
+  const onStart = useCallback(() => {
+    if (delivery) {
+      TMap.openNavi(
+        '도착지',
+        delivery.end.longitude.toString(),
+        delivery.end.latitude.toString(),
+        'MOTORCYCLE',
+      ).then(data => {
+        console.log('TMap callback', data);
+        if (!data) {
+          Alert.alert('알림', '티맵을 설치하세요.');
+        }
+      });
+    }
+  }, [delivery]);
+
   const onEnd = useCallback(() => {
     if (delivery) {
       navigation.push('Complete', { orderId: delivery.orderId });
@@ -115,6 +148,7 @@ function Proceed({ navigation }: ProceedScreenProps) {
           height={20}
           anchor={anchor}
           caption={myCaption}
+          onClick={onMyPosition}
         />
 
         <Path coordinates={startPath} />
@@ -126,6 +160,7 @@ function Proceed({ navigation }: ProceedScreenProps) {
           height={20}
           anchor={anchor}
           caption={startCaption}
+          onClick={onStart}
         />
 
         <Path coordinates={endPath} />
