@@ -15,6 +15,7 @@
   - [Splash Screen](https://github.com/crazycodeboy/react-native-splash-screen)
   - [Android Icon Generator](https://romannurik.github.io/AndroidAssetStudio/icons-launcher.html)
   - [iOS Icon Generator](https://appicon.co)
+  - [Vector Icons](https://github.com/oblador/react-native-vector-icons)
 - [Flipper](https://fbflipper.com/docs/getting-started)
   - [Redux Flipper](https://github.com/jk-gan/redux-flipper)
 - [Emotion](https://emotion.sh/docs/@emotion/native)
