@@ -8,6 +8,7 @@ import { permissions } from '../utils/permissions';
 import { getEncryptedStorage } from '../utils/encryptedStorage';
 import Main from './main';
 import Sign from './sign';
+import SplashScreen from 'react-native-splash-screen';
 
 function RootScreen() {
   const [refreshToken, { isSuccess, data, isError, error }] = useRefreshTokenMutation();
@@ -42,6 +43,8 @@ function RootScreen() {
         console.error(error);
       }
     }
+
+    SplashScreen.hide();
   }, [isSuccess, data, dispatch, isError, error]);
 
   return <NavigationContainer>{accessToken ? <Main /> : <Sign />}</NavigationContainer>;

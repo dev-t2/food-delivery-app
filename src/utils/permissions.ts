@@ -5,7 +5,7 @@ export function permissions() {
   if (Platform.OS === 'android') {
     check(PERMISSIONS.ANDROID.ACCESS_FINE_LOCATION)
       .then(result => {
-        if (result === RESULTS.BLOCKED || result === RESULTS.DENIED) {
+        if (result === RESULTS.BLOCKED) {
           Alert.alert(
             'Location permission is required',
             'Please always set the location permission to Allow on the Settings screen',
