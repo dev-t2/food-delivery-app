@@ -10,6 +10,8 @@ export interface IOrder {
     longitude: number;
   };
   rider?: string;
+  completedAt?: string;
+  image?: string;
 }
 
 export interface InitialState {

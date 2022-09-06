@@ -122,7 +122,7 @@ function OrderItem({ item }: IOrderItem) {
     if (isSuccess) {
       dispatch(acceptOrder(item.orderId));
 
-      navigation.navigate('Delivery');
+      navigation.navigate('Delivery', { screen: 'Proceed' });
     }
 
     if (isError && error) {

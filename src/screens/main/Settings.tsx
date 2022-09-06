@@ -1,14 +1,19 @@
-import React, { memo, useEffect } from 'react';
+import React, { memo, useCallback, useEffect, useState } from 'react';
+import { FlatList, ListRenderItem } from 'react-native';
 
+import { IOrder } from '../../slices/order/orderType';
 import { useCompletesQuery } from '../../slices/order/orderApi';
 import { Container } from '../../components/layout';
-import { SignOut, TotalMoney } from '../../components/main';
+import { CompleteItem, SignOut, TotalMoney } from '../../components/main';
 
 function Settings() {
   const { isSuccess, data, isError, error } = useCompletesQuery();
 
+  const [completes, setCompletes] = useState<IOrder[]>([]);
+
   useEffect(() => {
     if (isSuccess && data) {
+      setCompletes(data.orders);
     }
 
     if (isError && error) {
@@ -20,9 +25,23 @@ function Settings() {
     }
   }, [isSuccess, data, isError, error]);
 
+  const renderItem = useCallback<ListRenderItem<IOrder>>(({ item }) => {
+    return <CompleteItem item={item} />;
+  }, []);
+
+  const keyExtractor = useCallback((item: IOrder) => item.orderId, []);
+
   return (
     <Container padding={20}>
       <TotalMoney />
+
+      <FlatList
+        numColumns={3}
+        data={completes}
+        renderItem={renderItem}
+        keyExtractor={keyExtractor}
+      />
+
       <SignOut />
     </Container>
   );
