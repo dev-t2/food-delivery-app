@@ -15,7 +15,7 @@ public class TMapModule extends ReactContextBaseJavaModule {
 
         TMapTapi tMapTapi = new TMapTapi(context);
 
-        tMapTapi.setSKTMapAuthentication("l7xx3fcf34960c684fb4ad18e23c7342c415");
+        tMapTapi.setSKTMapAuthentication("");
     }
 
     @NotNull
