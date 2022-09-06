@@ -1,29 +1,14 @@
-import React, { memo, useCallback, useEffect } from 'react';
+import React, { memo, useEffect } from 'react';
 
-import { useAppDispatch } from '../../store';
-import { useSignOutMutation } from '../../slices/user/userApi';
-import { setUser } from '../../slices/user/userSlice';
-import { removeEncryptedStorage } from '../../utils/encryptedStorage';
+import { useCompletesQuery } from '../../slices/order/orderApi';
 import { Container } from '../../components/layout';
-import { ContainedButton } from '../../components/input';
-import { TotalMoney } from '../../components/main';
+import { SignOut, TotalMoney } from '../../components/main';
 
 function Settings() {
-  const [signOut, { isLoading, isSuccess, isError, error }] = useSignOutMutation();
-
-  const dispatch = useAppDispatch();
+  const { isSuccess, data, isError, error } = useCompletesQuery();
 
   useEffect(() => {
-    if (isSuccess) {
-      dispatch(setUser({ email: '', nickname: '', accessToken: '' }));
-
-      (async () => {
-        try {
-          await removeEncryptedStorage('refreshToken');
-        } catch (err) {
-          console.error(err);
-        }
-      })();
+    if (isSuccess && data) {
     }
 
     if (isError && error) {
@@ -33,17 +18,12 @@ function Settings() {
         console.error(error);
       }
     }
-  }, [isSuccess, dispatch, isError, error]);
-
-  const onSignOut = useCallback(() => {
-    signOut();
-  }, [signOut]);
+  }, [isSuccess, data, isError, error]);
 
   return (
     <Container padding={20}>
       <TotalMoney />
-
-      <ContainedButton marginTop={20} isLoading={isLoading} text="SignOut" onPress={onSignOut} />
+      <SignOut />
     </Container>
   );
 }
