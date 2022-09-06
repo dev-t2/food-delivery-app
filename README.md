@@ -13,6 +13,7 @@
   - [Patch Package](https://github.com/ds300/patch-package)
   - [Native Modules](https://reactnative.dev/docs/native-modules-intro)
   - [Splash Screen](https://github.com/crazycodeboy/react-native-splash-screen)
+  - [Launcher Icon Generator](https://romannurik.github.io/AndroidAssetStudio/icons-launcher.html)
 - [Flipper](https://fbflipper.com/docs/getting-started)
   - [Redux Flipper](https://github.com/jk-gan/redux-flipper)
 - [Emotion](https://emotion.sh/docs/@emotion/native)
