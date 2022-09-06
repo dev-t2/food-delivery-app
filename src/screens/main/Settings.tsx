@@ -1,5 +1,5 @@
-import React, { memo, useCallback, useEffect, useState } from 'react';
-import { FlatList, ListRenderItem } from 'react-native';
+import React, { memo, useCallback, useEffect, useMemo, useState } from 'react';
+import { FlatList, ListRenderItem, StyleProp, ViewStyle } from 'react-native';
 
 import { IOrder } from '../../slices/order/orderType';
 import { useCompletesQuery } from '../../slices/order/orderApi';
@@ -11,9 +11,13 @@ function Settings() {
 
   const [completes, setCompletes] = useState<IOrder[]>([]);
 
+  const style = useMemo<StyleProp<ViewStyle>>(() => {
+    return { marginTop: 20 };
+  }, []);
+
   useEffect(() => {
     if (isSuccess && data) {
-      setCompletes(data.orders);
+      setCompletes(data.completes);
     }
 
     if (isError && error) {
@@ -36,6 +40,7 @@ function Settings() {
       <TotalMoney />
 
       <FlatList
+        style={style}
         numColumns={3}
         data={completes}
         renderItem={renderItem}

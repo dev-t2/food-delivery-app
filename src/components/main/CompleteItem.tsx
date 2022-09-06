@@ -7,12 +7,13 @@ import styled from '@emotion/native';
 import { IOrder } from '../../slices/order/orderType';
 
 interface IStyledFastImage {
-  width: number;
+  windowWidth: number;
 }
 
-const StyledFastImage = styled(FastImage)<IStyledFastImage>(({ width }) => ({
-  width: width / 3,
-  height: width / 3,
+const StyledFastImage = styled(FastImage)<IStyledFastImage>(({ windowWidth }) => ({
+  width: (windowWidth - 40) / 3 - 2,
+  height: (windowWidth - 40) / 3 - 2,
+  margin: 1,
 }));
 
 interface ICompleteItem {
@@ -23,10 +24,10 @@ function CompleteItem({ item }: ICompleteItem) {
   const { width } = useWindowDimensions();
 
   const source = useMemo(() => {
-    return { uri: `${Config.API_URL}/${item.image}` };
+    return { uri: `${Config.BASE_URL}/${item.image}` };
   }, [item.image]);
 
-  return <StyledFastImage width={width} source={source} resizeMode="contain" />;
+  return <StyledFastImage windowWidth={width} source={source} resizeMode="contain" />;
 }
 
 export default memo(CompleteItem);

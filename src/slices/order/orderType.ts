@@ -28,5 +28,5 @@ export interface IAcceptRequest {
 }
 
 export interface ICompletesResponse {
-  orders: IOrder[];
+  completes: IOrder[];
 }
