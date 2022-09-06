@@ -15,7 +15,7 @@ public class TMapModule extends ReactContextBaseJavaModule {
 
         TMapTapi tMapTapi = new TMapTapi(context);
 
-        tMapTapi.setSKTMapAuthentication("");
+        tMapTapi.setSKTMapAuthentication("l7xx193d714429164e4981a5bfdd043f4ba3");
     }
 
     @NotNull
@@ -27,6 +27,7 @@ public class TMapModule extends ReactContextBaseJavaModule {
     @ReactMethod
     public void openNavi(String name, String longitude, String latitude, String vehicle, Promise promise) {
         TMapTapi tMapTapi = new TMapTapi(getReactApplicationContext());
+        
         boolean isTMapApp = tMapTapi.isTmapApplicationInstalled();
 
         if (isTMapApp) {
