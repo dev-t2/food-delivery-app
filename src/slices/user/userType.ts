@@ -1,3 +1,7 @@
+export interface IDeviceToken {
+  deviceToken: string;
+}
+
 export interface IUser {
   email: string;
   nickname: string;
@@ -5,6 +9,7 @@ export interface IUser {
 }
 
 export interface InitialState {
+  deviceToken: string;
   email: string;
   nickname: string;
   accessToken: string;

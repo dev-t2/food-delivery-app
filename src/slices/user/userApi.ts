@@ -10,11 +10,10 @@ const userApi = api.injectEndpoints({
       query: body => ({ url: 'signin', method: 'POST', body }),
     }),
     refreshToken: builder.mutation<IUser, string>({
-      query: token => ({
-        url: 'refreshToken',
-        method: 'POST',
-        headers: { authorization: token },
-      }),
+      query: token => ({ url: 'refreshToken', method: 'POST', headers: { authorization: token } }),
+    }),
+    deviceToken: builder.mutation<void, string>({
+      query: body => ({ url: 'deviceToken', method: 'POST', body }),
     }),
     money: builder.query<IMoneyResponse, void>({
       query: () => ({ url: 'money' }),
@@ -31,6 +30,7 @@ export const {
   useSignUpMutation,
   useSignInMutation,
   useRefreshTokenMutation,
+  useDeviceTokenMutation,
   useMoneyQuery,
   useSignOutMutation,
 } = userApi;
