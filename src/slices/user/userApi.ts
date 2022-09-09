@@ -1,5 +1,12 @@
 import { api } from '../index';
-import { IMoneyResponse, ISignInRequest, ISignInResponse, ISignUpRequest, IUser } from './userType';
+import {
+  IDeviceToken,
+  IMoneyResponse,
+  ISignInRequest,
+  ISignInResponse,
+  ISignUpRequest,
+  IUser,
+} from './userType';
 
 const userApi = api.injectEndpoints({
   endpoints: builder => ({
@@ -12,7 +19,7 @@ const userApi = api.injectEndpoints({
     refreshToken: builder.mutation<IUser, string>({
       query: token => ({ url: 'refreshToken', method: 'POST', headers: { authorization: token } }),
     }),
-    deviceToken: builder.mutation<void, string>({
+    deviceToken: builder.mutation<void, IDeviceToken>({
       query: body => ({ url: 'deviceToken', method: 'POST', body }),
     }),
     money: builder.query<IMoneyResponse, void>({

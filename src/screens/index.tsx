@@ -62,7 +62,7 @@ function RootScreen() {
 
         dispatch(setDeviceToken({ deviceToken: token }));
 
-        deviceToken(token);
+        deviceToken({ deviceToken: token });
       } catch (err) {
         console.error(err);
       }

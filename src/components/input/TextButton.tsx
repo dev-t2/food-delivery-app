@@ -1,11 +1,12 @@
 import React, { memo } from 'react';
+import { Pressable } from 'react-native';
 import styled from '@emotion/native';
 
-const StyledPressable = styled.Pressable({});
-
-const StyledText = styled.Text({
+const StyledText = styled.Text(({ theme }) => ({
+  fontWeight: 'bold',
+  color: theme.colors.black,
   textAlign: 'center',
-});
+}));
 
 interface ITextButton {
   isDisabled?: boolean;
@@ -15,9 +16,9 @@ interface ITextButton {
 
 function TextButton({ isDisabled, text, onPress }: ITextButton) {
   return (
-    <StyledPressable disabled={isDisabled} onPress={onPress}>
+    <Pressable disabled={isDisabled} onPress={onPress}>
       <StyledText>{text}</StyledText>
-    </StyledPressable>
+    </Pressable>
   );
 }
 

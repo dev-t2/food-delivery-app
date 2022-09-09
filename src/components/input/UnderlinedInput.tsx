@@ -7,12 +7,14 @@ const Container = styled.View({
   marginBottom: 20,
 });
 
-const Label = styled.Text({
+const Label = styled.Text(({ theme }) => ({
   fontSize: 16,
   fontWeight: 'bold',
-});
+  color: theme.colors.black,
+}));
 
 const StyledTextInput = styled.TextInput(({ theme }) => ({
+  color: theme.colors.black,
   borderBottomWidth: 0.2,
   borderBottomColor: theme.colors.gray,
 }));
