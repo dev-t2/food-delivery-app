@@ -21,6 +21,7 @@
   - [Analytics](https://rnfirebase.io/analytics/usage)
   - [Cloud Messaging](https://rnfirebase.io/messaging/usage)
   - [Push Notification](https://github.com/zo0r/react-native-push-notification)
+  - [Code Push](https://github.com/microsoft/react-native-code-push)
 - [Flipper](https://fbflipper.com/docs/getting-started)
   - [Redux Flipper](https://github.com/jk-gan/redux-flipper)
 - [Emotion](https://emotion.sh/docs/@emotion/native)
@@ -51,4 +52,3 @@
   - [TMap API](https://tmapapi.sktelecom.com)
 - [Sentry](https://sentry.io/welcome)
 - [Firebase](https://firebase.google.com/?hl=ko)
-- [Visual Studio App Center](https://appcenter.ms)
