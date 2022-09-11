@@ -21,7 +21,6 @@
   - [Analytics](https://rnfirebase.io/analytics/usage)
   - [Cloud Messaging](https://rnfirebase.io/messaging/usage)
   - [Push Notification](https://github.com/zo0r/react-native-push-notification)
-  - [Push Notification iOS](https://github.com/react-native-push-notification/ios)
 - [Flipper](https://fbflipper.com/docs/getting-started)
   - [Redux Flipper](https://github.com/jk-gan/redux-flipper)
 - [Emotion](https://emotion.sh/docs/@emotion/native)
