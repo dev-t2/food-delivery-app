@@ -23,6 +23,7 @@
   - [Push Notification](https://github.com/zo0r/react-native-push-notification)
   - [Code Push](https://github.com/microsoft/react-native-code-push)
   - [Hermes](https://reactnative.dev/docs/hermes)
+  - [Publishing to Google Play Store](https://reactnative.dev/docs/signed-apk-android)
 - [Flipper](https://fbflipper.com/docs/getting-started)
   - [Redux Flipper](https://github.com/jk-gan/redux-flipper)
 - [Emotion](https://emotion.sh/docs/@emotion/native)
@@ -54,3 +55,4 @@
 - [Sentry](https://sentry.io/welcome)
 - [Firebase](https://firebase.google.com/?hl=ko)
 - [Fastlane](https://fastlane.tools)
+- [Google Play Console](https://play.google.com/console)
