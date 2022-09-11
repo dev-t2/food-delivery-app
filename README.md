@@ -22,6 +22,7 @@
   - [Cloud Messaging](https://rnfirebase.io/messaging/usage)
   - [Push Notification](https://github.com/zo0r/react-native-push-notification)
   - [Code Push](https://github.com/microsoft/react-native-code-push)
+  - [Hermes](https://reactnative.dev/docs/hermes)
 - [Flipper](https://fbflipper.com/docs/getting-started)
   - [Redux Flipper](https://github.com/jk-gan/redux-flipper)
 - [Emotion](https://emotion.sh/docs/@emotion/native)
