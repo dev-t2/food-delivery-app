@@ -1,4 +1,5 @@
-import React, { memo } from 'react';
+import React, { memo, useLayoutEffect } from 'react';
+import CodePush, { CodePushOptions } from 'react-native-code-push';
 import messaging from '@react-native-firebase/messaging';
 import PushNotificationIOS from '@react-native-community/push-notification-ios';
 import PushNotification, { Importance } from 'react-native-push-notification';
@@ -8,6 +9,12 @@ import { ThemeProvider } from '@emotion/react';
 import store from './src/store';
 import theme from './src/utils/theme';
 import RootScreen from './src/screens';
+
+const codePushOptions: CodePushOptions = {
+  checkFrequency: CodePush.CheckFrequency.MANUAL,
+  installMode: CodePush.InstallMode.IMMEDIATE,
+  mandatoryInstallMode: CodePush.InstallMode.IMMEDIATE,
+};
 
 messaging().setBackgroundMessageHandler(async remoteMessage => {
   console.log('Message handled in the background!', remoteMessage);
@@ -52,6 +59,25 @@ PushNotification.createChannel(
 );
 
 function App() {
+  useLayoutEffect(() => {
+    CodePush.sync(
+      {
+        installMode: CodePush.InstallMode.IMMEDIATE,
+        mandatoryInstallMode: CodePush.InstallMode.IMMEDIATE,
+        updateDialog: {
+          title: '업데이트 안내',
+          mandatoryUpdateMessage: '필수 업데이트가 있어 설치 후 앱을 재시작합니다.',
+          mandatoryContinueButtonLabel: '재시작',
+        },
+      },
+      status => {
+        console.log(`Changed ${status}`);
+      },
+    ).then(status => {
+      console.log(`CodePush ${status}`);
+    });
+  }, []);
+
   return (
     <Provider store={store}>
       <ThemeProvider theme={theme}>
@@ -61,4 +87,4 @@ function App() {
   );
 }
 
-export default memo(App);
+export default CodePush(codePushOptions)(memo(App));
