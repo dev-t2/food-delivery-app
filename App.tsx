@@ -87,4 +87,4 @@ function App() {
   );
 }
 
-export default CodePush(codePushOptions)(memo(App));
+export default memo(CodePush(codePushOptions)(App));
